@@ -1,0 +1,68 @@
+{
+  "name": "wohnbaurad-handlungsleitfaden",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Handlungsleitfaden WohnBauRad – website and PDF for https://wohnbaurad.de.",
+  "license": "AGPL-3.0",
+  "author": "FixMyCity <hello@fixmycity.de>",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "bun run dev",
+    "build": "astro build",
+    "preview": "astro preview --open",
+    "astro": "astro",
+    "type-check": "bun run --sequential type-check:*",
+    "type-check:astro": "astro check",
+    "type-check:tsc": "tsc --noEmit",
+    "lint": "oxlint --fix --fix-dangerously --deny-warnings -c oxlint.config.mjs .",
+    "lint-check": "oxlint --deny-warnings -c oxlint.config.mjs .",
+    "format": "oxfmt --write -c oxfmt.config.mjs .",
+    "format-check": "oxfmt --check -c oxfmt.config.mjs .",
+    "test-run": "vitest run --passWithNoTests",
+    "knip": "knip --config knip.config.mjs",
+    "knip-warn": "knip --config knip.config.mjs || true",
+    "check": "bun run --parallel type-check lint format test-run knip-warn",
+    "check-ci": "bun run --parallel type-check lint-check format-check test-run",
+    "check-pre-push": "bun run --parallel type-check lint format test-run knip",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@astrojs/mdx": "^8.1.2",
+    "@astrojs/sitemap": "^3.7.4",
+    "@astrojs/ts-plugin": "^1.10.12",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.4.4",
+    "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.20",
+    "@types/bun": "^1.4.4",
+    "@types/web": "^0.0.359",
+    "browserslist": "^4.29.5",
+    "browserslist-to-esbuild": "^2.1.1",
+    "bun-types": "^1.4.4",
+    "husky": "^9.1.7",
+    "knip": "^6.43.0",
+    "oxfmt": "^0.75.0",
+    "oxlint": "^1.90.0",
+    "oxlint-tsgolint": "^7.0.2005",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.5"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not op_mini all",
+    "not kaios > 0"
+  ],
+  "engines": {
+    "bun": ">=1.3.14"
+  },
+  "packageManager": "bun@1.4.4",
+  "trustedDependencies": [
+    "astro"
+  ]
+}

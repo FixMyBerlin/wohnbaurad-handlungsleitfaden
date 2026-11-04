@@ -1,0 +1,27 @@
+---
+import { ASTRO_ENV } from 'astro:env/client'
+import 'src/styles/global.css'
+
+type Props = {
+  title: string
+  description?: string
+}
+
+const { title, description } = Astro.props
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    {/* Netlify previews must never be indexed; the X-Robots-Tag in netlify.toml is the first guard */}
+    {ASTRO_ENV !== 'production' && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="sitemap" href="/sitemap-index.xml" />
+  </head>
+  <body class="bg-white text-gray-900 antialiased">
+    <slot />
+  </body>
+</html>

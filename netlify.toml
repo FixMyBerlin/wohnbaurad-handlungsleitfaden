@@ -1,0 +1,17 @@
+# Internal previews only (PR deploy previews, branch deploys). Production is deployed to IONOS.
+[build]
+command = "bun run build"
+publish = "dist"
+# Exit 0 = skip build. Skip Dependabot deploy previews.
+ignore = "if [ \"$CONTEXT\" = \"deploy-preview\" ] && echo \"$HEAD$BRANCH\" | grep -qiE 'dependabot'; then exit 0; fi; git diff --quiet \"$CACHED_COMMIT_REF\" \"$COMMIT_REF\""
+
+[build.environment]
+ASTRO_ENV = "staging"
+BUN_VERSION = "1.4.4"
+BUN_FLAGS = "--frozen-lockfile"
+HUSKY = "0"
+
+[[headers]]
+for = "/*"
+[headers.values]
+X-Robots-Tag = "noindex, nofollow"
