@@ -337,6 +337,7 @@ Gegenüber der Agent-Gliederung (22 Seiten) schlage ich **16 Seiten** vor: 1.3 �
 **Bausteine:** Karte (Beispielflächen) mit Fallback-Bild, Screenshot-Schritte, Legende
 
 ❓ **Welche Beispielflächen** – echte GWG-Flächen (dann mit GWG-Freigabe, siehe 3.3), anonymisiert oder ausgedacht? Ein Gebiet oder mehrere?
+❓ **Mehrere Anwendungsszenarien** (z. B. zwei), zwischen denen man auf der Karte umschalten kann? Und wenn ja, welche? (Plan A6)
 ❓ **Welche Eigenschaften** sollen beim Klick erscheinen, und was davon darf öffentlich sein?
 ❓ **Tiles live von Martin oder statischer Export?** Live bedeutet einen externen Request (#3744 „keine externen Requests“) und die Abhängigkeit, dass tilda-geo nach Projektende weiterläuft. Ein Export ins Repo (GeoJSON/PMTiles) wäre unabhängig davon. Und woher kommt die Hintergrundkarte?
 ❓ **Stile übernehmen:** einmal kopieren oder aus tilda-geo als JSON/Paket beziehen, damit sie gleich bleiben?

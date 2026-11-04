@@ -96,6 +96,8 @@ Was wir gegenüber rsv-info ändern:
 
 Kosten: React + react-map-gl nur auf der Kartenseite. Alle anderen Seiten bleiben ohne JavaScript.
 
+Offen ist, ob die Karte **mehrere Anwendungsszenarien** zeigt (z. B. zwei), zwischen denen man umschalten kann (A6). Technisch hieße das ein Umschalter über der Karte, der Layer-Filter oder Ausschnitt wechselt, und je Szenario ein eigenes statisches Bild für PDF und ohne JavaScript.
+
 **E9 – PDF minimal: eine Druckseite `/gesamtfassung` mit allen Kapiteln, schlichtes Print-CSS, PDF per Playwright `page.pdf()`.**
 *Warum:* Das PDF muss nur vorhanden und sauber lesbar sein, ein eigenes Styling ist nicht nötig (Entscheidung 04.11.). Playwright ist bei FMC bekannt (Skill `playwright-skill`) und kann Seitenzahlen in die Fußzeile setzen. Inhaltsverzeichnis ohne Seitenzahlen, Quellen als Endnoten pro Kapitel. Eine Quelle für Web und PDF, also keine doppelte Pflege.
 Vivliostyle (CSS Paged Media, AGPL) und WeasyPrint (Python) wären die Upgrade-Pfade, falls doch ein gestaltetes PDF gewünscht wird. Paged.js ist ungepflegt.
@@ -259,6 +261,7 @@ Keine davon blockiert Phase 0–3.
 - **A2 – Manus und `AGENTS.md`:** Liest Manus die `AGENTS.md` des Repos? Das testen wir in Phase 3 gemeinsam mit Sine. Der Zugriff auf das private Repo ist geklärt, Sines Manus ist mit GitHub verbunden.
 - **A3 – Freigabe-Status:** Brauchen wir doch einen Status pro Seite (z. B. für Kanzlei, GWG, BMDV), oder reicht der Überblick über PRs und Issues? Ein Status würde ein Frontmatter-Feld, ein Banner im Preview und eine Übersichtsseite bedeuten. Das lässt sich jederzeit nachrüsten.
 - **A5 – Praxisbeispiel als Baustein?** Bisher ist nur ein Beispiel geplant (GWG München, Seite 3.3). Die Design-Sitzung hält einen eigenen Baustein dafür nicht für sinnvoll. Ohne ihn gibt es weiterhin keine Collection und keinen Baustein dafür. Er lässt sich nachrüsten, falls Kooperationsbeispiele aus anderen Städten dazukommen (Seite 2.3).
+- **A6 – Anwendungsszenarien auf der Karte:** Zeigen wir mehrere Szenarien (z. B. zwei), zwischen denen man umschalten kann? Und wenn ja, welche? Hängt mit der Auswahl der Beispielflächen zusammen (siehe auch #3748).
 - **A4 – Kartenzustimmung:** rsv-info speichert das Opt-in in einem Cookie. Übernehmen wir das (dann gehört es in die Datenschutzerklärung), oder gilt die Zustimmung nur für den Seitenbesuch, ganz ohne Speichern?
 
 ---
