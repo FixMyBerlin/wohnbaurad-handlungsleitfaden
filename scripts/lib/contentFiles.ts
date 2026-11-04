@@ -1,13 +1,14 @@
-import { Glob } from 'bun'
+import { glob, readFile } from 'node:fs/promises'
 
+// node:fs instead of Bun APIs: this also runs inside the Astro config, which Node may load
 export const PLACEHOLDER = 'PLATZHALTER:'
 
 export type Finding = { file: string; line: number; text: string }
 
 export const readContentFiles = async (pattern = 'src/content/**/*.{mdx,yaml}') => {
   const files: { file: string; lines: string[] }[] = []
-  for await (const file of new Glob(pattern).scan('.')) {
-    files.push({ file, lines: (await Bun.file(file).text()).split('\n') })
+  for await (const file of glob(pattern)) {
+    files.push({ file, lines: (await readFile(file, 'utf8')).split('\n') })
   }
   return files.toSorted((a, b) => a.file.localeCompare(b.file))
 }

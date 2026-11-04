@@ -69,7 +69,7 @@ Alle Collection-, Feld- und Enum-Namen sind englisch (z. B. `sources.title`, `gl
 
 **E5 – Feste Komponenten-Liste für MDX, Inhalte enthalten keine Imports.**
 `src/components/mdx/index.ts` exportiert alle Bausteine: `Infobox`, `LegalNotice`, `Checklist`, `Cite`, `Download`, `KeyFigures`/`KeyFigure`, `Steps`/`Step`, `ScreenshotStep`, `ButtonLink`/`Button`/`ButtonGroup`, `GlossaryTerm`, `Literature`, `StakeholderCards`/`StakeholderCard`, `FundingPrograms`/`FundingProgram`, `ExampleMap`, `ChapterTiles`. Namen und Props folgen der Komponenten-API der Design-Sitzung, ins Englische übersetzt. Sie werden zentral per `<Content components={…} />` übergeben.
-*Warum:* Sine bzw. die KI schreibt nur `<Infobox variant="tip">…</Infobox>` und muss keine Pfade kennen. Der Skill `inhalte-bearbeiten` (E13) dokumentiert genau diese Liste als „erlaubtes Vokabular“. Unbekannte Komponenten lässt der Astro-7-Compiler mit einem Fehler scheitern.
+*Warum:* Sine bzw. die KI schreibt nur `<Infobox variant="tip">…</Infobox>` und muss keine Pfade kennen. Der Skill `edit-content` (E13) dokumentiert genau diese Liste als „erlaubtes Vokabular“. Unbekannte Komponenten lässt der Astro-7-Compiler mit einem Fehler scheitern.
 
 **E6 – Quellen über `<Cite id="…" />`, nummeriert pro Seite, mit Quellenliste am Seitenende.**
 *Warum:* Pflicht für Rechtsaussagen und Zahlen (Lektorat, #3749), und im PDF werden daraus automatisch Endnoten. Ob dafür GFM-Fußnoten reichen (Sätteri!), prüfen wir beim Setup. Die eigene Komponente ist auf jeden Fall robuster.
@@ -124,10 +124,10 @@ Kommt in **Phase 5**.
 
 **E13 – Agent-Doku zweigeteilt: eine schlanke `AGENTS.md` für immer gültige Regeln und ein Projekt-Skill für die Inhaltsarbeit.**
 
-| | `AGENTS.md` (+ `CLAUDE.md` mit `@AGENTS.md`) | Skill `.agents/skills/inhalte-bearbeiten/` |
+| | `AGENTS.md` (+ `CLAUDE.md` mit `@AGENTS.md`) | Skill `.agents/skills/edit-content/` |
 |---|---|---|
-| **Wann geladen** | **immer**, in jeder Sitzung, auch bei reiner Code-Arbeit | **bei Bedarf**: wenn die Aufgabe zur Beschreibung passt oder per Slash-Befehl `/inhalte-bearbeiten`. Bis dahin steht nur die Beschreibung im Kontext |
-| **Inhalt** | Was das Repo ist, wo Inhalte liegen, `bun run check`, Code-Kommentar-Regeln (E16), Platzhalter-Prefix (E17), Tabu-Bereiche, Hinweis „für Inhalte → Skill `inhalte-bearbeiten`“. Ziel: ≤ 60 Zeilen | Abläufe Schritt für Schritt: neue Seite anlegen, Quelle ergänzen, Förderprogramm eintragen, Platzhalter ersetzen, Preview prüfen, PR öffnen. Dazu `references/` mit Komponenten-Katalog und Beispielen, Ansprache **Sie**, Gendern mit Doppelpunkt, Quellenpflicht |
+| **Wann geladen** | **immer**, in jeder Sitzung, auch bei reiner Code-Arbeit | **bei Bedarf**: wenn die Aufgabe zur Beschreibung passt oder per Slash-Befehl `/edit-content`. Bis dahin steht nur die Beschreibung im Kontext |
+| **Inhalt** | Auf Englisch: was das Repo ist, wo Inhalte liegen, `bun run check`, Code-Kommentar-Regeln (E16), Platzhalter-Prefix (E17), Tabu-Bereiche, Hinweis „für Inhalte → Skill `edit-content`“. Ziel: ≤ 60 Zeilen | Abläufe Schritt für Schritt: neue Seite anlegen, Quelle ergänzen, Förderprogramm eintragen, Platzhalter ersetzen, Preview prüfen, PR öffnen. Dazu `references/components.md` (Bausteine) und `references/content-model.md` (Felder), Ansprache **Sie**, Gendern mit Doppelpunkt, Quellenpflicht. Auf Deutsch, weil Sine ihn liest |
 | **Stärke** | wird nie übersehen | lang und detailliert, ohne jede Code-Sitzung aufzublähen. Mehrere Dateien, nur die nötige wird gelesen. Explizit aufrufbar |
 | **Schwäche** | jede Zeile kostet in jeder Sitzung Kontext, lange Dateien werden überlesen | löst nicht immer automatisch aus. Gegenmittel: Verweis in `AGENTS.md` und gute Beschreibung |
 
@@ -136,7 +136,7 @@ Kommt in **Phase 5**.
 *Für Trassenscout (Beteiligungen):* Dieselbe Logik gilt dort. Lange, aufgabenspezifische Anleitungen gehören in einen Skill, immer gültige Regeln in eine kurze `AGENTS.md`.
 
 **Sine arbeitet mit Manus.** Daraus folgt:
-- Manus unterstützt Skills im offenen SKILL.md-Format und kann sie **direkt aus einem GitHub-Repo importieren** ([Manus-Doku](https://manus.im/docs/en/features/skills)). Der Skill liegt deshalb am werkzeugneutralen Pfad `.agents/skills/inhalte-bearbeiten/` (Empfehlung der [Agent-Skills-Spezifikation](https://agentskills.io/llms-full.txt)). `.claude/skills/inhalte-bearbeiten` ist ein Symlink darauf, damit Claude Code ihn auch findet.
+- Manus unterstützt Skills im offenen SKILL.md-Format und kann sie **direkt aus einem GitHub-Repo importieren** ([Manus-Doku](https://manus.im/docs/en/features/skills)). Der Skill liegt deshalb am werkzeugneutralen Pfad `.agents/skills/edit-content/` (Empfehlung der [Agent-Skills-Spezifikation](https://agentskills.io/llms-full.txt)). `.claude/skills/edit-content` ist ein Symlink darauf, damit Claude Code ihn auch findet.
 - **Nicht in fixmyskills.** fixmyskills enthält projektübergreifende Entwickler-Konventionen und wird bei allen global installiert. Dieser Skill beschreibt nur die Inhalte *dieses* Repos (Pfade, Komponenten, Collections) und würde überall sonst stören. Er muss außerdem mit dem Code zusammen versioniert werden, sonst passt der Komponenten-Katalog nicht mehr zum Stand.
 - Ob Manus die `AGENTS.md` eines Repos liest, ist **nicht belegt**. Der Skill muss deshalb **für sich allein reichen** und die kritischen Regeln (Check-Befehl, Platzhalter, Tabu-Bereiche) selbst wiederholen. Diese Doppelung nehmen wir bewusst in Kauf.
 - Sines Manus hat GitHub-Zugriff auf das private Repo (Import des Skills, Branch, PR).
@@ -181,10 +181,10 @@ Dazu `.claude/rules/package-json-scripts.md` laut `tech-stack`.
 ```
 .
 ├── .agents/
-│   └── skills/inhalte-bearbeiten/   # SKILL.md + references/ (Komponenten-Katalog, Beispiele); Manus-Import
+│   └── skills/edit-content/   # SKILL.md + references/ (Komponenten-Katalog, Beispiele); Manus-Import
 ├── .claude/
 │   ├── rules/package-json-scripts.md
-│   └── skills/inhalte-bearbeiten    # Symlink → .agents/skills/inhalte-bearbeiten
+│   └── skills/edit-content    # Symlink → .agents/skills/edit-content
 ├── .github/workflows/        # check-ci; IONOS-Deploy später (Vorlage rsv-info)
 ├── AGENTS.md                 # schlanke, immer gültige Regeln
 ├── CLAUDE.md                 # @AGENTS.md
@@ -239,7 +239,7 @@ Dazu `.claude/rules/package-json-scripts.md` laut `tech-stack`.
 | **0 Repo-Basis** | AGPL-Lizenz, README, Konzeptpapiere nach `docs/concept/` | Commit 1 (laut `new-project-setup`) | 1 |
 | **1 Scaffold + Tooling** ✅ | Astro 7, MDX, Tailwind 4 (React kommt erst mit der Karte in Phase 5, sonst meldet knip es als ungenutzt), Bun, oxc, knip, tsconfig, Scripts, husky, Dependabot, CI, `netlify.toml` (intern, noindex), Platzhalter für IONOS | `bun run check` grün, leere Seite baut | 1 (Commit 2 laut Skill) |
 | **2 Inhaltsmodell + Gerüst** ✅ | Collections mit Zod, Routing mit deutschen Pfaden, Layouts, Navigation (Kapitel → Seiten, Vor/Zurück), MDX-Bausteine in schlichter Form, `<Cite>`, `placeholder-check`, Seitengerüst für alle 16 Seiten **nur mit `PLATZHALTER:`-Texten** | Sine könnte loslegen | 2–3 |
-| **3 AGENTS.md + Skill** | schlanke `AGENTS.md`, Skill `inhalte-bearbeiten` (unter `.agents/skills/`, Symlink für Claude Code), Test: eine Seite nur über den Skill anlegen lassen, Import in Manus mit Sine ausprobieren | Inhaltsarbeit kann im November starten | 1 |
+| **3 AGENTS.md + Skill** ✅ | schlanke `AGENTS.md`, Skill `edit-content` (unter `.agents/skills/`, Symlink für Claude Code), Test: eine Seite nur über den Skill anlegen lassen, Import in Manus mit Sine ausprobieren | Inhaltsarbeit kann im November starten | 1 |
 | **4 Design** | Tokens und Bausteine aus der Design-Sitzung übernehmen (Konzept A, Übergabe-Notiz liegt vor), Logozeile Förderer/Partner im Footer, responsive Prüfung, Barrierefreiheit | Seite sieht aus wie im Entwurf | 1–2 |
 | **5 Extras** | Karte aus rsv-info umbauen (Martin-Tiles, OpenFreeMap, Opt-in, statisches Bild), Druckseite + PDF per Playwright, Pagefind | Grundlage für den Launch | mehrere |
 
