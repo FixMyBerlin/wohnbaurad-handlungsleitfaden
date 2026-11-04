@@ -11,6 +11,6 @@ const downloads = (await getCollection('downloads')).toSorted((a, b) => {
 ---
 
 <PageLayout title="Downloads">
-  <h1 slot="header" class="mb-8 text-3xl font-bold">Downloads</h1>
+  <h1 slot="header" class="mb-10 text-3xl font-bold tracking-tight text-ink lg:text-4xl">Downloads</h1>
   {downloads.map((download) => <Download id={download.id} />)}
 </PageLayout>

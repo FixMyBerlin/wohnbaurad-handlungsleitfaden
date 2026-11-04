@@ -10,11 +10,12 @@ type Props = {
 const { prev, next } = Astro.props
 ---
 
-<nav aria-label="Vorherige und nächste Seite" class="mt-12 flex justify-between gap-4 text-sm">
+<nav aria-label="Vorherige und nächste Seite" class="mt-14 grid gap-4 border-t border-border pt-6 sm:grid-cols-2">
   {
     prev ? (
-      <a href={pagePath(prev)} rel="prev">
-        ← {prev.data.title}
+      <a href={pagePath(prev)} rel="prev" class="group block no-underline">
+        <span class="text-sm text-ink-muted">← Zurück</span>
+        <span class="block font-semibold text-petrol-900 group-hover:text-petrol-950">{prev.data.title}</span>
       </a>
     ) : (
       <span />
@@ -22,8 +23,9 @@ const { prev, next } = Astro.props
   }
   {
     next && (
-      <a href={pagePath(next)} rel="next">
-        {next.data.title} →
+      <a href={pagePath(next)} rel="next" class="group block text-right no-underline">
+        <span class="text-sm text-ink-muted">Weiter →</span>
+        <span class="block font-semibold text-petrol-900 group-hover:text-petrol-950">{next.data.title}</span>
       </a>
     )
   }

@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content'
 
-const footerSeiten = (await getCollection('singlePages', (seite) => seite.data.footer)).toSorted(
+const footerPages = (await getCollection('singlePages', (page) => page.data.footer)).toSorted(
   (a, b) => a.data.title.localeCompare(b.data.title, 'de'),
 )
 const links = [
@@ -9,19 +9,32 @@ const links = [
   { href: '/downloads', label: 'Downloads' },
   { href: '/quellen', label: 'Quellen' },
   { href: '/glossar', label: 'Glossar' },
-  ...footerSeiten.map((seite) => ({ href: `/${seite.id}`, label: seite.data.title })),
+  ...footerPages.map((page) => ({ href: `/${page.id}`, label: page.data.title })),
 ]
+// Logo files follow; until then labelled placeholders
+const logos = ['BMDV / NRVP', 'GWG München', 'FixMyCity']
 ---
 
-<footer class="mt-16 border-t border-gray-200">
-  <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-8 text-sm">
-    <p>PLATZHALTER: Logozeile Förderer (BMDV/NRVP) und Partner (GWG München, FixMyCity)</p>
+<footer class="mt-20 border-t border-border bg-surface-muted">
+  <div class="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-10 lg:px-8">
+    <div>
+      <p class="text-sm text-ink-muted">PLATZHALTER: Förderhinweis NRVP</p>
+      <ul class="mt-4 flex flex-wrap gap-4" aria-label="Förderer und Partner">
+        {
+          logos.map((logo) => (
+            <li class="flex h-12 min-w-32 items-center justify-center rounded border border-dashed border-border-strong px-4 text-sm text-ink-muted">
+              PLATZHALTER: Logo {logo}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
     <nav aria-label="Fußzeile">
-      <ul class="flex flex-wrap gap-x-6 gap-y-2">
+      <ul class="flex flex-wrap gap-x-6 gap-y-2 text-sm">
         {
           links.map((link) => (
             <li>
-              <a href={link.href} class="underline">
+              <a href={link.href} class="text-ink-soft underline-offset-2 hover:text-petrol-900 hover:underline">
                 {link.label}
               </a>
             </li>

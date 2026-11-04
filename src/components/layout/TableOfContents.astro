@@ -11,13 +11,15 @@ const h2 = Astro.props.headings.filter((heading) => heading.depth === 2)
 {
   h2.length > 0 && (
     <nav aria-labelledby="toc-title" class="text-sm">
-      <p id="toc-title" class="font-semibold">
+      <p id="toc-title" class="font-semibold text-ink">
         Auf dieser Seite
       </p>
-      <ul class="mt-2 space-y-1">
+      <ul class="mt-3 space-y-2 border-l border-border pl-3">
         {h2.map((heading) => (
           <li>
-            <a href={`#${heading.slug}`}>{heading.text}</a>
+            <a href={`#${heading.slug}`} class="text-ink-muted no-underline hover:text-petrol-900">
+              {heading.text}
+            </a>
           </li>
         ))}
       </ul>

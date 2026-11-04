@@ -41,7 +41,7 @@ const title = chapter?.data.title ?? (props.kind === 'single' ? props.page.data.
 ---
 
 <PageLayout title={title} headings={single?.headings}>
-  <h1 slot="header" class="mb-8 text-3xl font-bold">{title}</h1>
+  <h1 slot="header" class="mb-10 text-3xl font-bold tracking-tight text-ink lg:text-4xl">{title}</h1>
   {
     chapter && (
       <>

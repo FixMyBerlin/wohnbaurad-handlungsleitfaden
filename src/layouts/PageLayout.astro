@@ -17,21 +17,15 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '')
 ---
 
 <BaseLayout title={title} description={description}>
-  <div class="mx-auto grid max-w-7xl gap-8 px-4 py-8 lg:grid-cols-[16rem_1fr] xl:grid-cols-[16rem_1fr_14rem]">
-    <aside class="lg:sticky lg:top-8 lg:self-start">
-      <details class="lg:hidden">
-        <summary class="cursor-pointer font-semibold">Navigation</summary>
-        <div class="mt-4">
-          <ChapterNav tree={tree} currentPath={currentPath} />
-        </div>
-      </details>
-      <div class="hidden lg:block">
-        <ChapterNav tree={tree} currentPath={currentPath} />
-      </div>
+  <div
+    class="mx-auto grid max-w-7xl gap-12 px-4 py-8 lg:grid-cols-[16rem_minmax(0,var(--container-prose))] lg:px-8 lg:py-12 xl:grid-cols-[16rem_minmax(0,var(--container-prose))_14rem]"
+  >
+    <aside class="hidden lg:sticky lg:top-8 lg:block lg:self-start">
+      <ChapterNav tree={tree} currentPath={currentPath} />
     </aside>
     <main id="inhalt" class="min-w-0">
       <slot name="header" />
-      <div class="prose max-w-none">
+      <div class="prose prose-lg prose-wbr max-w-none">
         <slot />
       </div>
       <slot name="footer" />

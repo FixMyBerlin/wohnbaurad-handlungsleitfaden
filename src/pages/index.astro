@@ -13,11 +13,13 @@ Astro.locals.citationIds = citationIds
 ---
 
 <BaseLayout title={home.data.title} description={home.data.summary}>
-  <main id="inhalt" class="mx-auto max-w-5xl px-4 py-12">
-    <p class="text-sm font-semibold uppercase">{home.data.eyebrow}</p>
-    <h1 class="mt-2 text-4xl font-bold">{home.data.title}</h1>
-    <p class="mt-4 text-xl">{home.data.summary}</p>
-    <div class="prose mt-10 max-w-none">
+  <main id="inhalt" class="mx-auto w-full max-w-home px-4 py-12 lg:px-8 lg:py-20">
+    <p class="text-sm font-semibold text-petrol-900">{home.data.eyebrow}</p>
+    <h1 class="mt-3 text-4xl leading-tight font-bold tracking-tight text-ink sm:text-5xl sm:leading-[52px]">
+      {home.data.title}
+    </h1>
+    <p class="mt-6 max-w-prose text-xl leading-8 text-ink-soft">{home.data.summary}</p>
+    <div class="prose prose-lg prose-wbr mt-12 max-w-none">
       <Content components={mdxComponents} />
     </div>
     <SourceList ids={citationIds} />
