@@ -1,0 +1,12 @@
+---
+type Props = {
+  beispiel: string
+}
+
+// Interactive map with opt-in follows in phase 5 (react-map-gl, see docs/konzept/plan-grundgeruest.md E8)
+const { beispiel } = Astro.props
+---
+
+<figure class="not-prose my-6 border border-dashed border-gray-400 p-8 text-center">
+  <figcaption>Karte mit Beispielflächen „{beispiel}“</figcaption>
+</figure>

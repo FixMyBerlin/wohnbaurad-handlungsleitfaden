@@ -1,0 +1,10 @@
+---
+type Props = {
+  variant?: 'primary' | 'secondary'
+  type?: 'button' | 'submit'
+}
+
+const { variant = 'primary', type = 'button' } = Astro.props
+---
+
+<button type={type} data-variant={variant} class="rounded border border-gray-900 px-4 py-2"><slot /></button>

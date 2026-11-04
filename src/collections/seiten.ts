@@ -18,6 +18,8 @@ export const seitenCollection = defineCollection({
   loader: glob({ base: 'src/content/seiten', pattern: '**/[^_]*.mdx' }),
   schema: z.object({
     title: z.string(),
+    // Short label for the navigation, e.g. "Mehrwert"
+    navTitle: z.string().optional(),
     kapitel: reference('kapitel'),
     order: z.number().int(),
     summary: z.string(),

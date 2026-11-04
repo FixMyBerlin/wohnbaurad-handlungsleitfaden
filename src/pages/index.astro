@@ -1,11 +1,15 @@
 ---
+import SourceList from '@components/layout/SourceList.astro'
 import { mdxComponents } from '@components/mdx'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import { getEntry, render } from 'astro:content'
+import { getCitationIds } from 'src/lib/citations'
 
 const home = await getEntry('startseite', 'index')
 if (!home) throw new Error('Missing src/content/startseite/index.mdx')
 const { Content } = await render(home)
+const citationIds = await getCitationIds(home.body, home.id)
+Astro.locals.citationIds = citationIds
 ---
 
 <BaseLayout title={home.data.title} description={home.data.summary}>
@@ -16,5 +20,6 @@ const { Content } = await render(home)
     <div class="prose mt-10 max-w-none">
       <Content components={mdxComponents} />
     </div>
+    <SourceList ids={citationIds} />
   </main>
 </BaseLayout>

@@ -29,7 +29,7 @@ const { tree, currentPath } = Astro.props
                   aria-current={currentPath === pagePath(page) ? 'page' : undefined}
                   class="aria-[current=page]:font-semibold"
                 >
-                  {page.data.title}
+                  {page.data.navTitle ?? page.data.title}
                 </a>
               </li>
             ))}

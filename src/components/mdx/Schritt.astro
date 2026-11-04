@@ -1,0 +1,16 @@
+---
+type Props = {
+  title: string
+  who?: string
+  output?: string
+}
+
+const { title, who, output } = Astro.props
+---
+
+<li>
+  <p class="font-semibold">{title}</p>
+  {who && <p>Wer: {who}</p>}
+  <slot />
+  {output && <p>Ergebnis: {output}</p>}
+</li>

@@ -9,7 +9,7 @@ const gesamtfassung = await getEntry('downloads', 'gesamtfassung')
     <a href="/" class="font-bold">WohnBauRad</a>
     {
       gesamtfassung && (
-        <a href={gesamtfassung.data.file} class="rounded border border-gray-900 px-3 py-1.5 text-sm">
+        <a href={gesamtfassung.data.dateien[0].datei} class="rounded border border-gray-900 px-3 py-1.5 text-sm">
           Gesamt-PDF
         </a>
       )

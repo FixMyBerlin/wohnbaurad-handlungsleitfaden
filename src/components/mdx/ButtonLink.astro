@@ -1,0 +1,18 @@
+---
+type Props = {
+  href: string
+  variant?: 'primary' | 'secondary'
+  icon?: 'download' | 'extern' | 'pfeil'
+}
+
+const { href, variant = 'primary', icon } = Astro.props
+const isExternal = icon === 'extern' || /^https?:\/\//.test(href)
+const iconText = { download: '↓', extern: '↗', pfeil: '→' } as const
+---
+
+<a
+  href={href}
+  data-variant={variant}
+  class="not-prose inline-block rounded border border-gray-900 px-4 py-2"
+  {...isExternal ? { target: '_blank', rel: 'noreferrer' } : {}}
+><slot />{icon && <span aria-hidden="true"> {iconText[icon]}</span>}{isExternal && <span class="sr-only"> (öffnet in neuem Tab)</span>}</a>

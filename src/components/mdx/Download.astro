@@ -1,0 +1,27 @@
+---
+import { getEntry } from 'astro:content'
+
+type Props = {
+  id: string
+}
+
+const download = await getEntry('downloads', Astro.props.id)
+if (!download) throw new Error(`<Download id="${Astro.props.id}"> not found in src/content/downloads.yaml`)
+---
+
+<div class="not-prose my-6 border border-gray-300 p-4">
+  <p class="font-semibold">{download.data.titel}</p>
+  <p class="mt-1">{download.data.beschreibung}</p>
+  <ul class="mt-2 flex gap-4">
+    {
+      download.data.dateien.map((file) => (
+        <li>
+          <a href={file.datei} class="underline" download>
+            {file.format.toUpperCase()}
+            {file.groesseKb && <> ({file.groesseKb} KB)</>}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>

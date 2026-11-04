@@ -5,8 +5,8 @@ import { defineCollection, reference } from 'astro:content'
 export const glossarCollection = defineCollection({
   loader: file('src/content/glossar.yaml'),
   schema: z.object({
-    term: z.string(),
+    begriff: z.string(),
     definition: z.string(),
-    seeAlso: z.array(reference('glossar')).default([]),
+    siehe: z.array(reference('glossar')).default([]),
   }),
 })

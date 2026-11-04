@@ -1,0 +1,20 @@
+---
+import { getCollection } from 'astro:content'
+import { chapterPath } from 'src/lib/navigation'
+
+const chapters = (await getCollection('kapitel')).toSorted((a, b) => a.data.order - b.data.order)
+---
+
+<ul class="not-prose my-6 grid gap-4 sm:grid-cols-3">
+  {
+    chapters.map((chapter) => (
+      <li class="border border-gray-300 p-4" data-icon={chapter.data.icon}>
+        <a href={chapterPath(chapter)} class="font-semibold">
+          {chapter.data.nummer && <>{chapter.data.nummer}. </>}
+          {chapter.data.title}
+        </a>
+        {chapter.data.kurztext && <p class="mt-2">{chapter.data.kurztext}</p>}
+      </li>
+    ))
+  }
+</ul>

@@ -1,5 +1,6 @@
 ---
 import { getEntries } from 'astro:content'
+import { formatSource } from 'src/lib/sources'
 
 type Props = {
   ids: string[]
@@ -17,9 +18,7 @@ const quellen = await getEntries(Astro.props.ids.map((id) => ({ collection: 'que
       <ol class="mt-2 list-decimal space-y-1 pl-5">
         {quellen.map((quelle) => (
           <li id={`quelle-${quelle.id}`}>
-            {[quelle.data.author, quelle.data.title, quelle.data.publisher, quelle.data.year]
-              .filter(Boolean)
-              .join(', ')}
+            {formatSource(quelle)}
             {quelle.data.url && (
               <>
                 {' '}

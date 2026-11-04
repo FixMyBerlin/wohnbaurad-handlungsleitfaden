@@ -1,0 +1,27 @@
+---
+import { getEntry } from 'astro:content'
+
+type Props = {
+  id: string
+}
+
+const program = await getEntry('foerderprogramme', Astro.props.id)
+if (!program) throw new Error(`<Foerderprogramm id="${Astro.props.id}"> not found in src/content/foerderprogramme/`)
+const { data } = program
+const ebenen = { bund: 'Bund', land: 'Land', eu: 'EU' } as const
+const stand = data.stand.toLocaleDateString('de-DE', { month: '2-digit', year: 'numeric' })
+---
+
+<article class="not-prose my-6 border border-gray-300 p-4">
+  <h3 class="font-semibold">{data.name}</h3>
+  <dl class="mt-2 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-sm">
+    <dt>Geber</dt><dd>{data.geber}</dd>
+    <dt>Ebene</dt><dd>{ebenen[data.ebene]}{data.land && <> ({data.land})</>}</dd>
+    <dt>Gefördert wird</dt><dd>{data.foerdergegenstand}</dd>
+    <dt>Antragsberechtigt</dt><dd>{data.antragsberechtigt}</dd>
+    {data.quote && <><dt>Förderquote</dt><dd>{data.quote}</dd></>}
+    {data.frist && <><dt>Frist</dt><dd>{data.frist}</dd></>}
+    <dt>Stand</dt><dd>{stand}</dd>
+  </dl>
+  <a href={data.url} class="mt-2 inline-block underline">Zum Programm</a>
+</article>

@@ -1,0 +1,15 @@
+---
+import Cite from './Cite.astro'
+
+type Props = {
+  value: string
+  source: string
+}
+
+const { value, source } = Astro.props
+---
+
+<div class="border border-gray-300 p-4">
+  <p class="text-3xl font-bold">{value}</p>
+  <p class="mt-1"><slot /><Cite id={source} /></p>
+</div>

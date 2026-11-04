@@ -7,11 +7,13 @@ export const foerderprogrammeCollection = defineCollection({
   schema: z.object({
     name: z.string(),
     geber: z.string(),
-    ebene: z.enum(['bund', 'land', 'kommune', 'eu']),
+    ebene: z.enum(['bund', 'land', 'eu']),
+    land: z.string().optional(),
     foerdergegenstand: z.string(),
     antragsberechtigt: z.string(),
     quote: z.string().optional(),
-    url: z.url().optional(),
+    frist: z.string().optional(),
+    url: z.url(),
     stand: z.coerce.date(),
   }),
 })

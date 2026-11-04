@@ -64,7 +64,8 @@ Das Repo bleibt vorerst **privat**. Ob und wann es öffentlich wird (Antrag: „
 | `downloads` | YAML | `file()` | Vorlagen und Gesamt-PDF (Eintrag `gesamtfassung`): `seite` (Referenz), `lizenz`, `reviewedBy`, `stand` |
 | `praxisbeispiele` | YAML | `glob` | GWG + andere Städte |
 
-Frontmatter für `seiten`: `title`, `kapitel` (Referenz), `order`, `summary`, `audience[]`, `updatedAt`. Bewusst **ohne Freigabe-Status**, siehe offene Frage A3.
+Frontmatter für `seiten`: `title`, `navTitle?`, `kapitel` (Referenz), `order`, `summary`, `audience[]`, `updatedAt`. Bewusst **ohne Freigabe-Status**, siehe offene Frage A3.
+Die Felder der Daten-Collections (`quellen`, `glossar`, `downloads`, `foerderprogramme`) folgen der Komponenten-API aus der Design-Sitzung und sind deutsch (`titel`, `begriff`, `dateien` …), weil Sine sie direkt bearbeitet. `kapitel` und `seiten` behalten `title`, damit beide gleich heißen. Stakeholder-Karten bekommen ihre Daten direkt im MDX und haben keine eigene Collection.
 *Warum:* Daten mit festem Schema (Förderprogramme, Quellen) kann die KI nicht „frei formulieren“. Zod prüft sie beim Build, ein Tippfehler bricht den Build und landet nicht online. Mit `reference()` kann ein Verweis auf eine fehlende Quelle gar nicht erst entstehen. Die Collection-Definitionen liegen in einer Datei je Collection, wie im Skill `keystatic-astro` (ohne den Keystatic-Teil).
 
 **E5 – Feste Komponenten-Liste für MDX, Inhalte enthalten keine Imports.**

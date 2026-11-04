@@ -1,9 +1,10 @@
 ---
 import PageLayout from '@layouts/PageLayout.astro'
 import { getCollection } from 'astro:content'
+import { formatSource } from 'src/lib/sources'
 
 const sources = (await getCollection('quellen')).toSorted((a, b) =>
-  a.data.title.localeCompare(b.data.title, 'de'),
+  a.data.titel.localeCompare(b.data.titel, 'de'),
 )
 ---
 
@@ -13,9 +14,7 @@ const sources = (await getCollection('quellen')).toSorted((a, b) =>
     {
       sources.map((source) => (
         <li id={`quelle-${source.id}`}>
-          {[source.data.author, source.data.title, source.data.publisher, source.data.year]
-            .filter(Boolean)
-            .join(', ')}
+          {formatSource(source)}
           {source.data.url && (
             <>
               {' '}

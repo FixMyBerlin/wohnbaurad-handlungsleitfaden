@@ -1,5 +1,13 @@
-- id: platzhalter-quelle
-  title: 'PLATZHALTER: Titel der Quelle'
-  author: 'PLATZHALTER: Autor:in'
-  year: 2026
-  topics: [abstellanlagen]
+- id: platzhalter-beleg
+  typ: beleg
+  titel: 'PLATZHALTER: Titel des Belegs'
+  autor: 'PLATZHALTER: Autor:in'
+  jahr: 2026
+
+- id: platzhalter-literatur
+  typ: literatur
+  titel: 'PLATZHALTER: Titel der Literatur'
+  herausgeber: 'PLATZHALTER: Herausgeber'
+  jahr: 2026
+  themen: [abstellanlagen]
+  kurzbeschreibung: 'PLATZHALTER: Worum es in der Veröffentlichung geht.'
