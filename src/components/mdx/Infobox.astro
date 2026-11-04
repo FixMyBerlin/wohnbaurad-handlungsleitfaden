@@ -1,11 +1,11 @@
 ---
 type Props = {
-  variant?: 'info' | 'tipp' | 'warnung'
+  variant?: 'info' | 'tip' | 'warning'
   title?: string
 }
 
 const { variant = 'info', title } = Astro.props
-const labels = { info: 'Info', tipp: 'Tipp', warnung: 'Achtung' } as const
+const labels = { info: 'Info', tip: 'Tipp', warning: 'Achtung' } as const
 ---
 
 <aside class="not-prose my-6 border border-gray-300 p-4" data-variant={variant}>

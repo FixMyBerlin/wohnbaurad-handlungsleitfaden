@@ -4,9 +4,9 @@ Website and PDF of the *Handlungsleitfaden* from the NRVP project WohnBauRad: ho
 
 ## Docs
 
-- [docs/konzept/plan-grundgeruest.md](./docs/konzept/plan-grundgeruest.md) – technical plan and decisions
-- [docs/konzept/handlungsleitfaden-struktur.md](./docs/konzept/handlungsleitfaden-struktur.md) – content structure
-- [docs/konzept/handlungsleitfaden-seiten.md](./docs/konzept/handlungsleitfaden-seiten.md) – page by page content
+- [docs/concept/technical-plan.md](./docs/concept/technical-plan.md) – technical plan and decisions
+- [docs/concept/content-structure.md](./docs/concept/content-structure.md) – content structure
+- [docs/concept/page-contents.md](./docs/concept/page-contents.md) – page by page content
 
 ## Developing
 

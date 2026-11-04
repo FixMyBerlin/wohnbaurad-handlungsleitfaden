@@ -5,8 +5,8 @@ import BaseLayout from '@layouts/BaseLayout.astro'
 import { getEntry, render } from 'astro:content'
 import { getCitationIds } from 'src/lib/citations'
 
-const home = await getEntry('startseite', 'index')
-if (!home) throw new Error('Missing src/content/startseite/index.mdx')
+const home = await getEntry('home', 'index')
+if (!home) throw new Error('Missing src/content/home/index.mdx')
 const { Content } = await render(home)
 const citationIds = await getCitationIds(home.body, home.id)
 Astro.locals.citationIds = citationIds

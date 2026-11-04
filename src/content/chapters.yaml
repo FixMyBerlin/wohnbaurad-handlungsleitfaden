@@ -1,0 +1,20 @@
+- id: warum-und-wer
+  title: Warum & Wer
+  number: 1
+  shortText: 'PLATZHALTER: Kurztext zum Kapitel Warum & Wer'
+  icon: people
+  order: 1
+
+- id: wie-umsetzen
+  title: Wie umsetzen
+  number: 2
+  shortText: 'PLATZHALTER: Kurztext zum Kapitel Wie umsetzen'
+  icon: house
+  order: 2
+
+- id: werkzeuge-und-praxis
+  title: Werkzeuge & Praxis
+  number: 3
+  shortText: 'PLATZHALTER: Kurztext zum Kapitel Werkzeuge & Praxis'
+  icon: map
+  order: 3

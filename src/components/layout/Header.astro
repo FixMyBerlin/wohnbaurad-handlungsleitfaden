@@ -1,15 +1,15 @@
 ---
 import { getEntry } from 'astro:content'
 
-const gesamtfassung = await getEntry('downloads', 'gesamtfassung')
+const completeGuide = await getEntry('downloads', 'complete-guide')
 ---
 
 <header class="border-b border-gray-200">
   <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3">
     <a href="/" class="font-bold">WohnBauRad</a>
     {
-      gesamtfassung && (
-        <a href={gesamtfassung.data.dateien[0].datei} class="rounded border border-gray-900 px-3 py-1.5 text-sm">
+      completeGuide && (
+        <a href={completeGuide.data.files[0].path} class="rounded border border-gray-900 px-3 py-1.5 text-sm">
           Gesamt-PDF
         </a>
       )

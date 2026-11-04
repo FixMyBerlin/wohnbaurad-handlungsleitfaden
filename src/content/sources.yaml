@@ -1,0 +1,13 @@
+- id: placeholder-evidence
+  type: evidence
+  title: 'PLATZHALTER: Titel des Belegs'
+  author: 'PLATZHALTER: Autor:in'
+  year: 2026
+
+- id: placeholder-literature
+  type: literature
+  title: 'PLATZHALTER: Titel der Literatur'
+  publisher: 'PLATZHALTER: Herausgeber'
+  year: 2026
+  topics: [bike-parking]
+  summary: 'PLATZHALTER: Worum es in der Veröffentlichung geht.'

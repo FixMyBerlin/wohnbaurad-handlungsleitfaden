@@ -2,8 +2,8 @@
 import PageLayout from '@layouts/PageLayout.astro'
 import { getCollection } from 'astro:content'
 
-const terms = (await getCollection('glossar')).toSorted((a, b) =>
-  a.data.begriff.localeCompare(b.data.begriff, 'de'),
+const terms = (await getCollection('glossary')).toSorted((a, b) =>
+  a.data.term.localeCompare(b.data.term, 'de'),
 )
 ---
 
@@ -13,7 +13,7 @@ const terms = (await getCollection('glossar')).toSorted((a, b) =>
     {
       terms.map((term) => (
         <>
-          <dt id={`begriff-${term.id}`}>{term.data.begriff}</dt>
+          <dt id={`begriff-${term.id}`}>{term.data.term}</dt>
           <dd>{term.data.definition}</dd>
         </>
       ))

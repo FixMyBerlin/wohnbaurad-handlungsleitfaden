@@ -1,19 +1,19 @@
+import { chaptersCollection } from './collections/chapters'
 import { downloadsCollection } from './collections/downloads'
-import { einzelseitenCollection } from './collections/einzelseiten'
-import { foerderprogrammeCollection } from './collections/foerderprogramme'
-import { glossarCollection } from './collections/glossar'
-import { kapitelCollection } from './collections/kapitel'
-import { quellenCollection } from './collections/quellen'
-import { seitenCollection } from './collections/seiten'
-import { startseiteCollection } from './collections/startseite'
+import { fundingProgramsCollection } from './collections/fundingPrograms'
+import { glossaryCollection } from './collections/glossary'
+import { homeCollection } from './collections/home'
+import { pagesCollection } from './collections/pages'
+import { singlePagesCollection } from './collections/singlePages'
+import { sourcesCollection } from './collections/sources'
 
 export const collections = {
-  kapitel: kapitelCollection,
-  seiten: seitenCollection,
-  startseite: startseiteCollection,
-  einzelseiten: einzelseitenCollection,
-  quellen: quellenCollection,
-  glossar: glossarCollection,
+  chapters: chaptersCollection,
+  pages: pagesCollection,
+  home: homeCollection,
+  singlePages: singlePagesCollection,
+  sources: sourcesCollection,
+  glossary: glossaryCollection,
   downloads: downloadsCollection,
-  foerderprogramme: foerderprogrammeCollection,
+  fundingPrograms: fundingProgramsCollection,
 }

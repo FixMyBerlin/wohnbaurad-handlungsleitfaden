@@ -2,12 +2,12 @@
 type Props = {
   href: string
   variant?: 'primary' | 'secondary'
-  icon?: 'download' | 'extern' | 'pfeil'
+  icon?: 'download' | 'external' | 'arrow'
 }
 
 const { href, variant = 'primary', icon } = Astro.props
-const isExternal = icon === 'extern' || /^https?:\/\//.test(href)
-const iconText = { download: '↓', extern: '↗', pfeil: '→' } as const
+const isExternal = icon === 'external' || /^https?:\/\//.test(href)
+const iconText = { download: '↓', external: '↗', arrow: '→' } as const
 ---
 
 <a

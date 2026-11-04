@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content'
+import { formatSource } from 'src/lib/sources'
+
+type Props = {
+  topic?: string
+  ids?: string[]
+}
+
+const { topic, ids } = Astro.props
+const entries = (
+  await getCollection(
+    'sources',
+    (source) =>
+      source.data.type === 'literature' &&
+      (!topic || source.data.topics.includes(topic)) &&
+      (!ids || ids.includes(source.id)),
+  )
+).toSorted((a, b) => b.data.year - a.data.year)
+---
+
+<ul>
+  {
+    entries.map((source) => (
+      <li>
+        {source.data.url ? <a href={source.data.url}>{formatSource(source)}</a> : formatSource(source)}
+        {source.data.summary && <p>{source.data.summary}</p>}
+      </li>
+    ))
+  }
+</ul>

@@ -9,12 +9,12 @@ import { getChapterTree, pagePath } from 'src/lib/navigation'
 // One URL level holds both chapter overviews and single pages (about, imprint, ...)
 type Props =
   | { kind: 'chapter'; chapterId: string }
-  | { kind: 'single'; page: CollectionEntry<'einzelseiten'> }
+  | { kind: 'single'; page: CollectionEntry<'singlePages'> }
 
 export const getStaticPaths = async () => {
   const [chapters, singlePages] = await Promise.all([
-    getCollection('kapitel'),
-    getCollection('einzelseiten'),
+    getCollection('chapters'),
+    getCollection('singlePages'),
   ])
   return [
     ...chapters.map((chapter) => ({
@@ -45,7 +45,7 @@ const title = chapter?.data.title ?? (props.kind === 'single' ? props.page.data.
   {
     chapter && (
       <>
-        <p>{chapter.data.kurztext}</p>
+        <p>{chapter.data.shortText}</p>
         <ol>
           {chapter.pages.map((page) => (
             <li>

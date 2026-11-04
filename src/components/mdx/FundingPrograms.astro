@@ -1,0 +1,15 @@
+---
+import { getCollection } from 'astro:content'
+import FundingProgram from './FundingProgram.astro'
+
+type Props = {
+  level?: 'federal' | 'state' | 'eu'
+}
+
+const { level } = Astro.props
+const programs = (
+  await getCollection('fundingPrograms', (program) => !level || program.data.level === level)
+).toSorted((a, b) => a.data.name.localeCompare(b.data.name, 'de'))
+---
+
+{programs.map((program) => <FundingProgram id={program.id} />)}

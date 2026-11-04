@@ -1,18 +1,18 @@
-- id: gesamtfassung
-  titel: Handlungsleitfaden (Gesamtfassung)
-  beschreibung: 'PLATZHALTER: Der gesamte Handlungsleitfaden als PDF.'
-  dateien:
+- id: complete-guide
+  title: Handlungsleitfaden (Gesamtfassung)
+  description: 'PLATZHALTER: Der gesamte Handlungsleitfaden als PDF.'
+  files:
     - format: pdf
-      datei: /downloads/handlungsleitfaden-wohnbaurad.pdf
-  stand: 2026-11-04
+      path: /downloads/handlungsleitfaden-wohnbaurad.pdf
+  updatedAt: 2026-11-04
 
-- id: platzhalter-vorlage
-  titel: 'PLATZHALTER: Titel der Vorlage'
-  beschreibung: 'PLATZHALTER: Wofür die Vorlage gedacht ist.'
-  dateien:
+- id: placeholder-template
+  title: 'PLATZHALTER: Titel der Vorlage'
+  description: 'PLATZHALTER: Wofür die Vorlage gedacht ist.'
+  files:
     - format: docx
-      datei: /downloads/platzhalter-vorlage.docx
+      path: /downloads/placeholder-template.docx
     - format: pdf
-      datei: /downloads/platzhalter-vorlage.pdf
-  seite: wie-umsetzen/vorlagen
-  stand: 2026-11-04
+      path: /downloads/placeholder-template.pdf
+  page: wie-umsetzen/vorlagen
+  updatedAt: 2026-11-04

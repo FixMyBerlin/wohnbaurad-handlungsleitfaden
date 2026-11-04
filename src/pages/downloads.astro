@@ -4,9 +4,9 @@ import PageLayout from '@layouts/PageLayout.astro'
 import { getCollection } from 'astro:content'
 
 const downloads = (await getCollection('downloads')).toSorted((a, b) => {
-  if (a.id === 'gesamtfassung') return -1
-  if (b.id === 'gesamtfassung') return 1
-  return a.data.titel.localeCompare(b.data.titel, 'de')
+  if (a.id === 'complete-guide') return -1
+  if (b.id === 'complete-guide') return 1
+  return a.data.title.localeCompare(b.data.title, 'de')
 })
 ---
 

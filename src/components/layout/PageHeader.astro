@@ -1,10 +1,10 @@
 ---
 import type { CollectionEntry } from 'astro:content'
-import { audienceLabels } from 'src/collections/seiten'
+import { audienceLabels } from 'src/collections/pages'
 
 type Props = {
-  page: CollectionEntry<'seiten'>
-  chapter: CollectionEntry<'kapitel'>
+  page: CollectionEntry<'pages'>
+  chapter: CollectionEntry<'chapters'>
 }
 
 const { page, chapter } = Astro.props

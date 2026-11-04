@@ -3,8 +3,8 @@ import type { CollectionEntry } from 'astro:content'
 import { pagePath } from 'src/lib/navigation'
 
 type Props = {
-  prev?: CollectionEntry<'seiten'>
-  next?: CollectionEntry<'seiten'>
+  prev?: CollectionEntry<'pages'>
+  next?: CollectionEntry<'pages'>
 }
 
 const { prev, next } = Astro.props

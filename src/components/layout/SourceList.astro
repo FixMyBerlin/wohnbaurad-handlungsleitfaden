@@ -6,23 +6,23 @@ type Props = {
   ids: string[]
 }
 
-const quellen = await getEntries(Astro.props.ids.map((id) => ({ collection: 'quellen', id })))
+const sources = await getEntries(Astro.props.ids.map((id) => ({ collection: 'sources', id })))
 ---
 
 {
-  quellen.length > 0 && (
-    <section aria-labelledby="quellen-title" class="mt-12 border-t border-gray-200 pt-6 text-sm">
-      <h2 id="quellen-title" class="font-semibold">
+  sources.length > 0 && (
+    <section aria-labelledby="sources-title" class="mt-12 border-t border-gray-200 pt-6 text-sm">
+      <h2 id="sources-title" class="font-semibold">
         Quellen
       </h2>
       <ol class="mt-2 list-decimal space-y-1 pl-5">
-        {quellen.map((quelle) => (
-          <li id={`quelle-${quelle.id}`}>
-            {formatSource(quelle)}
-            {quelle.data.url && (
+        {sources.map((source) => (
+          <li id={`quelle-${source.id}`}>
+            {formatSource(source)}
+            {source.data.url && (
               <>
                 {' '}
-                <a href={quelle.data.url}>Link</a>
+                <a href={source.data.url}>Link</a>
               </>
             )}
           </li>

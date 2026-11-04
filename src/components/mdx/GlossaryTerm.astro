@@ -1,0 +1,13 @@
+---
+import { getEntry } from 'astro:content'
+
+type Props = {
+  id: string
+}
+
+const entry = await getEntry('glossary', Astro.props.id)
+if (!entry) throw new Error(`<GlossaryTerm id="${Astro.props.id}"> not found in src/content/glossary.yaml`)
+const hasText = Astro.slots.has('default')
+---
+
+<a href={`/glossar#begriff-${entry.id}`} title={entry.data.definition} class="underline decoration-dotted">{hasText ? <slot /> : entry.data.term}</a>
