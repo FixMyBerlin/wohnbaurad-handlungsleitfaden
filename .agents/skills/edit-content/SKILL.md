@@ -35,9 +35,9 @@ Dieser Skill beschreibt, wie Inhalte in dieses Repo kommen. Er gilt für jede KI
 
 ## Schreibweise in MDX
 
-- Bausteine mit Markdown-Inhalt (`Infobox`, `Checklist`, `Step`, `StakeholderCard`): Steht im Inhalt mehr als ein Satz oder eine Liste, eine Leerzeile nach dem öffnenden und vor dem schließenden Tag lassen.
+- Bausteine mit Markdown-Inhalt (`Infobox`, `Checklist`, `Step`): Steht im Inhalt mehr als ein Satz oder eine Liste, eine Leerzeile nach dem öffnenden und vor dem schließenden Tag lassen.
 - `<Cite id="…" />` direkt hinter das Satzzeichen, ohne Leerzeichen: `… am Wohnort.<Cite id="bmvi-2018" />`
-- IDs (Quellen, Glossar, Downloads, Förderprogramme) klein, mit Bindestrichen, sprechend: `wuppertal-institut-2015`, `verkehrssicherungspflicht`. Platzhalter-Einträge beginnen mit `placeholder-`.
+- IDs (Quellen, Glossar, Downloads, Förderprogramme, Akteur:innen) klein, mit Bindestrichen, sprechend: `wuppertal-institut-2015`, `verkehrssicherungspflicht`. Platzhalter-Einträge beginnen mit `placeholder-`.
 - `order` legt die Reihenfolge im Kapitel fest. Jede Zahl nur einmal pro Kapitel, Lücken sind erlaubt.
 
 ## Aufgaben
@@ -49,6 +49,7 @@ Dieser Skill beschreibt, wie Inhalte in dieses Repo kommen. Er gilt für jede KI
 | Quelle oder Literatur ergänzen | `src/content/sources.yaml` | `type: evidence` für Belege, `type: literature` für die Literaturliste. `id` englisch oder neutral, z. B. `wuppertal-institut-2015` |
 | Glossarbegriff ergänzen | `src/content/glossary.yaml` | Im Text verlinken mit `<GlossaryTerm id="…" />` |
 | Vorlage oder Download ergänzen | Datei nach `public/downloads/`, Eintrag in `src/content/downloads.yaml` | Auf der Seite mit `<Download id="…" />` einbinden |
+| Akteur:in ergänzen | `src/content/stakeholders.yaml` | Erscheint automatisch in `<StakeholderCards />` |
 | Förderprogramm ergänzen | neue Datei `src/content/funding-programs/<id>.yaml` | `updatedAt` = Stand der Recherche |
 | Screenshot einbinden | Bild nach `src/assets/screenshots/` | `<ScreenshotStep step={1} image="screenshots/datei.png" alt="…">Bildunterschrift</ScreenshotStep>` |
 | Kapiteltext (Kacheln) | `src/content/chapters.yaml` | `shortText` |

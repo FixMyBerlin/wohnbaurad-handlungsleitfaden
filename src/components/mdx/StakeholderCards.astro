@@ -1,1 +1,16 @@
-<div class="not-prose my-6 grid gap-4 sm:grid-cols-2"><slot /></div>
+---
+import { getCollection } from 'astro:content'
+import StakeholderCard from './StakeholderCard.astro'
+
+type Props = {
+  ids?: string[]
+}
+
+const { ids } = Astro.props
+const stakeholders = (await getCollection('stakeholders', (entry) => !ids || ids.includes(entry.id)))
+  .toSorted((a, b) => a.data.order - b.data.order)
+---
+
+<div class="not-prose my-6 grid gap-4 sm:grid-cols-2">
+  {stakeholders.map((entry) => <StakeholderCard id={entry.id} />)}
+</div>

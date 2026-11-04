@@ -43,6 +43,10 @@ Typen: Text in YAML am besten in einfachen Anführungszeichen (`'…'`), zwingen
 
 `id`, `term`, `definition`, `seeAlso?` (Liste von Glossar-IDs).
 
+## Akteur:innen – `src/content/stakeholders.yaml`
+
+`id`, `name`, `type`, `interest`, `influence` (`high` \| `medium` \| `low`), `tip?` (Tipp für die Ansprache), `order` (Reihenfolge in `<StakeholderCards />`).
+
 ## Downloads – `src/content/downloads.yaml`
 
 | Feld | Bedeutung |

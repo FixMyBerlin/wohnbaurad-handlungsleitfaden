@@ -60,11 +60,12 @@ Das Repo bleibt vorerst **privat**. Ob und wann es öffentlich wird (Antrag: „
 | `home` | MDX | `glob` (eine Datei) | Startseite: `eyebrow`, `title`, Inhalt als MDX mit Bausteinen |
 | `sources` | YAML | `file()` | Belege und Literatur (für `<Cite>`, `<KeyFigure>` und `<Literature>`) |
 | `fundingPrograms` | YAML | `glob` | Steckbriefe (2.6) |
+| `stakeholders` | YAML | `file()` | Akteur:innen für `<StakeholderCards />` (1.3) |
 | `glossary` | YAML | `file()` | Begriffe (Tooltips + Anhang) |
 | `downloads` | YAML | `file()` | Vorlagen und Gesamt-PDF (Eintrag `complete-guide`): `files[]`, `page` (Referenz), `license`, `reviewedBy`, `updatedAt` |
 
 Frontmatter für `pages`: `title`, `navTitle?`, `chapter` (Referenz), `order`, `summary`, `audience[]`, `updatedAt`. Bewusst **ohne Freigabe-Status**, siehe offene Frage A3.
-Alle Collection-, Feld- und Enum-Namen sind englisch (z. B. `sources.title`, `glossary.term`, `fundingPrograms.level: federal | state | eu`). Deutsch sind nur die URL-Slugs (Ordner- und Dateinamen unter `src/content/pages/`, IDs von `chapters` und `singlePages`) und die angezeigten Texte. Stakeholder-Karten bekommen ihre Daten direkt im MDX und haben keine eigene Collection.
+Alle Collection-, Feld- und Enum-Namen sind englisch (z. B. `sources.title`, `glossary.term`, `fundingPrograms.level: federal | state | eu`). Deutsch sind nur die URL-Slugs (Ordner- und Dateinamen unter `src/content/pages/`, IDs von `chapters` und `singlePages`) und die angezeigten Texte. Stakeholder-Karten kommen aus der Collection `stakeholders` (`src/content/stakeholders.yaml`), damit Akteur:innen strukturiert gepflegt werden.
 *Warum:* Daten mit festem Schema (Förderprogramme, Quellen) kann die KI nicht „frei formulieren“. Zod prüft sie beim Build, ein Tippfehler bricht den Build und landet nicht online. Mit `reference()` kann ein Verweis auf eine fehlende Quelle gar nicht erst entstehen. Die Collection-Definitionen liegen in einer Datei je Collection, wie im Skill `keystatic-astro` (ohne den Keystatic-Teil).
 
 **E5 – Feste Komponenten-Liste für MDX, Inhalte enthalten keine Imports.**
@@ -208,7 +209,7 @@ Dazu `.claude/rules/package-json-scripts.md` laut `tech-stack`.
     ├── content/
     │   ├── pages/<kapitel-slug>/<seiten-slug>.mdx
     │   ├── home/index.mdx · single-pages/*.mdx
-    │   ├── chapters.yaml · sources.yaml · glossary.yaml · downloads.yaml
+    │   ├── chapters.yaml · sources.yaml · glossary.yaml · downloads.yaml · stakeholders.yaml
     │   └── funding-programs/*.yaml
     ├── components/
     │   ├── mdx/              # Bausteine für Inhalte + index.ts (Liste)

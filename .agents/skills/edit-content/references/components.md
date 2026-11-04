@@ -19,8 +19,8 @@ Alle Bausteine stehen in jeder MDX-Datei ohne Import zur Verfügung. Andere Komp
 | `ButtonGroup` | – | mehrere `ButtonLink` | siehe unten |
 | `GlossaryTerm` | `id` (aus `glossary.yaml`) | optional: sichtbarer Text, sonst der Begriff | `<GlossaryTerm id="verkehrssicherungspflicht" />` |
 | `Literature` | `topic?`, `ids?` | keine; listet Quellen mit `type: literature` | `<Literature topic="bike-parking" />` |
-| `StakeholderCards` | – | `StakeholderCard`-Bausteine | siehe unten |
-| `StakeholderCard` | `name`, `type`, `interest`, `influence`: `high` \| `medium` \| `low` | Tipp für die Ansprache | siehe unten |
+| `StakeholderCards` | `ids?` (Liste) | keine; zeigt alle Einträge aus `stakeholders.yaml` (oder nur `ids`) in der Reihenfolge `order` | `<StakeholderCards />` |
+| `StakeholderCard` | `id` (aus `stakeholders.yaml`) | keine | `<StakeholderCard id="strassenverkehrsbehoerde" />` |
 | `FundingProgram` | `id` (Dateiname in `funding-programs/`) | keine | `<FundingProgram id="stadt-und-land" />` |
 | `FundingPrograms` | `level?`: `federal` \| `state` \| `eu` | keine; listet alle passenden | `<FundingPrograms level="federal" />` |
 | `ExampleMap` | `example` (ID eines Beispielgebiets) | keine | `<ExampleMap example="muenchen-nord" />` |
@@ -45,11 +45,7 @@ Alle Bausteine stehen in jeder MDX-Datei ohne Import zur Verfügung. Andere Komp
   <Step title="Bedarf mit der Kommune abgleichen" />
 </Steps>
 
-<StakeholderCards>
-  <StakeholderCard name="Straßenverkehrsbehörde" type="Verwaltung" interest="Verkehrssicherheit" influence="high">
-    Früh einbinden, wenn Flächen öffentlich genutzt werden.
-  </StakeholderCard>
-</StakeholderCards>
+<StakeholderCards ids={['strassenverkehrsbehoerde', 'mieterbeirat']} />
 
 <ButtonGroup>
   <ButtonLink href="/downloads" icon="download">Alle Vorlagen</ButtonLink>

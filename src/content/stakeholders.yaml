@@ -1,0 +1,7 @@
+- id: placeholder-stakeholder
+  name: 'PLATZHALTER: Akteur:in'
+  type: 'PLATZHALTER: Typ'
+  interest: 'PLATZHALTER: Interesse'
+  influence: medium
+  tip: 'PLATZHALTER: Tipp für die Ansprache'
+  order: 1

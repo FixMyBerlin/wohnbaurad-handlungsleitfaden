@@ -1,12 +1,13 @@
 ---
+import { getEntry } from 'astro:content'
+
 type Props = {
-  name: string
-  type: string
-  interest: string
-  influence: 'high' | 'medium' | 'low'
+  id: string
 }
 
-const { name, type, interest, influence } = Astro.props
+const entry = await getEntry('stakeholders', Astro.props.id)
+if (!entry) throw new Error(`<StakeholderCard id="${Astro.props.id}"> not found in src/content/stakeholders.yaml`)
+const { name, type, interest, influence, tip } = entry.data
 const influenceLabels = { high: 'hoch', medium: 'mittel', low: 'gering' } as const
 ---
 
@@ -14,5 +15,5 @@ const influenceLabels = { high: 'hoch', medium: 'mittel', low: 'gering' } as con
   <h3 class="font-semibold">{name}</h3>
   <p class="text-sm">{type} · Einfluss: {influenceLabels[influence]}</p>
   <p class="mt-2">Interesse: {interest}</p>
-  {Astro.slots.has('default') && <div class="prose mt-2"><strong>Tipp:</strong> <slot /></div>}
+  {tip && <p class="mt-2"><strong>Tipp:</strong> {tip}</p>}
 </article>
