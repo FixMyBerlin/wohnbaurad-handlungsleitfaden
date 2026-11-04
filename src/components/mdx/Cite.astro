@@ -1,0 +1,11 @@
+---
+type Props = {
+  id: string
+}
+
+const { id } = Astro.props
+const number = (Astro.locals.citationIds ?? []).indexOf(id) + 1
+if (number === 0) throw new Error(`<Cite id="${id}"> is not registered for this page`)
+---
+
+<sup><a href={`#quelle-${id}`} aria-label={`Quelle ${number}`}>[{number}]</a></sup>

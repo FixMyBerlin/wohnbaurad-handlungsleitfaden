@@ -1,0 +1,17 @@
+- id: warum-und-wer
+  title: Warum & Wer
+  order: 1
+  kurztext: 'PLATZHALTER: Kurztext zum Kapitel Warum & Wer'
+  icon: platzhalter
+
+- id: wie-umsetzen
+  title: Wie umsetzen
+  order: 2
+  kurztext: 'PLATZHALTER: Kurztext zum Kapitel Wie umsetzen'
+  icon: platzhalter
+
+- id: werkzeuge-und-praxis
+  title: Werkzeuge & Praxis
+  order: 3
+  kurztext: 'PLATZHALTER: Kurztext zum Kapitel Werkzeuge & Praxis'
+  icon: platzhalter

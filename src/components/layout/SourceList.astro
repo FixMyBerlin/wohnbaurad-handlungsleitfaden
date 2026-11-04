@@ -1,0 +1,34 @@
+---
+import { getEntries } from 'astro:content'
+
+type Props = {
+  ids: string[]
+}
+
+const quellen = await getEntries(Astro.props.ids.map((id) => ({ collection: 'quellen', id })))
+---
+
+{
+  quellen.length > 0 && (
+    <section aria-labelledby="quellen-title" class="mt-12 border-t border-gray-200 pt-6 text-sm">
+      <h2 id="quellen-title" class="font-semibold">
+        Quellen
+      </h2>
+      <ol class="mt-2 list-decimal space-y-1 pl-5">
+        {quellen.map((quelle) => (
+          <li id={`quelle-${quelle.id}`}>
+            {[quelle.data.author, quelle.data.title, quelle.data.publisher, quelle.data.year]
+              .filter(Boolean)
+              .join(', ')}
+            {quelle.data.url && (
+              <>
+                {' '}
+                <a href={quelle.data.url}>Link</a>
+              </>
+            )}
+          </li>
+        ))}
+      </ol>
+    </section>
+  )
+}

@@ -1,0 +1,30 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { pagePath } from 'src/lib/navigation'
+
+type Props = {
+  prev?: CollectionEntry<'seiten'>
+  next?: CollectionEntry<'seiten'>
+}
+
+const { prev, next } = Astro.props
+---
+
+<nav aria-label="Vorherige und nächste Seite" class="mt-12 flex justify-between gap-4 text-sm">
+  {
+    prev ? (
+      <a href={pagePath(prev)} rel="prev">
+        ← {prev.data.title}
+      </a>
+    ) : (
+      <span />
+    )
+  }
+  {
+    next && (
+      <a href={pagePath(next)} rel="next">
+        {next.data.title} →
+      </a>
+    )
+  }
+</nav>

@@ -56,11 +56,12 @@ Das Repo bleibt vorerst **privat**. Ob und wann es öffentlich wird (Antrag: „
 | Collection | Format | Loader | Wofür |
 |---|---|---|---|
 | `seiten` | MDX | `glob('**/*.mdx')` in `src/content/seiten/<kapitel>/<seite>.mdx`. Ordner- und Dateinamen = URL, deutsch und sprechend: `/wie-umsetzen/rechtlicher-rahmen` | alle 16 Seiten |
-| `kapitel` | YAML | `file()` | Kapitel-Titel, Reihenfolge, Farbe/Icon |
+| `kapitel` | YAML | `file()` | Kapitel-Titel, Reihenfolge, `kurztext`, `icon` (für die Kapitelkacheln, keine Kapitelfarbe) |
+| `startseite` | MDX | `glob` (eine Datei) | Startseite: `eyebrow`, `title`, Inhalt als MDX mit Bausteinen |
 | `quellen` | YAML | `file()` | Literatur und Belege (für `<Cite>` und 2.8) |
 | `foerderprogramme` | YAML | `glob` | Steckbriefe (2.6) |
 | `glossar` | YAML | `file()` | Begriffe (Tooltips + Anhang) |
-| `downloads` | YAML | `file()` | Vorlagen mit Prüfstand |
+| `downloads` | YAML | `file()` | Vorlagen und Gesamt-PDF (Eintrag `gesamtfassung`): `seite` (Referenz), `lizenz`, `reviewedBy`, `stand` |
 | `praxisbeispiele` | YAML | `glob` | GWG + andere Städte |
 
 Frontmatter für `seiten`: `title`, `kapitel` (Referenz), `order`, `summary`, `audience[]`, `updatedAt`. Bewusst **ohne Freigabe-Status**, siehe offene Frage A3.
@@ -161,6 +162,18 @@ Dazu `.claude/rules/package-json-scripts.md` laut `tech-stack`.
 
 **E18 – Ansprache „Sie“** in Navigation, Systemtexten und Inhalten. Steht in `AGENTS.md` und im Skill.
 
+**E19 – Strukturvorgaben aus der Design-Sitzung** ([Design System](https://claude.ai/artifact/1nXDG4m2Husr5mcV9PCuqj), [Seitenentwürfe mit MDX](https://claude.ai/artifact/H4sYZXDS7P5j1tP5ipcA4F)):
+- **Inhaltsseiten = Markdown + Bausteine**, kein HTML im MDX und **kein h1 im MDX**. Das prüft `content-check`.
+- **Seitenlayout:**
+  - Header mit Wortmarke, Suche (Phase 5) und Button „Gesamt-PDF“
+  - links der Kapitelbaum mit allen Unterseiten und `aria-current`
+  - rechts „Auf dieser Seite“ aus den h2, ab 1280px
+  - am Seitenende die Quellenliste aus `<Cite>`, dann Vor/Zurück und der Footer
+  - unter 1024px wird die Navigation zum Drawer
+- **Seitenkopf aus dem Frontmatter:** Kapitelzeile, `title` als h1, `summary` als Lead, „Für: {audience} · Stand: {updatedAt}“. Das Status-Banner aus dem Entwurf entfällt (E14/A3).
+- **Startseite:** eigenes Layout mit `eyebrow` und großem Titel. Der Inhalt ist MDX mit `<Kennzahlen>`, Einstiegen als Markdown-Liste, `<Kapitelkacheln />` und `<Download id="gesamtfassung" />`.
+- **Footer** mit Logozeile Förderer/Partner und der Seite „Erklärung zur Barrierefreiheit“ (BITV-Pflicht).
+
 ---
 
 ## 3. Verzeichnisstruktur (Ziel)
@@ -208,7 +221,7 @@ Dazu `.claude/rules/package-json-scripts.md` laut `tech-stack`.
     │   ├── [kapitel]/[seite].astro   # z. B. /wie-umsetzen/rechtlicher-rahmen
     │   ├── downloads.astro · quellen.astro · glossar.astro
     │   ├── gesamtfassung.astro   # Druckseite für das PDF
-    │   └── impressum.astro · datenschutz.astro
+    │   └── impressum.astro · datenschutz.astro · barrierefreiheit.astro
     ├── assets/               # Screenshots, Fotos (astro:assets)
     └── styles/
         ├── global.css        # Tailwind-Import
@@ -223,7 +236,7 @@ Dazu `.claude/rules/package-json-scripts.md` laut `tech-stack`.
 | Phase | Inhalt | Ergebnis | Commit(s) |
 |---|---|---|---|
 | **0 Repo-Basis** | AGPL-Lizenz, README, Konzeptpapiere nach `docs/konzept/` | Commit 1 (laut `new-project-setup`) | 1 |
-| **1 Scaffold + Tooling** | Astro 7, MDX, React (für die Karte), Tailwind 4, Bun, oxc, knip, tsconfig, Scripts, husky, Dependabot, CI, `netlify.toml` (intern, noindex), Platzhalter für IONOS | `bun run check` grün, leere Seite baut | 1 (Commit 2 laut Skill) |
+| **1 Scaffold + Tooling** ✅ | Astro 7, MDX, Tailwind 4 (React kommt erst mit der Karte in Phase 5, sonst meldet knip es als ungenutzt), Bun, oxc, knip, tsconfig, Scripts, husky, Dependabot, CI, `netlify.toml` (intern, noindex), Platzhalter für IONOS | `bun run check` grün, leere Seite baut | 1 (Commit 2 laut Skill) |
 | **2 Inhaltsmodell + Gerüst** | Collections mit Zod, Routing mit deutschen Pfaden, Layouts, Navigation (Kapitel → Seiten, Vor/Zurück), MDX-Bausteine in schlichter Form, `<Cite>`, `placeholder-check`, Seitengerüst für alle 16 Seiten **nur mit `PLATZHALTER:`-Texten** | Sine könnte loslegen | 2–3 |
 | **3 AGENTS.md + Skill** | schlanke `AGENTS.md`, Skill `inhalte-bearbeiten` (unter `.agents/skills/`, Symlink für Claude Code), Test: eine Seite nur über den Skill anlegen lassen, Import in Manus mit Sine ausprobieren | Inhaltsarbeit kann im November starten | 1 |
 | **4 Design** | Tokens und Bausteine aus der Design-Sitzung übernehmen (Konzept A, Übergabe-Notiz liegt vor), Logozeile Förderer/Partner im Footer, responsive Prüfung, Barrierefreiheit | Seite sieht aus wie im Entwurf | 1–2 |

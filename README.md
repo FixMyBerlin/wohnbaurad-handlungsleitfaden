@@ -14,6 +14,7 @@ Website and PDF of the *Handlungsleitfaden* from the NRVP project WohnBauRad: ho
 - `bun run dev` starts the Astro dev server
 - `bun run check` runs type check, lint, format, tests and a non-blocking knip. Run it before committing. CI runs the read-only `bun run check-ci`, husky runs `bun run check-pre-push` on push.
 - TypeScript stays on 6.x until `astro check` supports TypeScript 7.
+- Content lives in `src/content/` (MDX pages, YAML data). Unfinished text starts with `PLATZHALTER:`; `bun run placeholder-check` lists all of them, and a production build (`ASTRO_ENV=production`) fails while any are left.
 
 ## Deployment
 

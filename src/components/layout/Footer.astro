@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content'
+
+const footerSeiten = (await getCollection('einzelseiten', (seite) => seite.data.footer)).toSorted(
+  (a, b) => a.data.title.localeCompare(b.data.title, 'de'),
+)
+const links = [
+  { href: '/ueber-das-projekt', label: 'Über das Projekt' },
+  { href: '/downloads', label: 'Downloads' },
+  { href: '/quellen', label: 'Quellen' },
+  { href: '/glossar', label: 'Glossar' },
+  ...footerSeiten.map((seite) => ({ href: `/${seite.id}`, label: seite.data.title })),
+]
+---
+
+<footer class="mt-16 border-t border-gray-200">
+  <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-8 text-sm">
+    <p>PLATZHALTER: Logozeile Förderer (BMDV/NRVP) und Partner (GWG München, FixMyCity)</p>
+    <nav aria-label="Fußzeile">
+      <ul class="flex flex-wrap gap-x-6 gap-y-2">
+        {
+          links.map((link) => (
+            <li>
+              <a href={link.href} class="underline">
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</footer>

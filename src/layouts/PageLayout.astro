@@ -1,0 +1,43 @@
+---
+import ChapterNav from '@components/layout/ChapterNav.astro'
+import TableOfContents from '@components/layout/TableOfContents.astro'
+import type { MarkdownHeading } from 'astro'
+import { getChapterTree } from 'src/lib/navigation'
+import BaseLayout from './BaseLayout.astro'
+
+type Props = {
+  title: string
+  description?: string
+  headings?: MarkdownHeading[]
+}
+
+const { title, description, headings = [] } = Astro.props
+const tree = await getChapterTree()
+const currentPath = Astro.url.pathname.replace(/\/$/, '')
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="mx-auto grid max-w-7xl gap-8 px-4 py-8 lg:grid-cols-[16rem_1fr] xl:grid-cols-[16rem_1fr_14rem]">
+    <aside class="lg:sticky lg:top-8 lg:self-start">
+      <details class="lg:hidden">
+        <summary class="cursor-pointer font-semibold">Navigation</summary>
+        <div class="mt-4">
+          <ChapterNav tree={tree} currentPath={currentPath} />
+        </div>
+      </details>
+      <div class="hidden lg:block">
+        <ChapterNav tree={tree} currentPath={currentPath} />
+      </div>
+    </aside>
+    <main id="inhalt" class="min-w-0">
+      <slot name="header" />
+      <div class="prose max-w-none">
+        <slot />
+      </div>
+      <slot name="footer" />
+    </main>
+    <aside class="hidden xl:sticky xl:top-8 xl:block xl:self-start">
+      <TableOfContents headings={headings} />
+    </aside>
+  </div>
+</BaseLayout>

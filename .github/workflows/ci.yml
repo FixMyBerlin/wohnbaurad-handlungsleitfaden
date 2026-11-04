@@ -45,8 +45,9 @@ jobs:
           HUSKY: '0'
         run: bun run check-ci
 
-      - name: Build (production)
+      # Staging, not production: the production build fails while content placeholders remain
+      - name: Build (staging)
         env:
-          ASTRO_ENV: production
+          ASTRO_ENV: staging
           HUSKY: '0'
         run: bun run build

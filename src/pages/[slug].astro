@@ -1,0 +1,55 @@
+---
+import { mdxComponents } from '@components/mdx'
+import PageLayout from '@layouts/PageLayout.astro'
+import { type CollectionEntry, getCollection, render } from 'astro:content'
+import { getChapterTree, pagePath } from 'src/lib/navigation'
+
+// One URL level holds both chapter overviews and single pages (about, imprint, ...)
+type Props =
+  | { kind: 'chapter'; chapterId: string }
+  | { kind: 'single'; page: CollectionEntry<'einzelseiten'> }
+
+export const getStaticPaths = async () => {
+  const [chapters, singlePages] = await Promise.all([
+    getCollection('kapitel'),
+    getCollection('einzelseiten'),
+  ])
+  return [
+    ...chapters.map((chapter) => ({
+      params: { slug: chapter.id },
+      props: { kind: 'chapter', chapterId: chapter.id } as const,
+    })),
+    ...singlePages.map((page) => ({
+      params: { slug: page.id },
+      props: { kind: 'single', page } as const,
+    })),
+  ]
+}
+
+const props = Astro.props
+const chapter =
+  props.kind === 'chapter'
+    ? (await getChapterTree()).find((entry) => entry.id === props.chapterId)
+    : undefined
+const single = props.kind === 'single' ? await render(props.page) : undefined
+const title = chapter?.data.title ?? (props.kind === 'single' ? props.page.data.title : '')
+---
+
+<PageLayout title={title} headings={single?.headings}>
+  <h1 slot="header" class="mb-8 text-3xl font-bold">{title}</h1>
+  {
+    chapter && (
+      <>
+        <p>{chapter.data.kurztext}</p>
+        <ol>
+          {chapter.pages.map((page) => (
+            <li>
+              <a href={pagePath(page)}>{page.data.title}</a>
+            </li>
+          ))}
+        </ol>
+      </>
+    )
+  }
+  {single && <single.Content components={mdxComponents} />}
+</PageLayout>

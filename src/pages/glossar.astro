@@ -1,0 +1,22 @@
+---
+import PageLayout from '@layouts/PageLayout.astro'
+import { getCollection } from 'astro:content'
+
+const terms = (await getCollection('glossar')).toSorted((a, b) =>
+  a.data.term.localeCompare(b.data.term, 'de'),
+)
+---
+
+<PageLayout title="Glossar">
+  <h1 slot="header" class="mb-8 text-3xl font-bold">Glossar</h1>
+  <dl>
+    {
+      terms.map((term) => (
+        <>
+          <dt id={`begriff-${term.id}`}>{term.data.term}</dt>
+          <dd>{term.data.definition}</dd>
+        </>
+      ))
+    }
+  </dl>
+</PageLayout>

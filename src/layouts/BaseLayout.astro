@@ -1,4 +1,6 @@
 ---
+import Footer from '@components/layout/Footer.astro'
+import Header from '@components/layout/Header.astro'
 import { ASTRO_ENV } from 'astro:env/client'
 import 'src/styles/global.css'
 
@@ -8,6 +10,7 @@ type Props = {
 }
 
 const { title, description } = Astro.props
+const siteTitle = 'Handlungsleitfaden WohnBauRad'
 ---
 
 <!doctype html>
@@ -15,13 +18,18 @@ const { title, description } = Astro.props
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
+    <title>{title === siteTitle ? title : `${title} – ${siteTitle}`}</title>
     {description && <meta name="description" content={description} />}
     {/* Netlify previews must never be indexed; the X-Robots-Tag in netlify.toml is the first guard */}
     {ASTRO_ENV !== 'production' && <meta name="robots" content="noindex, nofollow" />}
     <link rel="sitemap" href="/sitemap-index.xml" />
   </head>
-  <body class="bg-white text-gray-900 antialiased">
-    <slot />
+  <body class="flex min-h-screen flex-col bg-white text-gray-900 antialiased">
+    <a href="#inhalt" class="sr-only focus:not-sr-only">Zum Inhalt springen</a>
+    <Header />
+    <div class="flex-1">
+      <slot />
+    </div>
+    <Footer />
   </body>
 </html>

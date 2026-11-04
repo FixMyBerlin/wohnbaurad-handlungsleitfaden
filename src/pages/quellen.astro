@@ -1,0 +1,29 @@
+---
+import PageLayout from '@layouts/PageLayout.astro'
+import { getCollection } from 'astro:content'
+
+const sources = (await getCollection('quellen')).toSorted((a, b) =>
+  a.data.title.localeCompare(b.data.title, 'de'),
+)
+---
+
+<PageLayout title="Quellen & Literatur">
+  <h1 slot="header" class="mb-8 text-3xl font-bold">Quellen & Literatur</h1>
+  <ul>
+    {
+      sources.map((source) => (
+        <li id={`quelle-${source.id}`}>
+          {[source.data.author, source.data.title, source.data.publisher, source.data.year]
+            .filter(Boolean)
+            .join(', ')}
+          {source.data.url && (
+            <>
+              {' '}
+              <a href={source.data.url}>Link</a>
+            </>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+</PageLayout>

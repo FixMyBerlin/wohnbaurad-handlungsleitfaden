@@ -1,0 +1,26 @@
+---
+import type { MarkdownHeading } from 'astro'
+
+type Props = {
+  headings: MarkdownHeading[]
+}
+
+const h2 = Astro.props.headings.filter((heading) => heading.depth === 2)
+---
+
+{
+  h2.length > 0 && (
+    <nav aria-labelledby="toc-title" class="text-sm">
+      <p id="toc-title" class="font-semibold">
+        Auf dieser Seite
+      </p>
+      <ul class="mt-2 space-y-1">
+        {h2.map((heading) => (
+          <li>
+            <a href={`#${heading.slug}`}>{heading.text}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}

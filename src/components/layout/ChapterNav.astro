@@ -1,0 +1,41 @@
+---
+import { type ChapterWithPages, chapterPath, pagePath } from 'src/lib/navigation'
+
+type Props = {
+  tree: ChapterWithPages[]
+  currentPath: string
+}
+
+const { tree, currentPath } = Astro.props
+---
+
+<nav aria-label="Kapitel">
+  <ol class="space-y-4 text-sm">
+    {
+      tree.map((chapter) => (
+        <li>
+          <a
+            href={chapterPath(chapter)}
+            class="font-semibold"
+            aria-current={currentPath === chapterPath(chapter) ? 'page' : undefined}
+          >
+            {chapter.data.title}
+          </a>
+          <ol class="mt-2 space-y-1 border-l border-gray-200 pl-3">
+            {chapter.pages.map((page) => (
+              <li>
+                <a
+                  href={pagePath(page)}
+                  aria-current={currentPath === pagePath(page) ? 'page' : undefined}
+                  class="aria-[current=page]:font-semibold"
+                >
+                  {page.data.title}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </li>
+      ))
+    }
+  </ol>
+</nav>

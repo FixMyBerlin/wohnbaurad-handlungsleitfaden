@@ -1,0 +1,24 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { audienceLabels } from 'src/collections/seiten'
+
+type Props = {
+  page: CollectionEntry<'seiten'>
+  chapter: CollectionEntry<'kapitel'>
+}
+
+const { page, chapter } = Astro.props
+const audience = page.data.audience.map((key) => audienceLabels[key]).join(', ')
+const updatedAt = page.data.updatedAt.toLocaleDateString('de-DE', {
+  day: '2-digit',
+  month: '2-digit',
+  year: 'numeric',
+})
+---
+
+<header class="mb-8">
+  <p class="text-sm">{chapter.data.title}</p>
+  <h1 class="mt-1 text-3xl font-bold">{page.data.title}</h1>
+  <p class="mt-3 text-lg">{page.data.summary}</p>
+  <p class="mt-3 text-sm">Für: {audience} · Stand: {updatedAt}</p>
+</header>

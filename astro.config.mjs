@@ -6,6 +6,7 @@ import sitemap from '@astrojs/sitemap'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig, envField } from 'astro/config'
 import browserslistToEsbuild from 'browserslist-to-esbuild'
+import { placeholderGuard } from './src/integrations/placeholderGuard'
 
 const appRoot = fileURLToPath(new URL('.', import.meta.url))
 
@@ -14,7 +15,7 @@ const appRoot = fileURLToPath(new URL('.', import.meta.url))
 export default defineConfig({
   site: 'https://wohnbaurad.de',
   output: 'static',
-  integrations: [mdx(), sitemap()],
+  integrations: [mdx(), sitemap(), placeholderGuard(process.env.ASTRO_ENV === 'production')],
   trailingSlash: 'never',
   vite: {
     plugins: [tailwindcss()],

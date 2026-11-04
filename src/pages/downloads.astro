@@ -1,0 +1,25 @@
+---
+import PageLayout from '@layouts/PageLayout.astro'
+import { getCollection } from 'astro:content'
+
+const downloads = (await getCollection('downloads')).toSorted((a, b) =>
+  a.id === 'gesamtfassung' ? -1 : b.id === 'gesamtfassung' ? 1 : a.data.title.localeCompare(b.data.title, 'de'),
+)
+---
+
+<PageLayout title="Downloads">
+  <h1 slot="header" class="mb-8 text-3xl font-bold">Downloads</h1>
+  <ul>
+    {
+      downloads.map((download) => (
+        <li>
+          <a href={download.data.file}>
+            {download.data.title} ({download.data.format.toUpperCase()})
+          </a>
+          <br />
+          {download.data.description}
+        </li>
+      ))
+    }
+  </ul>
+</PageLayout>
