@@ -94,7 +94,7 @@
   }
 }
 
-/* Compound selector so it wins over the typography plugin's own .prose rules */
+/* Compound selector so it wins over the typography plugin's own .prose rules; building blocks (not-prose) are left alone */
 .prose.prose-wbr {
   --tw-prose-body: var(--color-violet-800);
   --tw-prose-headings: var(--color-violet-800);
@@ -112,43 +112,43 @@
   line-height: 1.625rem;
 
   /* Text runs at a readable width; building blocks (not-prose) may use the full column (open point with Annika) */
-  & > :where(p, ul, ol, h2, h3, h4, blockquote, table, hr) {
+  & > :where(p, ul, ol, h2, h3, h4, blockquote, table, hr):not(.not-prose) {
     max-width: var(--container-reading);
   }
-  & :where(h2, h3, h4):not(:where([class~='not-prose'] *)) {
+  & :where(h2, h3, h4):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
     font-family: var(--font-display);
     font-weight: 600;
   }
-  & :where(h2):not(:where([class~='not-prose'] *)) {
+  & :where(h2):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
     margin-top: 3rem;
     margin-bottom: 1rem;
     font-size: 1.75rem;
     line-height: 2.25rem;
   }
-  & :where(h3):not(:where([class~='not-prose'] *)) {
+  & :where(h3):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
     margin-top: 2rem;
     margin-bottom: 0.75rem;
     font-size: 1.25rem;
     line-height: 1.75rem;
   }
-  & :where(p):not(:where([class~='not-prose'] *)) {
+  & :where(p):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
     margin-top: 0;
     margin-bottom: 1rem;
   }
-  & :where(ul, ol):not(:where([class~='not-prose'] *)) {
+  & :where(ul, ol):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
     padding-left: 1.25rem;
   }
-  & :where(li):not(:where([class~='not-prose'] *)) {
+  & :where(li):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
     margin-top: 0.75rem;
     margin-bottom: 0.75rem;
   }
-  & :where(strong):not(:where([class~='not-prose'] *)) {
+  & :where(strong):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
     font-weight: 700;
   }
-  & :where(a:hover):not(:where([class~='not-prose'] *)) {
+  & :where(a:hover):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
     color: var(--color-violet-950);
   }
-  & :where(blockquote):not(:where([class~='not-prose'] *)) {
+  & :where(blockquote):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
     border: 0;
     padding: 1rem 1rem 1rem 5rem;
     position: relative;
@@ -158,7 +158,7 @@
     font-size: 1.25rem;
     line-height: 2rem;
   }
-  & :where(blockquote):not(:where([class~='not-prose'] *))::before {
+  & :where(blockquote):not(:where([class~='not-prose'], [class~='not-prose'] *))::before {
     content: '”';
     position: absolute;
     left: 1rem;
@@ -166,13 +166,16 @@
     font-size: 5rem;
     line-height: 5rem;
   }
-  & :where(blockquote p):not(:where([class~='not-prose'] *)) {
+  & :where(blockquote p):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
     margin: 0;
   }
-  & :where(blockquote p::before, blockquote p::after):not(:where([class~='not-prose'] *)) {
+  &
+    :where(blockquote p::before, blockquote p::after):not(
+      :where([class~='not-prose'], [class~='not-prose'] *)
+    ) {
     content: none;
   }
-  & :where(th):not(:where([class~='not-prose'] *)) {
+  & :where(th):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
     font-family: var(--font-display);
     font-weight: 600;
   }
