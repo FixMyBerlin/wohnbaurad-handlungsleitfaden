@@ -20,7 +20,7 @@ const h2 = headings.filter((heading) => heading.depth === 2)
       <ul class="flex flex-col gap-3">
         {h2.map((heading) => (
           <li>
-            <a href={`#${heading.slug}`}>{heading.text}</a>
+            <a href={`#${heading.slug}`} class="hover:underline">{heading.text}</a>
           </li>
         ))}
       </ul>

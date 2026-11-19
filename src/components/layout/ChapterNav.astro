@@ -11,7 +11,9 @@ const { tree, currentPath, variant = 'sidebar' } = Astro.props
 const isCurrentChapter = (chapter: ChapterWithPages) =>
   currentPath === chapterPath(chapter) || currentPath.startsWith(`${chapterPath(chapter)}/`)
 const mobile = variant === 'mobile'
-const linkColor = mobile ? 'text-white hover:text-lime-300' : 'text-violet-800'
+const linkColor = mobile
+  ? 'text-white hover:text-lime-300 hover:underline'
+  : 'text-violet-800 hover:underline'
 const activeLink = mobile
   ? 'aria-[current=page]:bg-lime-300 aria-[current=page]:text-violet-800'
   : 'aria-[current=page]:bg-lime-300'
@@ -62,7 +64,7 @@ const activeLink = mobile
                 <a
                   href={chapterPath(chapter)}
                   aria-current={currentPath === chapterPath(chapter) ? 'page' : undefined}
-                  class="-mx-4 block px-4 font-display leading-[26px] font-bold no-underline aria-[current=page]:bg-lime-300"
+                  class="-mx-4 block px-4 font-display leading-[26px] font-bold no-underline hover:underline aria-[current=page]:bg-lime-300"
                 >
                   {label}
                 </a>
