@@ -18,35 +18,36 @@ const icons = {
 <ol class="not-prose my-12 grid max-w-[var(--container-main)] list-none grid-cols-1 gap-6 p-0 md:grid-cols-2 lg:grid-cols-3">
   {
     chapters.map((chapter) => (
-      <li class="flex flex-col border border-violet-800 bg-white">
-        <div class="flex items-center justify-between gap-3 bg-violet-800 px-4 py-3 text-white">
-          <span class="caps text-sm leading-[22px]">{chapter.data.number ? `Kapitel ${chapter.data.number}` : ''}</span>
-          {chapter.data.icon && (
-            <svg
-              width="28"
-              height="28"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.6"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              {icons[chapter.data.icon].map((d) => (
-                <path d={d} />
-              ))}
-            </svg>
-          )}
-        </div>
-        <div class="flex flex-col gap-2 p-4">
-          <h3 class="font-display text-xl leading-7 font-semibold">
-            <a href={chapterPath(chapter)} class="no-underline hover:underline">
-              {chapter.data.title}
-            </a>
-          </h3>
-          {chapter.data.shortText && <p>{chapter.data.shortText}</p>}
-        </div>
+      <li>
+        <a
+          href={chapterPath(chapter)}
+          class="group flex h-full flex-col border border-violet-800 bg-white text-violet-800 no-underline hover:bg-lime-300 hover:text-violet-800"
+        >
+          <span class="flex items-center justify-between gap-3 bg-violet-800 px-4 py-3 text-white group-hover:bg-violet-950">
+            <span class="caps text-sm leading-[22px]">{chapter.data.number ? `Kapitel ${chapter.data.number}` : ''}</span>
+            {chapter.data.icon && (
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                {icons[chapter.data.icon].map((d) => (
+                  <path d={d} />
+                ))}
+              </svg>
+            )}
+          </span>
+          <span class="flex flex-col gap-2 p-4">
+            <h3 class="font-display text-xl leading-7 font-semibold group-hover:underline">{chapter.data.title}</h3>
+            {chapter.data.shortText && <span>{chapter.data.shortText}</span>}
+          </span>
+        </a>
       </li>
     ))
   }

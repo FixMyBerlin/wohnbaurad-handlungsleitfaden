@@ -9,32 +9,46 @@ type Props = {
   title: string
   description?: string
   headings?: MarkdownHeading[]
+  toc?: boolean
 }
 
-const { title, description, headings = [] } = Astro.props
+const { title, description, headings = [], toc = true } = Astro.props
 const tree = await getChapterTree()
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
 ---
 
 <BaseLayout title={title} description={description}>
   <div
-    class="grid gap-8 px-4 pt-10 md:grid-cols-[180px_minmax(0,1fr)] md:px-6 md:pt-14 lg:grid-cols-[minmax(0,280px)_minmax(0,var(--container-main))_minmax(0,320px)] lg:gap-16"
+    class:list={[
+      'grid gap-8 px-4 pt-10 md:grid-cols-[180px_minmax(0,1fr)] md:px-6 md:pt-14 lg:gap-16',
+      toc
+        ? 'lg:grid-cols-[minmax(0,280px)_minmax(0,var(--container-main))_minmax(0,320px)]'
+        : 'lg:grid-cols-[minmax(0,280px)_minmax(0,var(--container-main))]',
+    ]}
   >
     <aside class="hidden md:block">
       <ChapterNav tree={tree} currentPath={currentPath} />
     </aside>
     <main id="inhalt" class="min-w-0">
       <slot name="header" />
-      <div class="lg:hidden">
-        <TableOfContents headings={headings} variant="inline" />
-      </div>
+      {
+        toc && (
+          <div class="lg:hidden">
+            <TableOfContents headings={headings} variant="inline" />
+          </div>
+        )
+      }
       <div class="prose-wbr prose mt-12 max-w-none">
         <slot />
       </div>
       <slot name="footer" />
     </main>
-    <aside class="hidden lg:sticky lg:top-8 lg:block lg:self-start">
-      <TableOfContents headings={headings} />
-    </aside>
+    {
+      toc && (
+        <aside class="hidden lg:sticky lg:top-8 lg:block lg:self-start">
+          <TableOfContents headings={headings} />
+        </aside>
+      )
+    }
   </div>
 </BaseLayout>
