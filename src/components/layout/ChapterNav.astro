@@ -20,13 +20,15 @@ const activeLink = mobile
 ---
 
 <nav aria-label="Kapitel" class="text-base leading-6">
-  <a
-    href="/"
-    aria-current={currentPath === '/' ? 'page' : undefined}
-    class:list={['-mx-4 mb-[18px] block px-4 py-[7px] aria-[current=page]:font-semibold', linkColor, activeLink]}
-  >
-    Startseite
-  </a>
+  <div class="mb-[18px] pl-6">
+    <a
+      href="/"
+      aria-current={currentPath === '/' ? 'page' : undefined}
+      class:list={['-mx-4 block px-4 py-[7px] aria-[current=page]:font-semibold', linkColor, activeLink]}
+    >
+      Startseite
+    </a>
+  </div>
   <ol class="flex flex-col gap-[18px]">
     {
       tree.map((chapter) => {
