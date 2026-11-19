@@ -77,9 +77,9 @@ Alle Collection-, Feld- und Enum-Namen sind englisch (z. B. `sources.title`, `gl
 **E6 – Quellen über `<Cite id="…" />`, nummeriert pro Seite, mit Quellenliste am Seitenende.**
 *Warum:* Pflicht für Rechtsaussagen und Zahlen (Lektorat, #3749), und im PDF werden daraus automatisch Endnoten. Ob dafür GFM-Fußnoten reichen (Sätteri!), prüfen wir beim Setup. Die eigene Komponente ist auf jeden Fall robuster.
 
-**E7 – Tailwind 4 + `@tailwindcss/typography`. Design-Tokens kommen als CSS-Variablen (`@theme`) aus der Design-Sitzung.**
-Schriften: **Fontsource** wie in rsv-info und im `tech-stack`-Skill. Die Astro-Fonts-API wäre auch möglich, ist aber in FMC noch nicht etabliert.
-*Warum:* Wir bleiben auf dem bekannten Stack. Die Design-Sitzung kann parallel arbeiten, weil nur die Token-Datei ausgetauscht wird.
+**E7 – Tailwind 4 + `@tailwindcss/typography`, Tokens aus Design System v2.**
+Verbindlich ist [Design System v2](https://claude.ai/artifact/1nXDG4m2Husr5mcV9PCuqj) (Annikas abgestimmter Entwurf, 19.11.2026): Farben `violet-*`, `lime-300`, `cream-50`, `white` als `@theme` in `src/styles/global.css`, keine Rundungen, keine Schatten, volle Seitenbreite mit Breakpoints 768px (`md`) und 1200px (`lg`). Schriften lokal per Fontsource: Manrope (Überschriften), Source Serif 4 (Text), Lilex (Labels), Space Grotesk (Box-Titel), Literata (Unterzeile), Nabla (Wortmarke, Palette `--wbr-white`). Fließtext max. 760px (`max-w-reading`, offener Punkt mit Annika), Bausteine bis 1100px.
+*Warum:* eine Quelle für die Gestaltung. Die Token-Namen sind dieselben wie im Design System.
 
 **E8 – Karte nach FMC-Konvention: `react-map-gl/maplibre` als React-Insel (`@astrojs/react`, `client:only="react"`), Grundlage ist die Kartenkomponente aus rsv-info.**
 *Warum:* Wir bleiben beim Stack (Entscheidung 04.11.). Die Regeln stehen im Skill `react-map-gl`. Geprüft habe ich beide Kandidaten:
@@ -245,8 +245,8 @@ Dazu `.claude/rules/package-json-scripts.md` laut `tech-stack`.
 | **1 Scaffold + Tooling** ✅ | Astro 7, MDX, Tailwind 4 (React kommt erst mit der Karte in Phase 5, sonst meldet knip es als ungenutzt), Bun, oxc, knip, tsconfig, Scripts, husky, Dependabot, CI, `netlify.toml` (intern, noindex), Platzhalter für IONOS | `bun run check` grün, leere Seite baut | 1 (Commit 2 laut Skill) |
 | **2 Inhaltsmodell + Gerüst** ✅ | Collections mit Zod, Routing mit deutschen Pfaden, Layouts, Navigation (Kapitel → Seiten, Vor/Zurück), MDX-Bausteine in schlichter Form, `<Cite>`, `placeholder-check`, Seitengerüst für alle 16 Seiten **nur mit `PLATZHALTER:`-Texten** | Sine könnte loslegen | 2–3 |
 | **3 AGENTS.md + Skill** ✅ | schlanke `AGENTS.md`, Skill `edit-content` (unter `.agents/skills/`, Symlink für Claude Code), Test: eine Seite nur über den Skill anlegen lassen, Import in Manus mit Sine ausprobieren | Inhaltsarbeit kann im November starten | 1 |
-| **4a Design-Grundlage** ✅ | Tokens als `@theme`, Inter (Fontsource, lokal), Typografie (`prose-wbr`), Seitenrahmen: Header mit Wortmarke und Drawer (`<dialog>`), Kapitelnavigation, „Auf dieser Seite“, Seitenkopf, Quellen, Vor/Zurück, Footer mit Platzhalter-Logozeile, Startseite und Kapitelkacheln | Rahmen sieht aus wie im Entwurf | 1 |
-| **4b Bausteine** | die übrigen MDX-Bausteine nach dem Design System gestalten, nach Annikas Feedback | Seite sieht aus wie im Entwurf | 1–2 |
+| **4a Design-Grundlage** ✅ (v1, durch v2 ersetzt) | Tokens als `@theme`, Inter (Fontsource, lokal), Typografie (`prose-wbr`), Seitenrahmen: Header mit Wortmarke und Drawer (`<dialog>`), Kapitelnavigation, „Auf dieser Seite“, Seitenkopf, Quellen, Vor/Zurück, Footer mit Platzhalter-Logozeile, Startseite und Kapitelkacheln | Rahmen sieht aus wie im Entwurf | 1 |
+| **4b Design v2** ✅ | Design System v2 komplett: Tokens, Schriften, Seitenrahmen (Header mit Nabla-Wortmarke und Burger-Menü, Navigation, Pager, Footer mit Förderlogo), Startseite, Kapitelübersicht und alle MDX-Bausteine | Seite sieht aus wie im Design System | 1 |
 | **5 Extras** | Karte aus rsv-info umbauen (Martin-Tiles, OpenFreeMap, Opt-in, statisches Bild), Druckseite + PDF per Playwright, Pagefind | Grundlage für den Launch | mehrere |
 
 Phase 0–3 sind das eigentliche „Grundgerüst“ aus #3745. Phase 4 hängt an der Design-Sitzung, Phase 5 an Henri (Tiles, Beispielflächen) und der Datenschutzerklärung.

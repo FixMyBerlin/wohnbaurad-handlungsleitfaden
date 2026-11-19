@@ -6,16 +6,24 @@ type Props = {
 }
 
 const { variant = 'page', reviewedBy, reviewedAt } = Astro.props
-const subject = variant === 'templates' ? 'Die Vorlagen ersetzen' : 'Diese Seite ersetzt'
+const text =
+  variant === 'templates'
+    ? 'Die Vorlagen sind Muster und ersetzen keine Rechtsberatung. Passen Sie sie an Ihren Fall und Ihr Landesrecht an.'
+    : 'Diese Seite gibt einen Überblick und ersetzt keine Rechtsberatung. Landesrecht kann abweichen.'
 const reviewed = reviewedAt
-  ? new Date(reviewedAt).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })
+  ? new Date(reviewedAt).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })
   : undefined
 ---
 
-<aside class="not-prose my-6 border border-gray-300 p-4" role="note">
-  <p class="font-semibold">Rechtlicher Hinweis</p>
-  <p class="mt-2">
-    {subject} keine Rechtsberatung. Landesrecht kann abweichen.
-    {reviewedBy && <> Geprüft durch {reviewedBy}{reviewed && <>, Stand {reviewed}</>}.</>}
-  </p>
+<aside role="note" class="on-violet not-prose my-12 max-w-reading bg-violet-800 p-6 text-white">
+  <p class="mb-2 font-label text-xl leading-7 font-bold">Rechtlicher Hinweis</p>
+  <p>{text}</p>
+  {
+    reviewedBy && (
+      <p class="mt-2 font-mono text-sm leading-[22px]">
+        Geprüft durch {reviewedBy}
+        {reviewed && <> · Stand {reviewed}</>}
+      </p>
+    )
+  }
 </aside>

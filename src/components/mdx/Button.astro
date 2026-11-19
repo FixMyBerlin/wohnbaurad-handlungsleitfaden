@@ -7,4 +7,13 @@ type Props = {
 const { variant = 'primary', type = 'button' } = Astro.props
 ---
 
-<button type={type} data-variant={variant} class="rounded border border-gray-900 px-4 py-2"><slot /></button>
+<button
+  type={type}
+  data-variant={variant}
+  class:list={[
+    'inline-flex min-h-[50px] cursor-pointer items-center gap-2 border border-violet-800 px-5 font-display font-semibold',
+    variant === 'primary' ? 'bg-violet-800 text-white hover:bg-violet-950' : 'bg-white hover:bg-cream-50',
+  ]}
+>
+  <slot />
+</button>

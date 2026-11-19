@@ -1,6 +1,5 @@
 ---
 import { getCollection } from 'astro:content'
-import { formatSource } from 'src/lib/sources'
 
 type Props = {
   topic?: string
@@ -19,12 +18,17 @@ const entries = (
 ).toSorted((a, b) => b.data.year - a.data.year)
 ---
 
-<ul>
+<ul class="not-prose my-6 max-w-reading border-t border-violet-800">
   {
     entries.map((source) => (
-      <li>
-        {source.data.url ? <a href={source.data.url}>{formatSource(source)}</a> : formatSource(source)}
-        {source.data.summary && <p>{source.data.summary}</p>}
+      <li class="border-b border-violet-800 py-3.5">
+        <p class="font-mono text-sm leading-[22px]">
+          {[source.data.year, source.data.publisher ?? source.data.author].filter(Boolean).join(' · ')}
+        </p>
+        <p class="mt-1 font-bold">
+          {source.data.url ? <a href={source.data.url}>{source.data.title}</a> : source.data.title}
+        </p>
+        {source.data.summary && <p class="mt-1">{source.data.summary}</p>}
       </li>
     ))
   }

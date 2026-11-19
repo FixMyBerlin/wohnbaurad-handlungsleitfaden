@@ -7,21 +7,50 @@ type Props = {
 
 const download = await getEntry('downloads', Astro.props.id)
 if (!download) throw new Error(`<Download id="${Astro.props.id}"> not found in src/content/downloads.yaml`)
+const { title, description, files, page, license, reviewedBy, updatedAt } = download.data
+const isCompleteGuide = download.id === 'complete-guide'
+const relatedPage = page ? await getEntry(page) : undefined
+const date = updatedAt.toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })
+const formatLabel = { docx: 'Word (.docx', pdf: 'PDF (' } as const
+const button = 'inline-flex min-h-[50px] items-center gap-2 border border-violet-800 px-5 font-display font-semibold no-underline'
+const meta = [reviewedBy && `Geprüft durch ${reviewedBy}`, `Stand ${date}`, license && `Lizenz ${license}`]
+  .filter(Boolean)
+  .join(' · ')
 ---
 
-<div class="not-prose my-6 border border-gray-300 p-4">
-  <p class="font-semibold">{download.data.title}</p>
-  <p class="mt-1">{download.data.description}</p>
-  <ul class="mt-2 flex gap-4">
-    {
-      download.data.files.map((file) => (
-        <li>
-          <a href={file.path} class="underline" download>
-            {file.format.toUpperCase()}
-            {file.sizeKb && <> ({file.sizeKb} KB)</>}
+{
+  isCompleteGuide ? (
+    <article class="not-prose my-12 max-w-[var(--container-main)] bg-lime-300 p-6">
+      <h3 class="mb-2 font-label text-xl leading-7 font-bold">{title}</h3>
+      <p class="mb-2.5">{description}</p>
+      <p class="font-mono text-sm leading-[22px]">
+        PDF{files[0].sizeKb && <> · {files[0].sizeKb} KB</>} · Stand {date}
+      </p>
+      <div class="mt-4 flex flex-wrap gap-3">
+        <a href={files[0].path} download class={`${button} bg-violet-800 text-white hover:bg-violet-950 hover:text-white`}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 19h14" /></svg>
+          PDF herunterladen
+        </a>
+      </div>
+    </article>
+  ) : (
+    <article class="not-prose my-6 max-w-[var(--container-main)] border border-violet-800 bg-white p-6">
+      {relatedPage && <p class="caps mb-1.5 text-sm leading-[22px]">Zu: {relatedPage.data.title}</p>}
+      <h3 class="mb-1.5 font-display text-xl leading-7 font-semibold">{title}</h3>
+      <p class="mb-2.5">{description}</p>
+      <p class="font-mono text-sm leading-[22px]">{meta}</p>
+      <div class="mt-4 flex flex-wrap gap-3">
+        {files.map((file, index) => (
+          <a
+            href={file.path}
+            download
+            class:list={[button, index === 0 ? 'bg-violet-800 text-white hover:bg-violet-950 hover:text-white' : 'bg-white hover:bg-cream-50']}
+          >
+            {formatLabel[file.format]}
+            {file.sizeKb ? `${file.format === 'docx' ? ', ' : ''}${file.sizeKb} KB)` : ')'}
           </a>
-        </li>
-      ))
-    }
-  </ul>
-</div>
+        ))}
+      </div>
+    </article>
+  )
+}

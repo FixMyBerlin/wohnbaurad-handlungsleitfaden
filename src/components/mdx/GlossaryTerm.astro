@@ -8,6 +8,18 @@ type Props = {
 const entry = await getEntry('glossary', Astro.props.id)
 if (!entry) throw new Error(`<GlossaryTerm id="${Astro.props.id}"> not found in src/content/glossary.yaml`)
 const hasText = Astro.slots.has('default')
+const popoverId = `glossar-${entry.id}-${Math.random().toString(36).slice(2, 8)}`
 ---
 
-<a href={`/glossar#begriff-${entry.id}`} title={entry.data.definition} class="underline decoration-dotted">{hasText ? <slot /> : entry.data.term}</a>
+{/* Native popover: opens on click and keyboard, closes with Esc, no script needed */}
+<button
+  type="button"
+  popovertarget={popoverId}
+  class="cursor-help border-0 bg-transparent p-0 font-[inherit] text-[length:inherit] text-inherit underline"
+>{hasText ? <slot /> : entry.data.term}</button><span
+  id={popoverId}
+  popover
+  role="note"
+  class="on-violet m-auto max-w-[360px] bg-violet-800 px-4 py-3 text-sm leading-[22px] text-white"
+><strong>{entry.data.term}:</strong> {entry.data.definition}
+  <a href={`/glossar#begriff-${entry.id}`} class="text-white underline">Im Glossar ansehen</a></span>

@@ -1,32 +1,32 @@
 @import 'tailwindcss';
-@import '@fontsource-variable/inter';
+@import '@fontsource-variable/manrope';
+@import '@fontsource-variable/source-serif-4';
+@import '@fontsource-variable/lilex';
+@import '@fontsource-variable/space-grotesk';
+@import '@fontsource-variable/literata';
+@import '@fontsource/nabla';
 @plugin '@tailwindcss/typography';
 
-/* Tokens from the WohnBauRad design system (tokens.json); names match the design system */
+/* Tokens from the WohnBauRad design system v2 (tokens.json); names match the design system */
 @theme {
-  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Manrope Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Source Serif 4 Variable', Georgia, serif;
+  --font-mono: 'Lilex Variable', ui-monospace, monospace;
+  --font-label: 'Space Grotesk Variable', ui-sans-serif, sans-serif;
+  --font-subline: 'Literata Variable', Georgia, serif;
+  --font-wordmark: Nabla, 'Manrope Variable', sans-serif;
 
-  --color-petrol-950: #083344;
-  --color-petrol-900: #164e63;
-  --color-petrol-700: #0e7490;
-  --color-petrol-100: #cffafe;
-  --color-petrol-50: #ecfeff;
-  --color-accent-700: #c2410c;
-  --color-accent-50: #fff7ed;
-
-  --color-ink: #111827;
-  --color-ink-soft: #374151;
-  --color-ink-muted: #4b5563;
-  --color-surface: #ffffff;
-  --color-surface-muted: #f9fafb;
-  --color-surface-sunken: #f3f4f6;
-  --color-border: #e5e7eb;
-  --color-border-strong: #9ca3af;
-
-  --color-tip-800: #065f46;
-  --color-tip-50: #ecfdf5;
-  --color-warning-800: #92400e;
-  --color-warning-50: #fffbeb;
+  --color-*: initial;
+  --color-violet-950: #1f0560;
+  --color-violet-800: #3b0ea1;
+  --color-violet-200: #d6ccf5;
+  --color-violet-100: #e9e3fb;
+  --color-lime-300: #e0fd7c;
+  --color-cream-50: #f9f7ef;
+  --color-white: #ffffff;
+  --color-white-15: rgb(255 255 255 / 0.15);
+  --color-transparent: transparent;
+  --color-current: currentColor;
 
   /* Placeholders until the tilda-geo area finder styles are taken over (phase 5) */
   --color-area-public: #0e7490;
@@ -38,44 +38,142 @@
   --color-map-green: #dcfce7;
   --color-map-rail: #6b7280;
 
-  --container-prose: 680px;
-  --container-home: 840px;
+  /* Layout breakpoints of the design system: one column below md, narrow navigation below lg */
+  --breakpoint-lg: 75rem;
+
+  --container-reading: 760px;
+  --container-main: 1100px;
+}
+
+/* Colour palette for the Nabla word mark on violet */
+@font-palette-values --wbr-white {
+  font-family: Nabla;
+  override-colors:
+    0 #ffffff,
+    1 #ffffff,
+    2 #ffffff,
+    3 #ffffff,
+    4 #ffffff,
+    5 #e9e3fb,
+    6 #d6ccf5,
+    7 #ffffff,
+    8 #ffffff,
+    9 #ffffff;
 }
 
 @layer base {
   html {
-    @apply bg-surface text-ink;
+    @apply bg-cream-50 font-serif text-violet-800;
+  }
+
+  a {
+    @apply underline-offset-2 hover:text-violet-950;
   }
 
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-petrol-700;
+    @apply outline-2 outline-offset-2 outline-violet-800;
   }
 }
 
-@utility prose-wbr {
-  --tw-prose-body: var(--color-ink);
-  --tw-prose-headings: var(--color-ink);
-  --tw-prose-links: var(--color-petrol-900);
-  --tw-prose-bold: var(--color-ink);
-  --tw-prose-counters: var(--color-ink-muted);
-  --tw-prose-bullets: var(--color-ink-muted);
-  --tw-prose-hr: var(--color-border);
-  --tw-prose-quotes: var(--color-ink-soft);
-  --tw-prose-quote-borders: var(--color-border);
-  --tw-prose-captions: var(--color-ink-muted);
-  --tw-prose-th-borders: var(--color-border-strong);
-  --tw-prose-td-borders: var(--color-border);
+@utility wordmark {
+  font-family: var(--font-wordmark);
+  font-palette: --wbr-white;
+  letter-spacing: 2px;
+}
 
+@utility caps {
+  font-family: var(--font-mono);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+@utility on-violet {
+  & :focus-visible,
+  &:focus-visible {
+    outline-color: var(--color-white);
+  }
+}
+
+/* Compound selector so it wins over the typography plugin's own .prose rules */
+.prose.prose-wbr {
+  --tw-prose-body: var(--color-violet-800);
+  --tw-prose-headings: var(--color-violet-800);
+  --tw-prose-links: var(--color-violet-800);
+  --tw-prose-bold: var(--color-violet-800);
+  --tw-prose-counters: var(--color-violet-800);
+  --tw-prose-bullets: var(--color-violet-800);
+  --tw-prose-hr: var(--color-violet-800);
+  --tw-prose-th-borders: var(--color-violet-800);
+  --tw-prose-td-borders: var(--color-violet-800);
+  --tw-prose-captions: var(--color-violet-800);
+  --tw-prose-code: var(--color-violet-800);
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  line-height: 1.625rem;
+
+  /* Text runs at a readable width; building blocks (not-prose) may use the full column (open point with Annika) */
+  & > :where(p, ul, ol, h2, h3, h4, blockquote, table, hr) {
+    max-width: var(--container-reading);
+  }
+  & :where(h2, h3, h4):not(:where([class~='not-prose'] *)) {
+    font-family: var(--font-display);
+    font-weight: 600;
+  }
   & :where(h2):not(:where([class~='not-prose'] *)) {
-    margin-top: 3.5rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    font-size: 1.75rem;
+    line-height: 2.25rem;
   }
-  & :where(a):not(:where([class~='not-prose'] *)) {
-    text-underline-offset: 3px;
+  & :where(h3):not(:where([class~='not-prose'] *)) {
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
   }
-  & :where(a:hover):not(:where([class~='not-prose'] *)) {
-    color: var(--color-petrol-950);
+  & :where(p):not(:where([class~='not-prose'] *)) {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+  & :where(ul, ol):not(:where([class~='not-prose'] *)) {
+    padding-left: 1.25rem;
+  }
+  & :where(li):not(:where([class~='not-prose'] *)) {
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
   }
   & :where(strong):not(:where([class~='not-prose'] *)) {
+    font-weight: 700;
+  }
+  & :where(a:hover):not(:where([class~='not-prose'] *)) {
+    color: var(--color-violet-950);
+  }
+  & :where(blockquote):not(:where([class~='not-prose'] *)) {
+    border: 0;
+    padding: 1rem 1rem 1rem 5rem;
+    position: relative;
+    background: var(--color-violet-800);
+    color: var(--color-white);
+    font-style: normal;
+    font-size: 1.25rem;
+    line-height: 2rem;
+  }
+  & :where(blockquote):not(:where([class~='not-prose'] *))::before {
+    content: '”';
+    position: absolute;
+    left: 1rem;
+    top: 0.25rem;
+    font-size: 5rem;
+    line-height: 5rem;
+  }
+  & :where(blockquote p):not(:where([class~='not-prose'] *)) {
+    margin: 0;
+  }
+  & :where(blockquote p::before, blockquote p::after):not(:where([class~='not-prose'] *)) {
+    content: none;
+  }
+  & :where(th):not(:where([class~='not-prose'] *)) {
+    font-family: var(--font-display);
     font-weight: 600;
   }
 }

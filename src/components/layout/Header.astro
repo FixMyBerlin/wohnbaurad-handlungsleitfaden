@@ -5,52 +5,70 @@ import ChapterNav from './ChapterNav.astro'
 
 const completeGuide = await getEntry('downloads', 'complete-guide')
 const tree = await getChapterTree()
-const currentPath = Astro.url.pathname.replace(/\/$/, '')
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
+const downloadIcon = 'M12 4v11m0 0-4-4m4 4 4-4M5 19h14'
 ---
 
-<header class="border-b border-border">
-  <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 lg:px-8">
-    <a href="/" class="text-xl font-bold tracking-tight text-ink no-underline">
-      WohnBau<span class="text-accent-700">Rad</span>
+<header class="on-violet bg-violet-800 text-white">
+  <div class="flex items-center justify-between gap-4 px-4 py-3 md:px-6 md:py-[21px]">
+    <a href="/" class="flex flex-col gap-0.5 text-white no-underline hover:text-white">
+      <span class="wordmark text-2xl leading-[30px] lg:text-[28px] lg:leading-8">WohnBauRad</span>
+      <span class="hidden font-subline text-sm leading-[22px] md:block">Handlungsleitfaden</span>
     </a>
-    <div class="flex items-center gap-3">
-      {
-        completeGuide && (
-          <a
-            href={completeGuide.data.files[0].path}
-            class="hidden min-h-11 items-center rounded-md bg-petrol-900 px-4 text-[15px] font-semibold text-surface hover:bg-petrol-950 sm:inline-flex"
-          >
-            Gesamt-PDF
-          </a>
-        )
-      }
-      <button
-        type="button"
-        data-menu-open
-        aria-controls="menu"
-        class="inline-flex min-h-11 items-center rounded-md border border-border-strong px-4 text-[15px] font-semibold text-petrol-900 lg:hidden"
-      >
-        Menü
-      </button>
-    </div>
+    {
+      completeGuide && (
+        <a
+          href={completeGuide.data.files[0].path}
+          class="hidden min-h-12 items-center gap-2 border border-white bg-white px-5 font-display font-semibold text-violet-800 no-underline hover:bg-cream-50 hover:text-violet-950 md:inline-flex"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={downloadIcon} /></svg>
+          Gesamt-PDF
+        </a>
+      )
+    }
+    <button
+      type="button"
+      data-menu-toggle
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="Menü öffnen"
+      class="flex size-11 items-center justify-center bg-cream-50 text-violet-800 md:hidden"
+    >
+      <svg data-icon-open width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+      <svg data-icon-close class="hidden" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg>
+    </button>
   </div>
-  <dialog
-    id="menu"
-    aria-label="Navigation"
-    class="m-0 ml-auto h-full max-h-none w-80 max-w-[85vw] bg-surface p-6 backdrop:bg-ink/40 lg:hidden"
-  >
-    <div class="mb-6 flex justify-end">
-      <button type="button" data-menu-close class="min-h-11 rounded-md px-3 text-sm font-semibold text-petrol-900">
-        Schließen
-      </button>
-    </div>
-    <ChapterNav tree={tree} currentPath={currentPath} />
-  </dialog>
+  <div id="mobile-menu" hidden class="border-t border-white/30 px-4 pt-4 pb-6 md:hidden">
+    {
+      completeGuide && (
+        <a
+          href={completeGuide.data.files[0].path}
+          class="mb-6 inline-flex min-h-12 items-center gap-2 bg-cream-50 px-5 font-display font-semibold text-violet-800 no-underline"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={downloadIcon} /></svg>
+          Gesamt-PDF
+        </a>
+      )
+    }
+    <ChapterNav tree={tree} currentPath={currentPath} variant="mobile" />
+  </div>
 </header>
 
 <script>
-  // Native <dialog> keeps focus inside and closes on Esc
-  const dialog = document.querySelector<HTMLDialogElement>('#menu')
-  document.querySelector('[data-menu-open]')?.addEventListener('click', () => dialog?.showModal())
-  document.querySelector('[data-menu-close]')?.addEventListener('click', () => dialog?.close())
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]')
+  const menu = document.querySelector<HTMLElement>('#mobile-menu')
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') !== 'true'
+    toggle.setAttribute('aria-expanded', String(open))
+    toggle.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen')
+    toggle.querySelector('[data-icon-open]')?.classList.toggle('hidden', open)
+    toggle.querySelector('[data-icon-close]')?.classList.toggle('hidden', !open)
+    if (menu) menu.hidden = !open
+  })
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') {
+      toggle.click()
+      toggle.focus()
+    }
+  })
 </script>

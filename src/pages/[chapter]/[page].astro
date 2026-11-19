@@ -5,8 +5,10 @@ import SourceList from '@components/layout/SourceList.astro'
 import { mdxComponents } from '@components/mdx'
 import PageLayout from '@layouts/PageLayout.astro'
 import { getCollection, getEntry, render } from 'astro:content'
+import { audienceLabels } from 'src/collections/pages'
 import { getCitationIds } from 'src/lib/citations'
 import { getChapterTree, getPrevNext } from 'src/lib/navigation'
+import { sourcesHeading } from 'src/lib/sources'
 
 export const getStaticPaths = async () => {
   const pages = await getCollection('pages')
@@ -22,10 +24,26 @@ const { Content, headings } = await render(page)
 const { prev, next } = getPrevNext(await getChapterTree(), page.id)
 const citationIds = await getCitationIds(page.body, page.id)
 Astro.locals.citationIds = citationIds
+const audience = page.data.audience.map((key) => audienceLabels[key]).join(', ')
+const updatedAt = page.data.updatedAt.toLocaleDateString('de-DE', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+})
 ---
 
-<PageLayout title={page.data.title} description={page.data.summary} headings={headings}>
-  <PageHeader slot="header" page={page} chapter={chapter} />
+<PageLayout
+  title={page.data.title}
+  description={page.data.summary}
+  headings={citationIds.length ? [...headings, sourcesHeading] : headings}
+>
+  <PageHeader
+    slot="header"
+    eyebrow={`Kapitel ${chapter.data.number} · ${chapter.data.title}`}
+    title={page.data.title}
+    summary={page.data.summary}
+    meta={`Für: ${audience} · Stand: ${updatedAt}`}
+  />
   <Content components={mdxComponents} />
   <Fragment slot="footer">
     <SourceList ids={citationIds} />

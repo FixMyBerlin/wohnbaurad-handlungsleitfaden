@@ -13,24 +13,27 @@ type Props = {
 
 const { title, description, headings = [] } = Astro.props
 const tree = await getChapterTree()
-const currentPath = Astro.url.pathname.replace(/\/$/, '')
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
 ---
 
 <BaseLayout title={title} description={description}>
   <div
-    class="mx-auto grid max-w-7xl gap-12 px-4 py-8 lg:grid-cols-[16rem_minmax(0,var(--container-prose))] lg:px-8 lg:py-12 xl:grid-cols-[16rem_minmax(0,var(--container-prose))_14rem]"
+    class="grid gap-8 px-4 pt-10 md:grid-cols-[180px_minmax(0,1fr)] md:px-6 md:pt-14 lg:grid-cols-[minmax(0,280px)_minmax(0,var(--container-main))_minmax(0,320px)] lg:gap-16"
   >
-    <aside class="hidden lg:sticky lg:top-8 lg:block lg:self-start">
+    <aside class="hidden md:block">
       <ChapterNav tree={tree} currentPath={currentPath} />
     </aside>
     <main id="inhalt" class="min-w-0">
       <slot name="header" />
-      <div class="prose prose-lg prose-wbr max-w-none">
+      <div class="lg:hidden">
+        <TableOfContents headings={headings} variant="inline" />
+      </div>
+      <div class="prose-wbr prose mt-12 max-w-none">
         <slot />
       </div>
       <slot name="footer" />
     </main>
-    <aside class="hidden xl:sticky xl:top-8 xl:block xl:self-start">
+    <aside class="hidden lg:sticky lg:top-8 lg:block lg:self-start">
       <TableOfContents headings={headings} />
     </aside>
   </div>

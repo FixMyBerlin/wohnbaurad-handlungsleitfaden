@@ -1,4 +1,5 @@
 ---
+import PageHeader from '@components/layout/PageHeader.astro'
 import PageLayout from '@layouts/PageLayout.astro'
 import { getCollection } from 'astro:content'
 import { formatSource } from 'src/lib/sources'
@@ -9,7 +10,7 @@ const sources = (await getCollection('sources')).toSorted((a, b) =>
 ---
 
 <PageLayout title="Quellen & Literatur">
-  <h1 slot="header" class="mb-10 text-3xl font-bold tracking-tight text-ink lg:text-4xl">Quellen & Literatur</h1>
+  <PageHeader slot="header" title="Quellen & Literatur" />
   <ul>
     {
       sources.map((source) => (

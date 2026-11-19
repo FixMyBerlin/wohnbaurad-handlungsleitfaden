@@ -8,4 +8,4 @@ const number = (Astro.locals.citationIds ?? []).indexOf(id) + 1
 if (number === 0) throw new Error(`<Cite id="${id}"> is not registered for this page`)
 ---
 
-<sup><a href={`#quelle-${id}`} aria-label={`Quelle ${number}`}>[{number}]</a></sup>
+<sup class="text-[11px] leading-none"><a href={`#quelle-${id}`} aria-label={`Quelle ${number}`} class="no-underline">{number}</a></sup>

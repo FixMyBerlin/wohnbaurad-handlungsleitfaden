@@ -16,8 +16,10 @@ if (!loader) throw new Error(`<ScreenshotStep image="${image}"> not found below 
 const { default: src } = await loader()
 ---
 
-<figure class="my-6">
-  <p class="font-semibold">Schritt {step}</p>
-  <Image src={src} alt={alt} />
-  <figcaption><slot /></figcaption>
+<figure class="not-prose my-8 max-w-[var(--container-main)]">
+  <figcaption class="flex items-start gap-3">
+    <span class="flex size-8 flex-none items-center justify-center bg-violet-800 font-mono text-lime-300" aria-hidden="true">{step}</span>
+    <span><strong>Schritt {step}:</strong> <slot /></span>
+  </figcaption>
+  <Image src={src} alt={alt} class="mt-3 aspect-video w-full border border-violet-800 object-cover" />
 </figure>

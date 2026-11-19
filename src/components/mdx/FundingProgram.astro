@@ -9,19 +9,33 @@ const program = await getEntry('fundingPrograms', Astro.props.id)
 if (!program) throw new Error(`<FundingProgram id="${Astro.props.id}"> not found in src/content/funding-programs/`)
 const { data } = program
 const levelLabels = { federal: 'Bund', state: 'Land', eu: 'EU' } as const
-const updatedAt = data.updatedAt.toLocaleDateString('de-DE', { month: '2-digit', year: 'numeric' })
+const updatedAt = data.updatedAt.toLocaleDateString('de-DE', { month: 'long', year: 'numeric' })
+const rows = [
+  ['Geber', data.funder],
+  ['Gefördert wird', data.scope],
+  ['Antragsberechtigt', data.eligibility],
+  ['Förderquote', data.fundingRate],
+  ['Frist', data.deadline],
+].filter((row): row is [string, string] => Boolean(row[1]))
 ---
 
-<article class="not-prose my-6 border border-gray-300 p-4">
-  <h3 class="font-semibold">{data.name}</h3>
-  <dl class="mt-2 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-sm">
-    <dt>Geber</dt><dd>{data.funder}</dd>
-    <dt>Ebene</dt><dd>{levelLabels[data.level]}{data.state && <> ({data.state})</>}</dd>
-    <dt>Gefördert wird</dt><dd>{data.scope}</dd>
-    <dt>Antragsberechtigt</dt><dd>{data.eligibility}</dd>
-    {data.fundingRate && <><dt>Förderquote</dt><dd>{data.fundingRate}</dd></>}
-    {data.deadline && <><dt>Frist</dt><dd>{data.deadline}</dd></>}
-    <dt>Stand</dt><dd>{updatedAt}</dd>
+<article class="not-prose my-6 max-w-reading border border-violet-800 bg-white p-6">
+  <p class="caps mb-1.5 text-sm leading-[22px]">{levelLabels[data.level]}{data.state && ` · ${data.state}`}</p>
+  <h3 class="font-display text-xl leading-7 font-semibold">{data.name}</h3>
+  <dl class="mt-3 grid grid-cols-[max-content_1fr] gap-x-4 gap-y-1.5">
+    {
+      rows.map(([label, value]) => (
+        <>
+          <dt class="font-mono text-sm leading-[26px]">{label}</dt>
+          <dd>{value}</dd>
+        </>
+      ))
+    }
   </dl>
-  <a href={data.url} class="mt-2 inline-block underline">Zum Programm</a>
+  <div class="mt-4 flex flex-wrap items-center justify-between gap-3">
+    <span class="font-mono text-sm leading-[22px]">Stand: {updatedAt}</span>
+    <a href={data.url} class="inline-flex min-h-[50px] items-center border border-violet-800 bg-white px-5 font-display font-semibold no-underline hover:bg-cream-50">
+      Zum Programm
+    </a>
+  </div>
 </article>

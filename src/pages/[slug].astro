@@ -1,12 +1,14 @@
 ---
+import PageHeader from '@components/layout/PageHeader.astro'
+import SourceList from '@components/layout/SourceList.astro'
 import { mdxComponents } from '@components/mdx'
 import PageLayout from '@layouts/PageLayout.astro'
 import { type CollectionEntry, getCollection, getEntry, render } from 'astro:content'
-import SourceList from '@components/layout/SourceList.astro'
 import { getCitationIds } from 'src/lib/citations'
 import { getChapterTree, pagePath } from 'src/lib/navigation'
+import { sourcesHeading } from 'src/lib/sources'
 
-// One URL level holds both chapter overviews and single pages (about, imprint, ...)
+// One URL level holds both chapter overviews and single pages (imprint, privacy, ...)
 type Props =
   | { kind: 'chapter'; chapterId: string }
   | { kind: 'single'; page: CollectionEntry<'singlePages'> }
@@ -34,24 +36,39 @@ const chapter =
     ? (await getChapterTree()).find((entry) => entry.id === props.chapterId)
     : undefined
 const single = props.kind === 'single' ? await render(props.page) : undefined
-const introEntry = props.kind === 'chapter' ? await getEntry('chapterIntros', props.chapterId) : undefined
+const introEntry = chapter ? await getEntry('chapterIntros', chapter.id) : undefined
 const intro = introEntry ? await render(introEntry) : undefined
 const citationIds =
   props.kind === 'single' ? await getCitationIds(props.page.body, props.page.id) : []
 Astro.locals.citationIds = citationIds
 const title = chapter?.data.title ?? (props.kind === 'single' ? props.page.data.title : '')
+const headings = [...(single?.headings ?? []), ...(citationIds.length ? [sourcesHeading] : [])]
 ---
 
-<PageLayout title={title} headings={single?.headings ?? intro?.headings}>
-  <h1 slot="header" class="mb-10 text-3xl font-bold tracking-tight text-ink lg:text-4xl">{title}</h1>
+<PageLayout title={title} headings={headings}>
+  <PageHeader
+    slot="header"
+    eyebrow={chapter?.data.number ? `Kapitel ${chapter.data.number}` : undefined}
+    title={title}
+    summary={chapter?.data.shortText ?? (props.kind === 'single' ? props.page.data.summary : undefined)}
+  />
   {
     chapter && (
       <>
-        {intro ? <intro.Content components={mdxComponents} /> : <p>{chapter.data.shortText}</p>}
-        <ol>
+        {intro && <intro.Content components={mdxComponents} />}
+        <h2>Seiten in diesem Kapitel</h2>
+        <ol class="not-prose max-w-reading border-t border-violet-800">
           {chapter.pages.map((page) => (
-            <li>
-              <a href={pagePath(page)}>{page.data.navTitle ?? page.data.title}</a>
+            <li class="flex gap-4 border-b border-violet-800 py-4">
+              <span class="w-8 flex-none font-mono text-sm leading-[26px]">
+                {chapter.data.number}.{page.data.order}
+              </span>
+              <div>
+                <a href={pagePath(page)} class="font-display text-lg leading-[26px] font-semibold">
+                  {page.data.title}
+                </a>
+                <p class="mt-1">{page.data.summary}</p>
+              </div>
             </li>
           ))}
         </ol>

@@ -6,7 +6,9 @@ type Props = {
 const { title } = Astro.props
 ---
 
-<section class="my-6 border border-gray-300 p-4">
-  <p class="font-semibold">{title}</p>
+<section
+  class="not-prose my-12 max-w-reading border border-violet-800 bg-white p-6 [&_input]:mt-[3px] [&_input]:size-5 [&_input]:shrink-0 [&_input]:accent-violet-800 [&_li]:flex [&_li]:gap-3 [&_ul]:flex [&_ul]:flex-col [&_ul]:gap-3"
+>
+  <h3 class="mb-2 font-label text-xl leading-7 font-bold">{title}</h3>
   <slot />
 </section>

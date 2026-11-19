@@ -6,11 +6,16 @@ type Props = {
 }
 
 const { title, who, output } = Astro.props
+const meta = [who && `Wer: ${who}`, output && `Ergebnis: ${output}`].filter(Boolean).join(' · ')
 ---
 
-<li>
-  <p class="font-semibold">{title}</p>
-  {who && <p>Wer: {who}</p>}
-  <slot />
-  {output && <p>Ergebnis: {output}</p>}
+<li class="flex gap-4 [counter-increment:step]">
+  <span
+    class="flex size-8 flex-none items-center justify-center bg-violet-800 font-mono text-lime-300 before:content-[counter(step)]"
+    aria-hidden="true"></span>
+  <div>
+    <p class="font-display text-lg leading-[26px] font-semibold">{title}</p>
+    {meta && <p class="mt-1 font-mono text-sm leading-[22px]">{meta}</p>}
+    {Astro.slots.has('default') && <div class="mt-2"><slot /></div>}
+  </div>
 </li>

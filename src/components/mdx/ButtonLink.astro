@@ -7,12 +7,24 @@ type Props = {
 
 const { href, variant = 'primary', icon } = Astro.props
 const isExternal = icon === 'external' || /^https?:\/\//.test(href)
-const iconText = { download: '↓', external: '↗', arrow: '→' } as const
+const iconPaths = {
+  download: 'M12 4v11m0 0-4-4m4 4 4-4M5 19h14',
+  external: 'M14 4h6v6M20 4l-9 9M18 14v6H4V6h6',
+  arrow: 'M5 12h14m0 0-5-5m5 5-5 5',
+} as const
 ---
 
 <a
   href={href}
   data-variant={variant}
-  class="not-prose inline-block rounded border border-gray-900 px-4 py-2"
+  class:list={[
+    'not-prose inline-flex min-h-[50px] items-center gap-2 border border-violet-800 px-5 font-display font-semibold no-underline',
+    variant === 'primary' ? 'bg-violet-800 text-white hover:bg-violet-950 hover:text-white' : 'bg-white hover:bg-cream-50',
+  ]}
   {...isExternal ? { target: '_blank', rel: 'noreferrer' } : {}}
-><slot />{icon && <span aria-hidden="true"> {iconText[icon]}</span>}{isExternal && <span class="sr-only"> (öffnet in neuem Tab)</span>}</a>
+>
+  {icon === 'download' && <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={iconPaths.download} /></svg>}
+  <slot />
+  {icon && icon !== 'download' && <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={iconPaths[icon]} /></svg>}
+  {isExternal && <span class="sr-only"> (öffnet in neuem Tab)</span>}
+</a>

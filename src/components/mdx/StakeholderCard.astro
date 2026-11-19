@@ -11,9 +11,12 @@ const { name, type, interest, influence, tip } = entry.data
 const influenceLabels = { high: 'hoch', medium: 'mittel', low: 'gering' } as const
 ---
 
-<article class="border border-gray-300 p-4">
-  <h3 class="font-semibold">{name}</h3>
-  <p class="text-sm">{type} · Einfluss: {influenceLabels[influence]}</p>
-  <p class="mt-2">Interesse: {interest}</p>
-  {tip && <p class="mt-2"><strong>Tipp:</strong> {tip}</p>}
+<article class="not-prose border border-violet-800 bg-white">
+  <div class="bg-violet-800 px-4 py-3 text-white"><span class="caps text-sm leading-[22px]">{type}</span></div>
+  <div class="p-4">
+    <h3 class="font-display text-xl leading-7 font-semibold">{name}</h3>
+    <p class="mt-2"><strong>Interesse:</strong> {interest}</p>
+    <p class="mt-1"><strong>Einfluss:</strong> {influenceLabels[influence]}</p>
+    {tip && <p class="mt-2">{tip}</p>}
+  </div>
 </article>

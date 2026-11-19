@@ -3,23 +3,24 @@ import type { MarkdownHeading } from 'astro'
 
 type Props = {
   headings: MarkdownHeading[]
+  variant?: 'aside' | 'inline'
 }
 
-const h2 = Astro.props.headings.filter((heading) => heading.depth === 2)
+const { headings, variant = 'aside' } = Astro.props
+const h2 = headings.filter((heading) => heading.depth === 2)
 ---
 
 {
   h2.length > 0 && (
-    <nav aria-labelledby="toc-title" class="text-sm">
-      <p id="toc-title" class="font-semibold text-ink">
-        Auf dieser Seite
-      </p>
-      <ul class="mt-3 space-y-2 border-l border-border pl-3">
+    <nav
+      aria-label="Auf dieser Seite"
+      class:list={[variant === 'inline' && 'mt-7 flex flex-col gap-3 border-y border-violet-800 py-4']}
+    >
+      <p class:list={['font-label text-lg leading-[26px] font-bold', variant === 'aside' && 'mb-4']}>Auf dieser Seite</p>
+      <ul class="flex flex-col gap-3">
         {h2.map((heading) => (
           <li>
-            <a href={`#${heading.slug}`} class="text-ink-muted no-underline hover:text-petrol-900">
-              {heading.text}
-            </a>
+            <a href={`#${heading.slug}`}>{heading.text}</a>
           </li>
         ))}
       </ul>

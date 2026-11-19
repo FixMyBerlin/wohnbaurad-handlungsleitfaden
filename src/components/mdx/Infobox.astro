@@ -5,10 +5,17 @@ type Props = {
 }
 
 const { variant = 'info', title } = Astro.props
+// The title names the variant so it is not told by colour alone
 const labels = { info: 'Info', tip: 'Tipp', warning: 'Achtung' } as const
 ---
 
-<aside class="not-prose my-6 border border-gray-300 p-4" data-variant={variant}>
-  <p class="font-semibold">{title ?? labels[variant]}</p>
-  <div class="prose mt-2 max-w-none"><slot /></div>
+<aside
+  data-variant={variant}
+  class:list={[
+    'not-prose my-12 max-w-reading p-6',
+    variant === 'warning' ? 'border-2 border-violet-800 bg-white' : 'bg-lime-300',
+  ]}
+>
+  <p class="mb-2 font-label text-xl leading-7 font-bold">{title ?? labels[variant]}</p>
+  <div class="[&_a]:underline [&_p+p]:mt-4"><slot /></div>
 </aside>

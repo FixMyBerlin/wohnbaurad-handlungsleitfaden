@@ -1,5 +1,6 @@
 ---
 import Download from '@components/mdx/Download.astro'
+import PageHeader from '@components/layout/PageHeader.astro'
 import PageLayout from '@layouts/PageLayout.astro'
 import { getCollection } from 'astro:content'
 
@@ -11,6 +12,6 @@ const downloads = (await getCollection('downloads')).toSorted((a, b) => {
 ---
 
 <PageLayout title="Downloads">
-  <h1 slot="header" class="mb-10 text-3xl font-bold tracking-tight text-ink lg:text-4xl">Downloads</h1>
+  <PageHeader slot="header" title="Downloads" />
   {downloads.map((download) => <Download id={download.id} />)}
 </PageLayout>
