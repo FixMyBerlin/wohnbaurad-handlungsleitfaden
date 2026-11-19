@@ -1,3 +1,4 @@
+import { chapterIntrosCollection } from './collections/chapterIntros'
 import { chaptersCollection } from './collections/chapters'
 import { downloadsCollection } from './collections/downloads'
 import { fundingProgramsCollection } from './collections/fundingPrograms'
@@ -10,6 +11,7 @@ import { stakeholdersCollection } from './collections/stakeholders'
 
 export const collections = {
   chapters: chaptersCollection,
+  chapterIntros: chapterIntrosCollection,
   pages: pagesCollection,
   home: homeCollection,
   singlePages: singlePagesCollection,

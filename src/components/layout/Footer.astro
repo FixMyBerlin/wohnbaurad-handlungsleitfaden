@@ -5,14 +5,13 @@ const footerPages = (await getCollection('singlePages', (page) => page.data.foot
   (a, b) => a.data.title.localeCompare(b.data.title, 'de'),
 )
 const links = [
-  { href: '/ueber-das-projekt', label: 'Über das Projekt' },
   { href: '/downloads', label: 'Downloads' },
   { href: '/quellen', label: 'Quellen' },
   { href: '/glossar', label: 'Glossar' },
   ...footerPages.map((page) => ({ href: `/${page.id}`, label: page.data.title })),
 ]
 // Logo files follow; until then labelled placeholders
-const logos = ['BMDV / NRVP', 'GWG München', 'FixMyCity']
+const logos = ['BMDV / NRVP', 'Münchner Wohnen', 'FixMyCity']
 ---
 
 <footer class="mt-20 border-t border-border bg-surface-muted">

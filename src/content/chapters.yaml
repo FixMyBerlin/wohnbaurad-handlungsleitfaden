@@ -1,20 +1,41 @@
-- id: warum-und-wer
-  title: Warum & Wer
+- id: flaechen-finden
+  title: Geeignete Flächen finden
   number: 1
-  shortText: 'PLATZHALTER: Kurztext zum Kapitel Warum & Wer'
-  icon: people
+  shortText: 'PLATZHALTER: Kurztext zum Kapitel Geeignete Flächen finden'
+  icon: map
   order: 1
 
-- id: wie-umsetzen
-  title: Wie umsetzen
+- id: massnahmen
+  title: Maßnahmen für fahrradfreundliche Wohnquartiere
   number: 2
-  shortText: 'PLATZHALTER: Kurztext zum Kapitel Wie umsetzen'
-  icon: house
+  shortText: 'PLATZHALTER: Kurztext zum Kapitel Maßnahmen für fahrradfreundliche Wohnquartiere'
+  icon: bike
   order: 2
 
-- id: werkzeuge-und-praxis
-  title: Werkzeuge & Praxis
+- id: kooperationen
+  title: Kooperationen gestalten
   number: 3
-  shortText: 'PLATZHALTER: Kurztext zum Kapitel Werkzeuge & Praxis'
-  icon: map
+  shortText: 'PLATZHALTER: Kurztext zum Kapitel Kooperationen gestalten'
+  icon: people
   order: 3
+
+- id: recht
+  title: Rechtliche Rahmenbedingungen
+  number: 4
+  shortText: 'PLATZHALTER: Kurztext zum Kapitel Rechtliche Rahmenbedingungen'
+  icon: scale
+  order: 4
+
+- id: finanzierung
+  title: Finanzierung und Wirtschaftlichkeit
+  number: 5
+  shortText: 'PLATZHALTER: Kurztext zum Kapitel Finanzierung und Wirtschaftlichkeit'
+  icon: coins
+  order: 5
+
+- id: mieterinnen-und-quartier
+  title: Mieter:innen und Quartier einbeziehen
+  number: 6
+  shortText: 'PLATZHALTER: Kurztext zum Kapitel Mieter:innen und Quartier einbeziehen'
+  icon: home
+  order: 6

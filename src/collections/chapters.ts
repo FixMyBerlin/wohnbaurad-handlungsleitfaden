@@ -7,9 +7,9 @@ export const chaptersCollection = defineCollection({
   loader: file('src/content/chapters.yaml'),
   schema: z.object({
     title: z.string(),
-    number: z.number().int().min(1).max(3).optional(),
+    number: z.number().int().min(1).optional(),
     shortText: z.string().optional(),
-    icon: z.enum(['people', 'house', 'map']).optional(),
+    icon: z.enum(['map', 'bike', 'people', 'scale', 'coins', 'home']).optional(),
     order: z.number().int(),
   }),
 })

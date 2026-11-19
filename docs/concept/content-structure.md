@@ -1,3 +1,5 @@
+> **Überholt (19.11.2026):** Die Gliederung hat sich geändert, maßgeblich ist [outline.md](outline.md). Dieses Dokument bleibt als Herleitung aus dem Antrag erhalten.
+
 # Handlungsleitfaden WohnBauRad – Inhaltliche Struktur (Entwurf)
 
 Grundlage: Vorhabenbeschreibung NRVP WohnBauRad v3 („Antrag“) und GitHub-Tickets #3742–#3749 (Stand 04.11.2026).

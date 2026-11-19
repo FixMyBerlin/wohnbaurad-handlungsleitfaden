@@ -14,7 +14,7 @@ Alle Bausteine stehen in jeder MDX-Datei ohne Import zur Verfügung. Andere Komp
 | `Steps` | – | `Step`-Bausteine | siehe unten |
 | `Step` | `title`, `who?`, `output?` | optional Markdown | `<Step title="Fläche prüfen" who="Liegenschaften" output="Flächenliste" />` |
 | `ScreenshotStep` | `step` (Zahl), `image` (Pfad unter `src/assets/`), `alt` (Pflicht) | Bildunterschrift | `<ScreenshotStep step={1} image="screenshots/suche.png" alt="Suchfeld des Flächen-Finders">Adresse eingeben</ScreenshotStep>` |
-| `ButtonLink` | `href`, `variant?`: `primary` \| `secondary`, `icon?`: `download` \| `external` \| `arrow` | Beschriftung | `<ButtonLink href="/werkzeuge-und-praxis/flaechen-finden" icon="arrow">Zum Flächen-Finder</ButtonLink>` |
+| `ButtonLink` | `href`, `variant?`: `primary` \| `secondary`, `icon?`: `download` \| `external` \| `arrow` | Beschriftung | `<ButtonLink href="/flaechen-finden/flaechen-finder" icon="arrow">Zum Flächen-Finder</ButtonLink>` |
 | `Button` | `variant?`, `type?`: `button` \| `submit` | Beschriftung | selten nötig |
 | `ButtonGroup` | – | mehrere `ButtonLink` | siehe unten |
 | `GlossaryTerm` | `id` (aus `glossary.yaml`) | optional: sichtbarer Text, sonst der Begriff | `<GlossaryTerm id="verkehrssicherungspflicht" />` |

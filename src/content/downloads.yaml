@@ -14,5 +14,14 @@
       path: /downloads/placeholder-template.docx
     - format: pdf
       path: /downloads/placeholder-template.pdf
-  page: wie-umsetzen/vorlagen
+  page: kooperationen/vorlagen
   updatedAt: 2026-11-04
+
+- id: placeholder-tenant-survey
+  title: 'PLATZHALTER: Vorlage Mieter:innenbefragung'
+  description: 'PLATZHALTER: Fragebogen zur Mobilität am Wohnstandort.'
+  files:
+    - format: docx
+      path: /downloads/vorlage-mieterinnenbefragung.docx
+  page: mieterinnen-und-quartier/beispiel-muenchner-wohnen
+  updatedAt: 2026-11-19

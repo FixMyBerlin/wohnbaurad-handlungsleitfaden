@@ -1,7 +1,7 @@
 ---
 import { mdxComponents } from '@components/mdx'
 import PageLayout from '@layouts/PageLayout.astro'
-import { type CollectionEntry, getCollection, render } from 'astro:content'
+import { type CollectionEntry, getCollection, getEntry, render } from 'astro:content'
 import SourceList from '@components/layout/SourceList.astro'
 import { getCitationIds } from 'src/lib/citations'
 import { getChapterTree, pagePath } from 'src/lib/navigation'
@@ -34,18 +34,20 @@ const chapter =
     ? (await getChapterTree()).find((entry) => entry.id === props.chapterId)
     : undefined
 const single = props.kind === 'single' ? await render(props.page) : undefined
+const introEntry = props.kind === 'chapter' ? await getEntry('chapterIntros', props.chapterId) : undefined
+const intro = introEntry ? await render(introEntry) : undefined
 const citationIds =
   props.kind === 'single' ? await getCitationIds(props.page.body, props.page.id) : []
 Astro.locals.citationIds = citationIds
 const title = chapter?.data.title ?? (props.kind === 'single' ? props.page.data.title : '')
 ---
 
-<PageLayout title={title} headings={single?.headings}>
+<PageLayout title={title} headings={single?.headings ?? intro?.headings}>
   <h1 slot="header" class="mb-10 text-3xl font-bold tracking-tight text-ink lg:text-4xl">{title}</h1>
   {
     chapter && (
       <>
-        <p>{chapter.data.shortText}</p>
+        {intro ? <intro.Content components={mdxComponents} /> : <p>{chapter.data.shortText}</p>}
         <ol>
           {chapter.pages.map((page) => (
             <li>

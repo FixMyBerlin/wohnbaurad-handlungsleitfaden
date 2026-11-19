@@ -23,7 +23,7 @@ Dieser Skill beschreibt, wie Inhalte in dieses Repo kommen. Er gilt für jede KI
 
 ## Ablauf
 
-1. Neuen Branch anlegen, z. B. `inhalt/rechtlicher-rahmen`. Nie direkt auf `main` arbeiten.
+1. Neuen Branch anlegen, z. B. `inhalt/recht-grundlagen`. Nie direkt auf `main` arbeiten.
 2. Änderungen machen (siehe Aufgaben unten).
 3. Prüfen:
    - `bun install` (einmalig), dann `bun run check`. Das prüft Typen und Schemas aller Inhaltsdateien, den Content-Check (kein h1, kein HTML), Formatierung und ungenutzte Dateien. Es muss grün sein.
@@ -45,7 +45,7 @@ Dieser Skill beschreibt, wie Inhalte in dieses Repo kommen. Er gilt für jede KI
 | Aufgabe | Wo | Details |
 |---|---|---|
 | Text einer Seite schreiben | `src/content/pages/<kapitel>/<seite>.mdx` | Frontmatter-Felder: [references/content-model.md](references/content-model.md). Bausteine: [references/components.md](references/components.md) |
-| Neue Seite anlegen | neue Datei im passenden Kapitelordner | Der Dateiname wird zur URL (deutsch, klein, mit Bindestrichen). `chapter` = Kapitelordner, `order` = Position im Kapitel |
+| Neue Seite anlegen | neue Datei im passenden Kapitelordner | Der Dateiname wird zur URL (deutsch, klein, mit Bindestrichen). `chapter` = Kapitelordner, `order` = Position im Kapitel. Gliederung: `docs/concept/outline.md` |
 | Quelle oder Literatur ergänzen | `src/content/sources.yaml` | `type: evidence` für Belege, `type: literature` für die Literaturliste. `id` englisch oder neutral, z. B. `wuppertal-institut-2015` |
 | Glossarbegriff ergänzen | `src/content/glossary.yaml` | Im Text verlinken mit `<GlossaryTerm id="…" />` |
 | Vorlage oder Download ergänzen | Datei nach `public/downloads/`, Eintrag in `src/content/downloads.yaml` | Auf der Seite mit `<Download id="…" />` einbinden |
@@ -53,6 +53,7 @@ Dieser Skill beschreibt, wie Inhalte in dieses Repo kommen. Er gilt für jede KI
 | Förderprogramm ergänzen | neue Datei `src/content/funding-programs/<id>.yaml` | `updatedAt` = Stand der Recherche |
 | Screenshot einbinden | Bild nach `src/assets/screenshots/` | `<ScreenshotStep step={1} image="screenshots/datei.png" alt="…">Bildunterschrift</ScreenshotStep>` |
 | Kapiteltext (Kacheln) | `src/content/chapters.yaml` | `shortText` |
+| Kapitel-Einleitung | `src/content/chapter-intros/<kapitel-id>.mdx` | optional, erscheint auf der Kapitelübersicht |
 | Startseite | `src/content/home/index.mdx` | |
 
 ## Wenn `bun run check` oder der Build scheitert

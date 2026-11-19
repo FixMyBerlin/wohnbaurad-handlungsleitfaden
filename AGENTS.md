@@ -8,7 +8,7 @@ Writing or changing content (pages, sources, glossary, downloads, funding progra
 
 ## Where things are
 
-- `src/content/` – content: MDX pages under `pages/<chapter-slug>/<page-slug>.mdx`, YAML data (`sources`, `glossary`, `downloads`, `chapters`, `funding-programs/`)
+- `src/content/` – content: MDX pages under `pages/<chapter-slug>/<page-slug>.mdx`, optional chapter intros under `chapter-intros/`, YAML data (`sources`, `glossary`, `downloads`, `chapters`, `stakeholders`, `funding-programs/`). Chapter and page outline: [docs/concept/outline.md](docs/concept/outline.md)
 - `src/collections/` – Zod schema per collection, registered in `src/content.config.ts`
 - `src/components/mdx/` – building blocks usable in content MDX; `index.ts` is the only registry (no imports in MDX)
 - `src/components/layout/`, `src/layouts/` – page frame, navigation, source list

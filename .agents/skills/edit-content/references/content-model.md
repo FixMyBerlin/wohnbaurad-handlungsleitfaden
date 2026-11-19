@@ -10,7 +10,7 @@ Typen: Text in YAML am besten in einfachen Anführungszeichen (`'…'`), zwingen
 |---|---|
 | `title` | Seitentitel (wird zur h1) |
 | `navTitle?` | Kurzname in der Navigation |
-| `chapter` | Kapitel-ID = Ordnername: `warum-und-wer` \| `wie-umsetzen` \| `werkzeuge-und-praxis` |
+| `chapter` | Kapitel-ID = Ordnername: `flaechen-finden` \| `massnahmen` \| `kooperationen` \| `recht` \| `finanzierung` \| `mieterinnen-und-quartier` (Gliederung: `docs/concept/outline.md`) |
 | `order` | Position im Kapitel (1, 2, 3 …) |
 | `summary` | Ein Satz als Lead unter dem Titel |
 | `audience` | Liste aus `housingCompanies`, `municipalities`, `transportOperators`, `experts` |
@@ -22,11 +22,15 @@ Typen: Text in YAML am besten in einfachen Anführungszeichen (`'…'`), zwingen
 
 ## Einzelseiten – `src/content/single-pages/<slug>.mdx`
 
-`title`, `summary?`, `footer` (`true` = im Footer verlinkt), `updatedAt`.
+`title`, `summary?`, `footer` (`true` = im Footer verlinkt), `updatedAt`. Derzeit: Impressum, Datenschutz, Barrierefreiheit.
 
 ## Kapitel – `src/content/chapters.yaml`
 
-`id` (= URL), `title`, `number?` (1–3), `shortText?`, `icon?` (`people` \| `house` \| `map`), `order`.
+`id` (= URL), `title`, `number?`, `shortText?`, `icon?` (`map` \| `bike` \| `people` \| `scale` \| `coins` \| `home`), `order`.
+
+## Kapitel-Einleitung – `src/content/chapter-intros/<kapitel-id>.mdx`
+
+Optional. Reines MDX ohne Frontmatter, erscheint auf der Kapitelübersicht (z. B. `/finanzierung`) über der Seitenliste. Ohne Datei steht dort der `shortText`.
 
 ## Quellen – `src/content/sources.yaml`
 
@@ -54,7 +58,7 @@ Typen: Text in YAML am besten in einfachen Anführungszeichen (`'…'`), zwingen
 | `id` | eindeutig; `complete-guide` ist das Gesamt-PDF |
 | `title`, `description` | |
 | `files` | Liste: `format` (`pdf` \| `docx`), `path` (beginnt mit `/downloads/`), `sizeKb?` |
-| `page?` | Seiten-ID, z. B. `wie-umsetzen/vorlagen` |
+| `page?` | Seiten-ID, z. B. `kooperationen/vorlagen` |
 | `license?`, `reviewedBy?` | |
 | `updatedAt` | Stand |
 

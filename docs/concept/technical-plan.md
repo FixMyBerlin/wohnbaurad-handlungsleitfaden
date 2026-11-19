@@ -3,7 +3,8 @@
 Stand: 04.11.2026 · Ticket: FixMyBerlin/private-issues#3745 · Status: **Entwurf, nichts davon ist gebaut**
 
 Grundlagen:
-- [content-structure.md](content-structure.md) und [page-contents.md](page-contents.md)
+- **[outline.md](outline.md): aktuelle Gliederung (6 Kapitel, 20 Seiten) – maßgeblich**
+- [content-structure.md](content-structure.md) und [page-contents.md](page-contents.md) (überholte erste Struktur)
 - FMC-Skills `new-project-setup`, `tech-stack`, `keystatic-astro`, `react-map-gl`, `finish-work`
 - Analyse von rsv-info (radschnellverbindungen.info) und den RSV-Landingpages (rsv-veloroute u. a. mit rsv-shared)
 - Online-Recherche zum Stand von Astro & Co. (Quellen unten)
@@ -55,7 +56,8 @@ Das Repo bleibt vorerst **privat**. Ob und wann es öffentlich wird (Antrag: „
 
 | Collection | Format | Loader | Wofür |
 |---|---|---|---|
-| `pages` | MDX | `glob('**/*.mdx')` in `src/content/pages/<kapitel-slug>/<seiten-slug>.mdx`. Ordner- und Dateinamen = URL, deutsch und sprechend: `/wie-umsetzen/rechtlicher-rahmen` | alle 16 Seiten |
+| `pages` | MDX | `glob('**/*.mdx')` in `src/content/pages/<kapitel-slug>/<seiten-slug>.mdx`. Ordner- und Dateinamen = URL, deutsch und sprechend: `/recht/grundlagen` | alle 20 Seiten der 6 Kapitel ([outline.md](outline.md)) |
+| `chapterIntros` | MDX | `glob` | optionale Einleitung je Kapitelübersicht (`src/content/chapter-intros/<kapitel>.mdx`) |
 | `chapters` | YAML | `file()` | Kapitel-Titel, Reihenfolge, `number`, `shortText`, `icon` (für die Kapitelkacheln, keine Kapitelfarbe) |
 | `home` | MDX | `glob` (eine Datei) | Startseite: `eyebrow`, `title`, Inhalt als MDX mit Bausteinen |
 | `sources` | YAML | `file()` | Belege und Literatur (für `<Cite>`, `<KeyFigure>` und `<Literature>`) |
@@ -174,7 +176,7 @@ Dazu `.claude/rules/package-json-scripts.md` laut `tech-stack`.
   - am Seitenende die Quellenliste aus `<Cite>`, dann Vor/Zurück und der Footer
   - unter 1024px wird die Navigation zum Drawer
 - **Seitenkopf aus dem Frontmatter:** Kapitelzeile, `title` als h1, `summary` als Lead, „Für: {audience} · Stand: {updatedAt}“. Das Status-Banner aus dem Entwurf entfällt (E14/A3).
-- **Startseite:** eigenes Layout mit `eyebrow` und großem Titel. Der Inhalt ist MDX mit `<KeyFigures>`, Einstiegen als Markdown-Liste, `<ChapterTiles />` und `<Download id="complete-guide" />`.
+- **Startseite:** eigenes Layout mit `eyebrow` und großem Titel. Der Inhalt ist MDX mit den vier Abschnitten „Projekt, Ziele und Leitbild“, „Warum sollten Wohnungsunternehmen den Radverkehr fördern?“, „Mehrwert und Motivationen“ (mit `<KeyFigures>`) und „Zielgruppe“, danach `<ChapterTiles />` (6 Kacheln) und `<Download id="complete-guide" />`. Die Seite „Über das Projekt“ ist darin aufgegangen.
 - **Footer** mit Logozeile Förderer/Partner und der Seite „Erklärung zur Barrierefreiheit“ (BITV-Pflicht).
 
 ---
@@ -221,11 +223,11 @@ Dazu `.claude/rules/package-json-scripts.md` laut `tech-stack`.
     ├── layouts/              # BaseLayout, SeitenLayout, DruckLayout
     ├── pages/
     │   ├── index.astro
-    │   ├── [chapter]/[page].astro    # z. B. /wie-umsetzen/rechtlicher-rahmen
+    │   ├── [chapter]/[page].astro    # z. B. /recht/grundlagen
     │   ├── [slug].astro              # Kapitelübersichten + Einzelseiten
     │   ├── downloads.astro · quellen.astro · glossar.astro
     │   ├── gesamtfassung.astro   # Druckseite für das PDF
-    │   └── impressum.astro · datenschutz.astro · barrierefreiheit.astro
+    │   └── (Impressum, Datenschutz, Barrierefreiheit kommen aus single-pages über [slug].astro)
     ├── assets/               # Screenshots, Fotos (astro:assets)
     └── styles/
         ├── global.css        # Tailwind-Import

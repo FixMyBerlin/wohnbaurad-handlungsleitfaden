@@ -1,3 +1,5 @@
+> **Überholt (19.11.2026):** Die Gliederung hat sich geändert, maßgeblich ist [outline.md](outline.md). Dieses Dokument bleibt als Herleitung aus dem Antrag erhalten.
+
 # Handlungsleitfaden WohnBauRad – Was steht konkret auf welcher Seite?
 
 Baut auf [content-structure.md](content-structure.md) auf. Stand: 04.11.2026.
