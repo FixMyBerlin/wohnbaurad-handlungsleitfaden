@@ -36,7 +36,7 @@ const activeLink = mobile
         const label = (
           <span class="flex">
             <span class="w-6 shrink-0">{chapter.data.number}</span>
-            <span>{chapter.data.title}</span>
+            <span class="group-hover/chapter:underline">{chapter.data.title}</span>
           </span>
         )
         const pages = (
@@ -74,7 +74,7 @@ const activeLink = mobile
                 <a
                   href={chapterPath(chapter)}
                   aria-current={currentPath === chapterPath(chapter) ? 'page' : undefined}
-                  class="-mx-4 block px-4 font-display leading-[26px] font-bold no-underline hover:underline aria-[current=page]:bg-lime-300"
+                  class="group/chapter -mx-4 block px-4 font-display leading-[26px] font-bold no-underline aria-[current=page]:bg-lime-300"
                 >
                   {label}
                 </a>
