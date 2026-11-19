@@ -58,7 +58,7 @@ Das Repo bleibt vorerst **privat**. Ob und wann es öffentlich wird (Antrag: „
 |---|---|---|---|
 | `pages` | MDX | `glob('**/*.mdx')` in `src/content/pages/<kapitel-slug>/<seiten-slug>.mdx`. Ordner- und Dateinamen = URL, deutsch und sprechend: `/recht/grundlagen` | alle 20 Seiten der 6 Kapitel ([outline.md](outline.md)) |
 | `chapterIntros` | MDX | `glob` | optionale Einleitung je Kapitelübersicht (`src/content/chapter-intros/<kapitel>.mdx`) |
-| `chapters` | YAML | `file()` | Kapitel-Titel, Reihenfolge, `number`, `shortText`, `icon` (für die Kapitelkacheln, keine Kapitelfarbe) |
+| `chapters` | YAML | `file()` | Kapitel-Titel, Reihenfolge, `number`, `shortText` (Kapitelkacheln ohne Icons) |
 | `home` | MDX | `glob` (eine Datei) | Startseite: `eyebrow`, `title`, Inhalt als MDX mit Bausteinen |
 | `sources` | YAML | `file()` | Belege und Literatur (für `<Cite>`, `<KeyFigure>` und `<Literature>`) |
 | `fundingPrograms` | YAML | `glob` | Steckbriefe (2.6) |

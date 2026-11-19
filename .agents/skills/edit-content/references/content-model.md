@@ -26,7 +26,7 @@ Typen: Text in YAML am besten in einfachen Anführungszeichen (`'…'`), zwingen
 
 ## Kapitel – `src/content/chapters.yaml`
 
-`id` (= URL), `title`, `number?`, `shortText?`, `icon?` (`map` \| `bike` \| `people` \| `scale` \| `coins` \| `home`), `order`.
+`id` (= URL), `title`, `number?`, `shortText?`, `order`.
 
 ## Kapitel-Einleitung – `src/content/chapter-intros/<kapitel-id>.mdx`
 

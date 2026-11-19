@@ -9,7 +9,6 @@ export const chaptersCollection = defineCollection({
     title: z.string(),
     number: z.number().int().min(1).optional(),
     shortText: z.string().optional(),
-    icon: z.enum(['map', 'bike', 'people', 'scale', 'coins', 'home']).optional(),
     order: z.number().int(),
   }),
 })
