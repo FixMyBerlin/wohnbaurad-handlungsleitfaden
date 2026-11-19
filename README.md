@@ -6,7 +6,9 @@ Website and PDF of the *Handlungsleitfaden* from the NRVP project WohnBauRad: ho
 
 - [docs/concept/technical-plan.md](./docs/concept/technical-plan.md) – technical plan and decisions
 - [docs/concept/content-structure.md](./docs/concept/content-structure.md) – content structure
-- [docs/concept/page-contents.md](./docs/concept/page-contents.md) – page by page content
+- [docs/concept/page-contents.md](./docs/concept/page-contents.md) – page by page content (superseded by outline.md)
+- [docs/concept/outline.md](./docs/concept/outline.md) – current outline: six chapters, 20 pages
+- [docs/manus.md](./docs/manus.md) – editing content with Manus (German)
 
 ## Developing
 

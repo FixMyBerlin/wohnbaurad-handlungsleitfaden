@@ -26,7 +26,7 @@ Dieser Skill beschreibt, wie Inhalte in dieses Repo kommen. Er gilt für jede KI
 1. Neuen Branch anlegen, z. B. `inhalt/recht-grundlagen`. Nie direkt auf `main` arbeiten.
 2. Änderungen machen (siehe Aufgaben unten).
 3. Prüfen:
-   - `bun install` (einmalig), dann `bun run check`. Das prüft Typen und Schemas aller Inhaltsdateien, den Content-Check (kein h1, kein HTML), Formatierung und ungenutzte Dateien. Es muss grün sein.
+   - `bun install` (einmalig), dann `bun run check`. Dafür muss Node in der Version aus `.nvmrc` (22.23.4 oder neuer) verfügbar sein. Das prüft Typen und Schemas aller Inhaltsdateien, den Content-Check (kein h1, kein HTML), Formatierung und ungenutzte Dateien. Es muss grün sein.
    - `bun run placeholder-check` listet alle offenen `PLATZHALTER:`.
    - Scheitert `bun run check` an der Umgebung (z. B. `node` oder `bun` fehlt, Netzwerk gesperrt) und nicht an den Inhalten: das im PR vermerken. Die CI prüft im PR dasselbe, ihr Ergebnis abwarten und Fehler beheben.
 4. Commit, Format: `Content: <was sich ändert>` und darunter Stichpunkte, was Leser:innen jetzt sehen.
@@ -39,6 +39,16 @@ Dieser Skill beschreibt, wie Inhalte in dieses Repo kommen. Er gilt für jede KI
 - `<Cite id="…" />` direkt hinter das Satzzeichen, ohne Leerzeichen: `… am Wohnort.<Cite id="bmvi-2018" />`
 - IDs (Quellen, Glossar, Downloads, Förderprogramme, Akteur:innen) klein, mit Bindestrichen, sprechend: `wuppertal-institut-2015`, `verkehrssicherungspflicht`. Platzhalter-Einträge beginnen mit `placeholder-`.
 - `order` legt die Reihenfolge im Kapitel fest. Jede Zahl nur einmal pro Kapitel, Lücken sind erlaubt.
+
+## Gestaltungsregeln für Inhalte
+
+Aus dem Design System, damit die Seiten so aussehen wie geplant:
+- Höchstens eine `Infobox` pro Abschnitt. Die Variante muss am Titel erkennbar sein, nicht nur an der Farbe.
+- `<GlossaryTerm>` nur beim ersten Vorkommen eines Begriffs auf einer Seite.
+- Überschriften als Frage oder Aussage formulieren, nicht als Schlagwort: „Welche Flächen eignen sich?“
+- Links sagen, wohin sie führen: „Vorlage herunterladen (.docx, 48 KB)“, nie „hier“.
+- Kurze Absätze und Listen. Für Ablauf-Schritte `<Steps>`, nicht eine nummerierte Liste mit langen Absätzen.
+- `<KeyFigure>` nur mit belegter Zahl (`source` ist Pflicht).
 
 ## Aufgaben
 
