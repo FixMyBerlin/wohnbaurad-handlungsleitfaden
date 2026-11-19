@@ -17,7 +17,7 @@ const h2 = headings.filter((heading) => heading.depth === 2)
       class:list={[variant === 'inline' && 'mt-7 flex flex-col gap-3 border-y border-violet-800 py-4']}
     >
       <p class:list={['font-label text-lg leading-[26px] font-bold', variant === 'aside' && 'mb-4']}>Auf dieser Seite</p>
-      <ul class="flex flex-col gap-3">
+      <ul class="flex flex-col gap-2.5 text-sm leading-[22px]">
         {h2.map((heading) => (
           <li>
             <a href={`#${heading.slug}`} class="hover:underline">{heading.text}</a>
