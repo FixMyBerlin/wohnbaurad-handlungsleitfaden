@@ -3,6 +3,7 @@ import Download from '@components/mdx/Download.astro'
 import PageHeader from '@components/layout/PageHeader.astro'
 import PageLayout from '@layouts/PageLayout.astro'
 import { getCollection } from 'astro:content'
+import { getDownloadUsage } from 'src/lib/downloads'
 import { isExample } from 'src/lib/examples'
 
 const downloads = (await getCollection('downloads', (entry) => !isExample(entry.id))).toSorted((a, b) => {
@@ -10,9 +11,10 @@ const downloads = (await getCollection('downloads', (entry) => !isExample(entry.
   if (b.id === 'complete-guide') return 1
   return a.data.title.localeCompare(b.data.title, 'de')
 })
+const usage = await getDownloadUsage()
 ---
 
 <PageLayout title="Downloads">
   <PageHeader slot="header" title="Downloads" />
-  {downloads.map((download) => <Download id={download.id} />)}
+  {downloads.map((download) => <Download id={download.id} usedOn={usage.get(download.id)} />)}
 </PageLayout>

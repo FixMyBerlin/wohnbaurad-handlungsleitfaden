@@ -14,7 +14,6 @@
       path: /downloads/placeholder-template.docx
     - format: pdf
       path: /downloads/placeholder-template.pdf
-  page: kooperationen/vorlagen
   updatedAt: 2026-11-04
 
 - id: placeholder-tenant-survey
@@ -23,7 +22,6 @@
   files:
     - format: docx
       path: /downloads/vorlage-mieterinnenbefragung.docx
-  page: mieterinnen-und-quartier/beispiel-muenchner-wohnen
   updatedAt: 2026-11-19
 
 # Example entry for the building block showcase; never listed publicly
@@ -37,7 +35,6 @@
     - format: pdf
       path: /downloads/example-template.pdf
       sizeKb: 120
-  page: kooperationen/vorlagen
   license: CC BY 4.0
   reviewedBy: 'Beispiel: Kanzlei'
   updatedAt: 2026-11-23

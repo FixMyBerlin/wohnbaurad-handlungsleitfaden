@@ -58,7 +58,8 @@ Optional. Reines MDX ohne Frontmatter, erscheint auf der Kapitelübersicht (z. B
 | `id` | eindeutig; `complete-guide` ist das Gesamt-PDF |
 | `title`, `description` | |
 | `files` | Liste: `format` (`pdf` \| `docx`), `path` (beginnt mit `/downloads/`), `sizeKb?` |
-| `page?` | Seiten-ID, z. B. `kooperationen/vorlagen` |
+
+Auf welcher Seite ein Download steht, ergibt sich aus `<Download id="…" />` in der Seite. Die Übersicht `/downloads` verlinkt das automatisch.
 | `license?`, `reviewedBy?` | |
 | `updatedAt` | Stand |
 

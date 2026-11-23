@@ -1,15 +1,18 @@
 ---
 import { getEntry } from 'astro:content'
+import type { DownloadUsage } from 'src/lib/downloads'
 
 type Props = {
   id: string
+  // Set only by the downloads overview; on content pages the context is the page itself
+  usedOn?: DownloadUsage[]
 }
 
 const download = await getEntry('downloads', Astro.props.id)
 if (!download) throw new Error(`<Download id="${Astro.props.id}"> not found in src/content/downloads.yaml`)
-const { title, description, files, page, license, reviewedBy, updatedAt } = download.data
+const { title, description, files, license, reviewedBy, updatedAt } = download.data
+const { usedOn = [] } = Astro.props
 const isCompleteGuide = download.id === 'complete-guide'
-const relatedPage = page ? await getEntry(page) : undefined
 const date = updatedAt.toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })
 const formatLabel = { docx: 'Word (.docx', pdf: 'PDF (' } as const
 const button = 'inline-flex min-h-[50px] items-center gap-2 border border-violet-800 px-5 font-display font-semibold no-underline'
@@ -35,7 +38,17 @@ const meta = [reviewedBy && `Geprüft durch ${reviewedBy}`, `Stand ${date}`, lic
     </article>
   ) : (
     <article class="not-prose my-6 max-w-[var(--container-main)] border border-violet-800 bg-white p-6">
-      {relatedPage && <p class="caps mb-1.5 text-sm leading-[22px]">Zu: {relatedPage.data.title}</p>}
+      {usedOn.length > 0 && (
+        <p class="caps mb-1.5 text-sm leading-[22px]">
+          Zu:{' '}
+          {usedOn.map((usage, index) => (
+            <>
+              {index > 0 && ', '}
+              <a href={usage.href} class="underline hover:text-violet-950">{usage.title}</a>
+            </>
+          ))}
+        </p>
+      )}
       <h3 class="mb-1.5 font-display text-xl leading-7 font-semibold">{title}</h3>
       <p class="mb-2.5">{description}</p>
       <p class="font-mono text-sm leading-[22px]">{meta}</p>

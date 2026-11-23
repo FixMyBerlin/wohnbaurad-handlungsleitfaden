@@ -1,6 +1,6 @@
 import { file } from 'astro/loaders'
 import { z } from 'astro/zod'
-import { defineCollection, reference } from 'astro:content'
+import { defineCollection } from 'astro:content'
 
 export const downloadsCollection = defineCollection({
   loader: file('src/content/downloads.yaml'),
@@ -17,7 +17,6 @@ export const downloadsCollection = defineCollection({
         }),
       )
       .min(1),
-    page: reference('pages').optional(),
     license: z.string().optional(),
     reviewedBy: z.string().optional(),
     updatedAt: z.coerce.date(),
