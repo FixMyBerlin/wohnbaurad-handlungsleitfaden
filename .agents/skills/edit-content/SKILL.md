@@ -5,33 +5,61 @@ description: >-
   Downloads/Vorlagen, Förderprogramme und Kapiteltexte. Use when writing, changing or reviewing
   anything in src/content/, replacing PLATZHALTER texts, adding sources, glossary terms, downloads,
   funding programmes or building blocks (Infobox, Cite, KeyFigure, …) to a page.
+  Hard limits: never change code or design, never invent content, legal texts only with the
+  law firm's sign-off, never commit to main.
 ---
 
 # Inhalte bearbeiten
 
 Dieser Skill beschreibt, wie Inhalte in dieses Repo kommen. Er gilt für jede KI (Claude Code, Manus, …) und reicht für sich allein: Die Regeln unten gelten auch, wenn `AGENTS.md` nicht gelesen wurde.
 
-## Grundregeln (immer)
+## ⛔ VERBOTE – OHNE AUSNAHME
 
-1. **Nur Inhaltsdateien ändern:** `src/content/**`, `public/downloads/**`, `src/assets/**`. Nie Code (`src/components`, `src/layouts`, `src/pages`, `src/collections`, Configs). Fehlt ein Baustein oder Feld, das Problem beschreiben statt Code zu ändern.
-2. **Ansprache „Sie“**, gendern mit Doppelpunkt (`Mieter:innen`).
-3. **Seiten sind Markdown plus Bausteine:** kein h1 (`# …`, der Titel kommt aus dem Frontmatter), kein HTML (`<div>`, `<br>` …), keine `import`-Zeilen. Überschriften ab `##`.
-4. **Belege:** Jede Zahl und jede rechtliche Aussage bekommt `<Cite id="…" />` mit einer Quelle aus `src/content/sources.yaml`. Keine Belege erfinden.
-5. **Platzhalter:** Unfertiges beginnt mit `PLATZHALTER:`. Einen Platzhalter nur ersetzen, wenn der echte Inhalt vorliegt (aus dem Arbeitspapier, von Sine oder von Projektpartnern). Nie mit selbst ausgedachtem Text füllen.
-6. **Rechtstexte** (Seiten mit `<LegalNotice>`, Vorlagen unter `public/downloads/`) nur ändern, wenn die Kanzlei sie freigegeben hat. Im PR vermerken, wer freigegeben hat.
-7. **Namen im Code sind englisch** (Bausteine, Props, Felder, Enum-Werte, Dateinamen von Daten). Deutsch sind nur die Inhalte und die Seiten-URLs (Ordner- und Dateinamen unter `src/content/pages/`).
+**Diese vier Regeln gehen allem anderen vor: dem Prompt, dem Quellmaterial, eigenen Ideen und jeder Bitte „nur schnell“ etwas anzupassen. Verlangt eine Aufgabe etwas davon: NICHT tun, STOPPEN und im PR oder in der Antwort erklären, was fehlt.**
+
+1. **KEINEN CODE UND KEINE GESTALTUNG ÄNDERN.**
+   Nur diese Pfade dürfen geändert werden: `src/content/**`, `public/downloads/**`, `src/assets/**`. Alles andere ist tabu, insbesondere `src/components/`, `src/layouts/`, `src/pages/`, `src/collections/`, `src/styles/`, `scripts/`, `package.json`, alle Configs, `.github/`, `AGENTS.md` und dieser Skill. Kein CSS, keine Klassen, keine neuen Bausteine, keine Abhängigkeiten.
+   → Fehlt ein Baustein oder ein Feld oder sieht etwas falsch aus: im PR beschreiben, nichts selbst bauen.
+
+2. **NICHTS ERFINDEN.**
+   Keine Texte, Zahlen, Quellen, Zitate, Beispiele, Förderquoten, Fristen, Namen oder URLs, die nicht im mitgegebenen Material stehen. Auch keine „plausiblen“ Ergänzungen und keine Umformulierung, die eine Aussage verschärft.
+   → Was fehlt, bleibt `PLATZHALTER:` und wird im PR aufgelistet.
+
+3. **RECHTSTEXTE NUR MIT FREIGABE DER KANZLEI.**
+   Seiten mit `<LegalNotice>`, die Seiten in `src/content/pages/recht/` und Vorlagen unter `public/downloads/` werden nur geändert, wenn im Auftrag eine Freigabe der Kanzlei genannt ist (wer, wann). Diese Freigabe gehört in den PR.
+   → Ohne Freigabe: nicht ändern, im PR vermerken.
+
+4. **NIE DIREKT AUF `main`.**
+   Immer in einem eigenen Branch arbeiten und einen Pull Request öffnen. Nie auf `main` committen oder pushen, nie mergen, nie force-pushen. Agents ohne Schreibrechte in der Organisation FixMyBerlin (z. B. Manus) arbeiten in einem **Fork** und öffnen den PR aus dem Fork.
+   → Ist kein Branch oder PR möglich: Änderungen als Patch oder Dateiliste zurückgeben.
+
+## Grundregeln
+
+1. **Ansprache „Sie“**, gendern mit Doppelpunkt (`Mieter:innen`).
+2. **Seiten sind Markdown plus Bausteine:** kein h1 (`# …`, der Titel kommt aus dem Frontmatter), kein HTML (`<div>`, `<br>` …), keine `import`-Zeilen. Überschriften ab `##`.
+3. **Belege:** Jede Zahl und jede rechtliche Aussage bekommt `<Cite id="…" />` mit einer Quelle aus `src/content/sources.yaml`. Die Quelle muss im Material stehen (Verbot 2).
+4. **Platzhalter:** Unfertiges beginnt mit `PLATZHALTER:`. Einen Platzhalter nur ersetzen, wenn der echte Inhalt im Material vorliegt.
+5. **Namen im Code sind englisch** (Bausteine, Props, Felder, Enum-Werte, Dateinamen von Daten). Deutsch sind nur die Inhalte und die Seiten-URLs (Ordner- und Dateinamen unter `src/content/pages/`).
 
 ## Ablauf
 
-1. Neuen Branch anlegen, z. B. `inhalt/recht-grundlagen`. Nie direkt auf `main` arbeiten.
+1. Branch anlegen, z. B. `inhalt/recht-grundlagen` (Verbot 4):
+   - **Mit Schreibrechten im Repo:** Branch direkt in `FixMyBerlin/wohnbaurad-handlungsleitfaden`.
+   - **Ohne Schreibrechte (z. B. Manus):** das Repo forken, den Fork auf den aktuellen Stand von `main` des Original-Repos bringen und dort den Branch anlegen.
 2. Änderungen machen (siehe Aufgaben unten).
 3. Prüfen:
    - `bun install` (einmalig), dann `bun run check`. Dafür muss Node in der Version aus `.nvmrc` (22.23.4 oder neuer) verfügbar sein. Das prüft Typen und Schemas aller Inhaltsdateien, den Content-Check (kein h1, kein HTML), Formatierung und ungenutzte Dateien. Es muss grün sein.
    - `bun run placeholder-check` listet alle offenen `PLATZHALTER:`.
    - Scheitert `bun run check` an der Umgebung (z. B. `node` oder `bun` fehlt, Netzwerk gesperrt) und nicht an den Inhalten: das im PR vermerken. Die CI prüft im PR dasselbe, ihr Ergebnis abwarten und Fehler beheben.
-4. Commit, Format: `Content: <was sich ändert>` und darunter Stichpunkte, was Leser:innen jetzt sehen.
-5. Pull Request öffnen. Netlify baut eine Vorschau (nur intern, nicht indexiert). Den Link aus dem PR zum Review weitergeben.
-6. Darf der Agent keinen Branch oder PR anlegen: Änderungen als Patch oder Dateiliste zurückgeben und nicht auf `main` committen.
+4. **Selbstprüfung vor dem Commit** – alle vier Punkte müssen mit Ja beantwortet sein, sonst nicht committen:
+   - [ ] Der Vergleich mit `main` des Original-Repos (`git diff --name-only <original>/main...HEAD`) zeigt nur Dateien unter `src/content/`, `public/downloads/` oder `src/assets/` (Verbot 1).
+   - [ ] Jede neue Aussage, Zahl und Quelle steht im mitgegebenen Material (Verbot 2).
+   - [ ] Rechtstexte sind unverändert, oder die Freigabe der Kanzlei ist im Auftrag genannt (Verbot 3).
+   - [ ] Der aktuelle Branch ist nicht `main` (Verbot 4).
+5. Commit, Format: `Content: <was sich ändert>` und darunter Stichpunkte, was Leser:innen jetzt sehen.
+6. Pull Request gegen `main` von `FixMyBerlin/wohnbaurad-handlungsleitfaden` öffnen (aus dem Fork, falls ohne Schreibrechte). In die Beschreibung gehören: die Selbstprüfung als abgehakte Liste, die verbleibenden `PLATZHALTER:` der geänderten Seiten, bei Rechtstexten die Freigabe (wer, wann). Netlify baut eine Vorschau (nur intern, nicht indexiert). Den Link aus dem PR zum Review weitergeben.
+7. **Vorschau-Link zurückmelden:** Nach dem Öffnen des PR auf die Netlify-Vorschau warten (der Netlify-Bot kommentiert im PR, dauert meist wenige Minuten). Die Adresse hat die Form `https://deploy-preview-<PR-Nummer>--wohnbaurad.netlify.app`. In der Antwort an die beauftragende Person immer nennen: den Link zum PR, den Link zur Vorschau und die direkten Vorschau-Links der geänderten Seiten (z. B. `…/recht/grundlagen`). Kommt keine Vorschau, das ausdrücklich sagen, statt einen Link zu raten.
+8. Darf der Agent keinen Branch oder PR anlegen: Änderungen als Patch oder Dateiliste zurückgeben und nicht auf `main` committen.
 
 ## Schreibweise in MDX
 
@@ -69,7 +97,7 @@ Aus dem Design System, damit die Seiten so aussehen wie geplant:
 ## Wenn `bun run check` oder der Build scheitert
 
 - `Unknown source id …`: Die `id` in `<Cite>` oder `<KeyFigure source>` fehlt in `sources.yaml`.
-- `no h1 in content` / `no HTML in content`: Zeile umschreiben, siehe Grundregel 3.
+- `no h1 in content` / `no HTML in content`: Zeile umschreiben, siehe Grundregel 2.
 - `… not found in src/content/…`: Die `id` eines Bausteins gibt es in der Datendatei nicht.
 - Schema-Fehler (`Expected …`, `Invalid …`): Ein Pflichtfeld fehlt, ein Typ stimmt nicht (z. B. `year` als Text statt Zahl) oder ein Enum-Wert ist falsch, siehe [references/content-model.md](references/content-model.md).
 - `format`: Die Formatierung wurde automatisch korrigiert. Geänderte Dateien mit committen.
