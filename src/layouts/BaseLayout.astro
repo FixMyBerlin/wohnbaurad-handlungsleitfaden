@@ -7,7 +7,6 @@ import literataUrl from '@fontsource-variable/literata/files/literata-latin-wght
 import manropeUrl from '@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2?url'
 import sourceSerifUrl from '@fontsource-variable/source-serif-4/files/source-serif-4-latin-wght-normal.woff2?url'
 import spaceGroteskUrl from '@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url'
-import nablaUrl from '@fontsource/nabla/files/nabla-latin-400-normal.woff2?url'
 import 'src/styles/global.css'
 
 type Props = {
@@ -31,7 +30,7 @@ const siteTitle = 'Handlungsleitfaden WohnBauRad'
     <link rel="sitemap" href="/sitemap-index.xml" />
     {/* Fonts used on every page; preloading avoids the text swap flash on page changes */}
     {
-      [sourceSerifUrl, manropeUrl, lilexUrl, nablaUrl, literataUrl, spaceGroteskUrl].map((href) => (
+      [sourceSerifUrl, manropeUrl, lilexUrl, literataUrl, spaceGroteskUrl].map((href) => (
         <link rel="preload" href={href} as="font" type="font/woff2" crossorigin />
       ))
     }

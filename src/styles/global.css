@@ -4,7 +4,6 @@
 @import '@fontsource-variable/lilex';
 @import '@fontsource-variable/space-grotesk';
 @import '@fontsource-variable/literata';
-@import '@fontsource/nabla';
 @plugin '@tailwindcss/typography';
 
 /* Tokens from the WohnBauRad design system v2 (tokens.json); names match the design system */
@@ -14,7 +13,6 @@
   --font-mono: 'Lilex Variable', ui-monospace, monospace;
   --font-label: 'Space Grotesk Variable', ui-sans-serif, sans-serif;
   --font-subline: 'Literata Variable', Georgia, serif;
-  --font-wordmark: Nabla, 'Manrope Variable', sans-serif;
 
   --color-*: initial;
   --color-violet-950: #1f0560;
@@ -45,22 +43,6 @@
   --container-main: 1100px;
 }
 
-/* Colour palette for the Nabla word mark on violet */
-@font-palette-values --wbr-white {
-  font-family: Nabla;
-  override-colors:
-    0 #ffffff,
-    1 #ffffff,
-    2 #ffffff,
-    3 #ffffff,
-    4 #ffffff,
-    5 #e9e3fb,
-    6 #d6ccf5,
-    7 #ffffff,
-    8 #ffffff,
-    9 #ffffff;
-}
-
 /* Cross-document view transitions keep the old page until the new one is ready, so page changes do not flash */
 @view-transition {
   navigation: auto;
@@ -78,12 +60,6 @@
   :focus-visible {
     @apply outline-2 outline-offset-2 outline-violet-800;
   }
-}
-
-@utility wordmark {
-  font-family: var(--font-wordmark);
-  font-palette: --wbr-white;
-  letter-spacing: 2px;
 }
 
 @utility caps {

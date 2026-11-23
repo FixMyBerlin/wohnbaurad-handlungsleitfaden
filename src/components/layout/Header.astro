@@ -1,4 +1,6 @@
 ---
+import wordmark from '@assets/logos/wordmark.svg'
+import { Image } from 'astro:assets'
 import { getEntry } from 'astro:content'
 import { getChapterTree } from 'src/lib/navigation'
 import ChapterNav from './ChapterNav.astro'
@@ -12,7 +14,7 @@ const downloadIcon = 'M12 4v11m0 0-4-4m4 4 4-4M5 19h14'
 <header class="on-violet bg-violet-800 text-white">
   <div class="flex items-center justify-between gap-4 px-4 py-3 md:px-6 md:py-[21px]">
     <a href="/" class="flex flex-col gap-0.5 text-white no-underline hover:text-white">
-      <span class="wordmark text-2xl leading-[30px] lg:text-[28px] lg:leading-8">WohnBauRad</span>
+      <Image src={wordmark} alt="WohnBauRad" loading="eager" class="h-auto w-[145px] lg:w-[169px]" />
       <span class="hidden font-subline text-sm leading-[22px] md:block">Handlungsleitfaden</span>
     </a>
     {
