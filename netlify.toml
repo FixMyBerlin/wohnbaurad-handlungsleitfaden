@@ -15,3 +15,9 @@ HUSKY = "0"
 for = "/*"
 [headers.values]
 X-Robots-Tag = "noindex, nofollow"
+
+# Hashed build assets never change; without this every page change revalidates fonts and CSS and the text flashes
+[[headers]]
+for = "/_astro/*"
+[headers.values]
+Cache-Control = "public, max-age=31536000, immutable"

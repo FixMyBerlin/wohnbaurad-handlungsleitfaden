@@ -23,7 +23,7 @@ Website and PDF of the *Handlungsleitfaden* from the NRVP project WohnBauRad: ho
 
 ## Deployment
 
-- **Production: IONOS** (not set up yet). Build with `ASTRO_ENV=production bun run build`, upload `dist/`.
+- **Production: IONOS** (not set up yet). Build with `ASTRO_ENV=production bun run build`, upload `dist/`. Serve `/_astro/*` with `Cache-Control: public, max-age=31536000, immutable` (as in `netlify.toml`), otherwise pages flash on every page change.
 - **Netlify: internal previews only** (PR deploy previews, branch deploys). Always `noindex` via `X-Robots-Tag` in `netlify.toml` and the robots meta tag for every `ASTRO_ENV` except `production`.
 
 ## License

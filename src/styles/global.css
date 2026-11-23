@@ -61,6 +61,11 @@
     9 #ffffff;
 }
 
+/* Cross-document view transitions keep the old page until the new one is ready, so page changes do not flash */
+@view-transition {
+  navigation: auto;
+}
+
 @layer base {
   html {
     @apply bg-cream-50 font-serif text-violet-800;

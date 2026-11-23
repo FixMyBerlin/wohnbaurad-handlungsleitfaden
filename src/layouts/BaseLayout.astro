@@ -2,6 +2,12 @@
 import Footer from '@components/layout/Footer.astro'
 import Header from '@components/layout/Header.astro'
 import { ASTRO_ENV } from 'astro:env/client'
+import lilexUrl from '@fontsource-variable/lilex/files/lilex-latin-wght-normal.woff2?url'
+import literataUrl from '@fontsource-variable/literata/files/literata-latin-wght-normal.woff2?url'
+import manropeUrl from '@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2?url'
+import sourceSerifUrl from '@fontsource-variable/source-serif-4/files/source-serif-4-latin-wght-normal.woff2?url'
+import spaceGroteskUrl from '@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url'
+import nablaUrl from '@fontsource/nabla/files/nabla-latin-400-normal.woff2?url'
 import 'src/styles/global.css'
 
 type Props = {
@@ -23,6 +29,12 @@ const siteTitle = 'Handlungsleitfaden WohnBauRad'
     {/* Netlify previews must never be indexed; the X-Robots-Tag in netlify.toml is the first guard */}
     {ASTRO_ENV !== 'production' && <meta name="robots" content="noindex, nofollow" />}
     <link rel="sitemap" href="/sitemap-index.xml" />
+    {/* Fonts used on every page; preloading avoids the text swap flash on page changes */}
+    {
+      [sourceSerifUrl, manropeUrl, lilexUrl, nablaUrl, literataUrl, spaceGroteskUrl].map((href) => (
+        <link rel="preload" href={href} as="font" type="font/woff2" crossorigin />
+      ))
+    }
   </head>
   <body class="flex min-h-screen flex-col bg-cream-50 font-serif text-base leading-[26px] text-violet-800 antialiased">
     <a href="#inhalt" class="sr-only bg-lime-300 px-4 py-2 focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-10">Zum Inhalt springen</a>
