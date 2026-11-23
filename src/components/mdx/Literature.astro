@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content'
+import { isExample } from 'src/lib/examples'
 
 type Props = {
   topic?: string
@@ -13,7 +14,7 @@ const entries = (
     (source) =>
       source.data.type === 'literature' &&
       (!topic || source.data.topics.includes(topic)) &&
-      (!ids || ids.includes(source.id)),
+      (ids ? ids.includes(source.id) : !isExample(source.id)),
   )
 ).toSorted((a, b) => b.data.year - a.data.year)
 ---

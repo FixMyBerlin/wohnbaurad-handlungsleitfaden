@@ -8,6 +8,8 @@ Manus schreibt und ändert die Inhalte für das Repo [FixMyBerlin/wohnbaurad-han
 
 **Voraussetzung:** Das Repo ist öffentlich, sobald Sine mit Manus arbeitet (siehe unten „Vorher im Repo einstellen“). Wie das geht, steht im Skill **`edit-content`** (`.agents/skills/edit-content/`). Manus liest ihn und hält sich an die Regeln darin.
 
+**Welche Bausteine es gibt:** Die interne Seite [https://wohnbaurad.netlify.app/intern/bausteine](https://wohnbaurad.netlify.app/intern/bausteine) zeigt jeden Baustein mit Beispiel und dem MDX-Code zum Kopieren. Sie ist nur in der Vorschau erreichbar, nicht auf der fertigen Website.
+
 **Manus darf:** Seiten schreiben, Platzhalter durch echte Inhalte ersetzen, Quellen, Glossarbegriffe, Downloads, Förderprogramme und Akteur:innen ergänzen.
 
 **Manus darf nicht:** Code oder Gestaltung ändern, Inhalte erfinden, Rechtstexte ohne Freigabe der Kanzlei ändern oder direkt auf `main` arbeiten.

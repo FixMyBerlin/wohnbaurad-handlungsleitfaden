@@ -11,3 +11,19 @@
   year: 2026
   topics: [bike-parking]
   summary: 'PLATZHALTER: Worum es in der Veröffentlichung geht.'
+
+# Example entries for the building block showcase (/intern/bausteine); never listed publicly
+- id: example-evidence
+  type: evidence
+  title: 'Beispiel: Titel eines Belegs'
+  author: 'Beispiel: Autor:in'
+  year: 2024
+  url: https://example.org/beleg
+
+- id: example-literature
+  type: literature
+  title: 'Beispiel: Titel einer Leseempfehlung'
+  publisher: 'Beispiel: Herausgeber'
+  year: 2023
+  topics: [example]
+  summary: 'Beispiel: Ein bis zwei Sätze, worum es in der Veröffentlichung geht.'

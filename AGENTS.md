@@ -15,6 +15,7 @@ Writing or changing content (pages, sources, glossary, downloads, funding progra
 - `src/pages/` – routes; file names are URLs, so they stay German
 - `src/assets/` – images (logos, map placeholder, screenshots) used via `astro:assets`
 - `src/styles/global.css` – design tokens (`@theme`) and running-text styles
+- `src/showcase/bausteine.mdx` – every building block with example data and code, served at `/intern/bausteine` in previews only; `example-*` data entries exist only for it
 - `scripts/` – content check and placeholder listing
 
 ## Commands
@@ -33,5 +34,5 @@ Writing or changing content (pages, sources, glossary, downloads, funding progra
 - **Legal texts** (`<LegalNotice>` pages, templates in `public/downloads/`) change only after the law firm signed off.
 - **No tracking and no new external requests.** The only external requests are the map tiles after opt-in (phase 5).
 - **Design source of truth:** [Design System v2](https://claude.ai/artifact/1nXDG4m2Husr5mcV9PCuqj) (tokens, rules per building block). Token names in `global.css` match it. Any design change made in code is reported back to the design system so both stay identical.
-- **Keep the skill in sync:** when a component, prop or collection field changes, update `.agents/skills/edit-content/references/`.
+- **Keep the skill in sync:** when a component, prop or collection field changes, update `.agents/skills/edit-content/references/` and the showcase `src/showcase/bausteine.mdx`.
 - Stack conventions follow the FMC skills (`tech-stack`, `react-map-gl`, `finish-work`). Commit messages: `Topic: Description` plus user-facing bullets.

@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content'
+import { isExample } from 'src/lib/examples'
 import StakeholderCard from './StakeholderCard.astro'
 
 type Props = {
@@ -7,7 +8,7 @@ type Props = {
 }
 
 const { ids } = Astro.props
-const stakeholders = (await getCollection('stakeholders', (entry) => !ids || ids.includes(entry.id)))
+const stakeholders = (await getCollection('stakeholders', (entry) => (ids ? ids.includes(entry.id) : !isExample(entry.id))))
   .toSorted((a, b) => a.data.order - b.data.order)
 ---
 

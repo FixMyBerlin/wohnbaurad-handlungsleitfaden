@@ -1,0 +1,10 @@
+# Example entry for the building block showcase; never listed publicly
+name: 'Beispiel: Name eines Förderprogramms'
+funder: 'Beispiel: Fördermittelgeber'
+level: federal
+scope: 'Beispiel: Was gefördert wird'
+eligibility: 'Beispiel: Wer Anträge stellen kann'
+fundingRate: 'Beispiel: bis zu 75 %'
+deadline: 'Beispiel: laufend'
+url: https://example.org/foerderprogramm
+updatedAt: 2026-11-23

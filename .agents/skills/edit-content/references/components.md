@@ -1,5 +1,7 @@
 # Bausteine für Inhaltsseiten
 
+Alle Bausteine live mit Beispiel und Code: [https://wohnbaurad.netlify.app/intern/bausteine](https://wohnbaurad.netlify.app/intern/bausteine) (nur Vorschau; Quelltext `src/showcase/bausteine.mdx`).
+
 Alle Bausteine stehen in jeder MDX-Datei ohne Import zur Verfügung. Andere Komponenten oder HTML gibt es nicht. Props in Anführungszeichen, Zahlen in `{}`.
 
 | Baustein | Props | Inhalt (Kinder) | Beispiel |
@@ -52,4 +54,4 @@ Alle Bausteine stehen in jeder MDX-Datei ohne Import zur Verfügung. Andere Komp
 </ButtonGroup>
 ```
 
-Die Beispiel-IDs oben (`bmvi-2018`, `nutzungsvereinbarung` …) gibt es erst, wenn sie in den Datendateien angelegt sind.
+Die Beispiel-IDs oben (`bmvi-2018`, `nutzungsvereinbarung` …) gibt es erst, wenn sie in den Datendateien angelegt sind. Einträge mit der ID `example-…` dienen nur der Bausteine-Seite und erscheinen in keiner öffentlichen Liste. Nicht in Inhaltsseiten verwenden.

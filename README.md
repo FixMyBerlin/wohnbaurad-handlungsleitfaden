@@ -9,6 +9,7 @@ Website and PDF of the *Handlungsleitfaden* from the NRVP project WohnBauRad: ho
 - [docs/concept/page-contents.md](./docs/concept/page-contents.md) – page by page content (superseded by outline.md)
 - [docs/concept/outline.md](./docs/concept/outline.md) – current outline: six chapters, 20 pages
 - [docs/manus.md](./docs/manus.md) – editing content with Manus (German)
+- [https://wohnbaurad.netlify.app/intern/bausteine](https://wohnbaurad.netlify.app/intern/bausteine) – all MDX building blocks with examples and code (preview builds only, source `src/showcase/bausteine.mdx`)
 
 ## Developing
 

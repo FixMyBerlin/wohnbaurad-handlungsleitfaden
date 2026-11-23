@@ -25,3 +25,19 @@
       path: /downloads/vorlage-mieterinnenbefragung.docx
   page: mieterinnen-und-quartier/beispiel-muenchner-wohnen
   updatedAt: 2026-11-19
+
+# Example entry for the building block showcase; never listed publicly
+- id: example-template
+  title: 'Beispiel: Muster-Nutzungsvereinbarung'
+  description: 'Beispiel: Wofür die Vorlage gedacht ist und was sie regelt.'
+  files:
+    - format: docx
+      path: /downloads/example-template.docx
+      sizeKb: 48
+    - format: pdf
+      path: /downloads/example-template.pdf
+      sizeKb: 120
+  page: kooperationen/vorlagen
+  license: CC BY 4.0
+  reviewedBy: 'Beispiel: Kanzlei'
+  updatedAt: 2026-11-23

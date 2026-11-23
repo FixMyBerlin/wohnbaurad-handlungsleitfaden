@@ -1,3 +1,8 @@
 - id: placeholder-term
   term: 'PLATZHALTER: Begriff'
   definition: 'PLATZHALTER: Erklärung des Begriffs in ein bis zwei Sätzen.'
+
+# Example entry for the building block showcase; never listed publicly
+- id: example-term
+  term: Beispielbegriff
+  definition: 'Beispiel: Eine kurze Erklärung des Begriffs in ein bis zwei Sätzen.'

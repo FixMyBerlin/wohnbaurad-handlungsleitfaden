@@ -1,0 +1,29 @@
+---
+import PageHeader from '@components/layout/PageHeader.astro'
+import SourceList from '@components/layout/SourceList.astro'
+import { mdxComponents } from '@components/mdx'
+import PageLayout from '@layouts/PageLayout.astro'
+import { getCitationIds } from 'src/lib/citations'
+import { sourcesHeading } from 'src/lib/sources'
+import Showcase, { getHeadings } from 'src/showcase/bausteine.mdx'
+import showcaseSource from 'src/showcase/bausteine.mdx?raw'
+
+// Internal pages for editors; not built for production (IONOS)
+export const getStaticPaths = () =>
+  process.env.ASTRO_ENV === 'production' ? [] : [{ params: { page: 'bausteine' } }]
+
+const citationIds = await getCitationIds(showcaseSource, 'showcase/bausteine')
+Astro.locals.citationIds = citationIds
+const headings = [...getHeadings(), sourcesHeading]
+---
+
+<PageLayout title="Bausteine" headings={headings}>
+  <PageHeader
+    slot="header"
+    eyebrow="Intern · nur in der Vorschau"
+    title="Bausteine"
+    summary="Alle Bausteine für Inhaltsseiten mit Beispieldaten und dem MDX-Code dazu."
+  />
+  <Showcase components={mdxComponents} />
+  <SourceList slot="footer" ids={citationIds} />
+</PageLayout>

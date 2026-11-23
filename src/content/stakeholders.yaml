@@ -5,3 +5,12 @@
   influence: medium
   tip: 'PLATZHALTER: Tipp für die Ansprache'
   order: 1
+
+# Example entry for the building block showcase; never listed publicly
+- id: example-stakeholder
+  name: 'Beispiel: Straßenverkehrsbehörde'
+  type: Verwaltung
+  interest: 'Beispiel: Verkehrssicherheit, Zuständigkeit'
+  influence: high
+  tip: 'Beispiel: Früh einbinden, wenn Flächen öffentlich genutzt werden.'
+  order: 99

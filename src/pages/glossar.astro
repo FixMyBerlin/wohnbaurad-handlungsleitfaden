@@ -2,8 +2,9 @@
 import PageHeader from '@components/layout/PageHeader.astro'
 import PageLayout from '@layouts/PageLayout.astro'
 import { getCollection } from 'astro:content'
+import { isExample } from 'src/lib/examples'
 
-const terms = (await getCollection('glossary')).toSorted((a, b) =>
+const terms = (await getCollection('glossary', (entry) => !isExample(entry.id))).toSorted((a, b) =>
   a.data.term.localeCompare(b.data.term, 'de'),
 )
 ---

@@ -2,9 +2,10 @@
 import PageHeader from '@components/layout/PageHeader.astro'
 import PageLayout from '@layouts/PageLayout.astro'
 import { getCollection } from 'astro:content'
+import { isExample } from 'src/lib/examples'
 import { formatSource } from 'src/lib/sources'
 
-const sources = (await getCollection('sources')).toSorted((a, b) =>
+const sources = (await getCollection('sources', (entry) => !isExample(entry.id))).toSorted((a, b) =>
   a.data.title.localeCompare(b.data.title, 'de'),
 )
 ---

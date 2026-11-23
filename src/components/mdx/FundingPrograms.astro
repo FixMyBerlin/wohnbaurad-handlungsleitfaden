@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content'
+import { isExample } from 'src/lib/examples'
 import FundingProgram from './FundingProgram.astro'
 
 type Props = {
@@ -8,7 +9,7 @@ type Props = {
 
 const { level } = Astro.props
 const programs = (
-  await getCollection('fundingPrograms', (program) => !level || program.data.level === level)
+  await getCollection('fundingPrograms', (program) => !isExample(program.id) && (!level || program.data.level === level))
 ).toSorted((a, b) => a.data.name.localeCompare(b.data.name, 'de'))
 ---
 

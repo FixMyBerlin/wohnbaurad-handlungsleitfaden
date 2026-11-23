@@ -1,0 +1,195 @@
+Diese Seite zeigt jeden Baustein einmal mit Beispieldaten und darunter den MDX-Code dazu. Sie ist nur in der Vorschau sichtbar, nicht auf der fertigen Website. Alle Texte hier sind Beispiele, keine Inhalte des Handlungsleitfadens.
+
+Felder und Props im Detail: `.agents/skills/edit-content/references/components.md`.
+
+## Fließtext (Markdown)
+
+Ein Absatz mit **fettem Text**, einem [Link zur Startseite](/) und einer Aufzählung:
+
+- **Erster Punkt:** kurze Erklärung
+- **Zweiter Punkt:** kurze Erklärung
+
+> Beispiel: ein Zitat aus einem Interview.
+
+### Unterabschnitt (h3)
+
+| | Öffentlich | Nur Mieter:innen |
+|---|---|---|
+| Wer nutzt? | alle | Mieter:innen |
+
+```mdx
+## Abschnitt
+Ein Absatz mit **fettem Text** und einem [Link](/).
+- **Punkt:** Erklärung
+> Zitat
+```
+
+## Infobox
+
+<Infobox title="Beispiel: Wirtschaftlich heißt hier nicht gewinnorientiert.">
+Ziel ist ein kostendeckender Betrieb. Varianten: `info` (Standard), `tip`, `warning`.
+</Infobox>
+
+<Infobox variant="warning" title="Beispiel: Fristen prüfen">
+Die Warnung ist weiß mit Rahmen.
+</Infobox>
+
+```mdx
+<Infobox title="Titel">Text in Markdown.</Infobox>
+<Infobox variant="warning" title="Titel">Text.</Infobox>
+```
+
+## LegalNotice
+
+<LegalNotice reviewedBy="Beispiel: Kanzlei" reviewedAt="2026-11-30" />
+
+<LegalNotice variant="templates" />
+
+```mdx
+<LegalNotice reviewedBy="Kanzlei X" reviewedAt="2026-11-30" />
+<LegalNotice variant="templates" />
+```
+
+## Cite und Quellenliste
+
+Ein Satz mit Beleg.<Cite id="example-evidence" /> Die Quellenliste erscheint automatisch am Seitenende.
+
+```mdx
+Ein Satz mit Beleg.<Cite id="quellen-id" />
+```
+
+## GlossaryTerm
+
+Je nach <GlossaryTerm id="example-term" /> sind weniger Stellplätze nötig. Mit eigenem Text: <GlossaryTerm id="example-term">anderer Begriff</GlossaryTerm>.
+
+```mdx
+<GlossaryTerm id="glossar-id" />
+<GlossaryTerm id="glossar-id">sichtbarer Text</GlossaryTerm>
+```
+
+## KeyFigures und KeyFigure
+
+<KeyFigures>
+  <KeyFigure value="80 %" source="example-evidence">Beispiel: aller Wege starten oder enden am Wohnort.</KeyFigure>
+  <KeyFigure value="3" source="example-evidence">Beispiel: zweite Kennzahl</KeyFigure>
+</KeyFigures>
+
+```mdx
+<KeyFigures>
+  <KeyFigure value="80 %" source="quellen-id">Text zur Zahl</KeyFigure>
+</KeyFigures>
+```
+
+## Checklist
+
+<Checklist title="Beispiel: Befragung vorbereiten">
+
+- [ ] Umfang mit der Unternehmenskommunikation klären
+- [ ] Datenschutz klären
+
+</Checklist>
+
+```mdx
+<Checklist title="Titel">
+
+- [ ] Erster Punkt
+- [ ] Zweiter Punkt
+
+</Checklist>
+```
+
+## Steps und Step
+
+<Steps>
+  <Step title="Beispiel: Fläche identifizieren" who="Liegenschaften" output="Flächenliste" />
+  <Step title="Beispiel: Bedarf mit der Kommune abgleichen" who="Liegenschaften und Radverkehrsplanung" />
+</Steps>
+
+```mdx
+<Steps>
+  <Step title="Schritt" who="Wer" output="Ergebnis" />
+</Steps>
+```
+
+## ScreenshotStep
+
+<ScreenshotStep step={1} image="maps/placeholder-area.webp" alt="Beispiel: Screenshot aus dem Flächen-Finder">Beispiel: Bahnhof oder Adresse eingeben.</ScreenshotStep>
+
+```mdx
+<ScreenshotStep step={1} image="screenshots/datei.png" alt="Alt-Text">Bildunterschrift</ScreenshotStep>
+```
+
+## ExampleMap
+
+<ExampleMap example="example-area" />
+
+```mdx
+<ExampleMap example="gebiet-id" />
+```
+
+## Download
+
+<Download id="complete-guide" />
+
+<Download id="example-template" />
+
+```mdx
+<Download id="complete-guide" />
+<Download id="download-id" />
+```
+
+## FundingProgram und FundingPrograms
+
+<FundingProgram id="example-program" />
+
+`<FundingPrograms />` listet alle Programme (optional nur eine Ebene).
+
+```mdx
+<FundingProgram id="programm-id" />
+<FundingPrograms level="federal" />
+```
+
+## StakeholderCards und StakeholderCard
+
+<StakeholderCards ids={['example-stakeholder']} />
+
+```mdx
+<StakeholderCards />
+<StakeholderCards ids={['id-1', 'id-2']} />
+<StakeholderCard id="akteur-id" />
+```
+
+## Literature
+
+<Literature ids={['example-literature']} />
+
+```mdx
+<Literature topic="bike-parking" />
+<Literature ids={['quellen-id']} />
+```
+
+## ButtonLink, Button und ButtonGroup
+
+<ButtonGroup>
+  <ButtonLink href="/">Primär</ButtonLink>
+  <ButtonLink href="/" variant="secondary" icon="arrow">Sekundär mit Pfeil</ButtonLink>
+  <ButtonLink href="https://example.org" variant="secondary" icon="external">Extern</ButtonLink>
+  <Button variant="secondary">Button</Button>
+</ButtonGroup>
+
+```mdx
+<ButtonGroup>
+  <ButtonLink href="/pfad" icon="arrow">Beschriftung</ButtonLink>
+  <ButtonLink href="/pfad" variant="secondary">Beschriftung</ButtonLink>
+</ButtonGroup>
+```
+
+## ChapterTiles
+
+Nur für die Startseite gedacht.
+
+<ChapterTiles />
+
+```mdx
+<ChapterTiles />
+```
